@@ -1,39 +1,98 @@
+<style type="text/css">
+.bgimg{
+  background: url("assets/img/download.jpg");
+  background-size:cover;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+.loginput{
+  background-color: transparent;
+  border-bottom: 0.55px solid #1396e2 !important;
+  border-top: none !important;
+}
+.passinput{
+border-top: none !important;
+background-color: transparent;
+border-bottom: 0.55px solid #1396e2 !important;
+}
+.toppad{
+      position: relative;
+    top: 15%;
+}
+.imglogo{
+    position: relative;
+    top: 4rem;
+    max-width: none;
+}
+.maincolor{
+  color: #1396e2;
+}
+.whitec{
+  color: white !important;
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #1396e2;
+  opacity:  1;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #1396e2;
+  opacity:  1;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #1396e2;
+  opacity:  1;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #1396e2;
+  opacity:  1;
+}
+</style>
 <ion-header>
-
   <ion-navbar>
-    <ion-title>{{ 'LOGIN_TITLE' | translate }}</ion-title>
+    <ion-title>Login</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content>
-  <form (submit)="doLogin()">
-    <ion-list>
+      <ion-row class="logo-row">
+          <ion-col></ion-col>
+          <ion-col width-67>
+            <img class="imglogo" src="https://www.forehotels.com/public/assets/img/logo1.png"/>
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+  <form class="toppad" [formGroup]="registrationForm" (ngSubmit)="loginForm()">
 
-      <ion-item>
-        <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
-        <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
-      </ion-item>
+			 <ion-list>
+  			  <ion-item class="loginput">
+  			    <ion-icon class="maincolor" name="contact" item-start></ion-icon>
+  			    <ion-input class="maincolor" type="name" placeholder="Username" formControlName="user_name" name="user_name" required></ion-input>  			    
+  			  </ion-item>
+        </ion-list>
 
-      <!--
-      Want to use a Username instead of an Email? Here you go:
+        <ion-list>			
+  			  <ion-item class="passinput">
+  			    <ion-icon class="maincolor" name="ios-lock-outline" item-start></ion-icon>
+  			    <ion-input class="maincolor" type="password" placeholder="Password" formControlName="password" name="password" required></ion-input>			    
+  			  </ion-item>
+        </ion-list>
 
-      <ion-item>
-        <ion-label floating>{{ 'USERNAME' | translate }}</ion-label>
-        <ion-input type="text" [(ngModel)]="account.username" name="username"></ion-input>
-      </ion-item>
-      -->
-
-      <ion-item>
-        <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
-        <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
-      </ion-item>
-
-      <div padding>
-        <button ion-button color="primary" block>{{ 'LOGIN_BUTTON' | translate }}</button>
-      </div>
-
-    </ion-list>
-  </form>
+      <ion-list no-lines style="text-align: center;">         
+           
+            <button ion-button icon-right outline type="submit" [disabled]="!registrationForm.valid">
+              Login
+              <ion-icon name="ios-play-outline"></ion-icon>
+            </button>
+      </ion-list>
+      <ion-list>
+            <p (click)="forgotPassword()" style="text-align: center;">Forgot Password </p>
+      <br>
+        <p style="text-align: center;" (click)="registration()">New here? Create an account</p>         
+        </ion-list>     
+    </form>
+  <div class="bgimg">
+  </div>
 </ion-content>

@@ -1,0 +1,37 @@
+<style>
+  .cardstyle{
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.62);
+    padding: 7%;
+  }
+  .btn{
+  /* text-align: center; */
+  font-size: 2.6rem;
+  }
+</style>
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>My History Report</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+    <ion-card class="cardstyle">
+        <button class="btn" ion-item (click)="cvDownloaded()">
+            <ion-icon style="font-size:2.2em" name="ios-clipboard-outline"></ion-icon>&nbsp;&nbsp;CV Downloaded
+      </button>
+    </ion-card>
+    <ion-card class="cardstyle">
+        <button class="btn" ion-item  (click)="jobPosted()">
+            <ion-icon style="font-size:2.2em" name="ios-folder-outline"></ion-icon>&nbsp;&nbsp;Job Posted
+        </button>
+    </ion-card>
+    <ion-card class="cardstyle">
+        <button class="btn" ion-item (click)="JobApplied()">
+            <ion-icon style="font-size:2.2em" name="ios-mail-open-outline"></ion-icon>&nbsp;&nbsp;Job Applied
+        </button>
+    </ion-card>
+</ion-content>
+  
+  

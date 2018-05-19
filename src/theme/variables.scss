@@ -12,8 +12,7 @@ $font-path: "../assets/fonts";
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
 
-$text-color:        #000;
-$background-color:  #fff;
+
 
 
 // Named Color Variables
@@ -25,8 +24,8 @@ $background-color:  #fff;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
+  primary:    #1396e2,
+  secondary:  #feb437,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222
@@ -69,7 +68,7 @@ $colors: (
 // The premium icon font for Ionic. For more info, please see:
 // http://ionicframework.com/docs/v2/ionicons/
 
-@import "ionic.ionicons";
+@import "ionicons";
 
 
 // Fonts
@@ -77,3 +76,20 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+$font-family-ios-base: "Montserrat", -apple-system, "Roboto", san-serif;
+$font-family-md-base: "Montserrat", "Roboto", "Helvetica Nueu", san-serif;
+$font-family-wp-base: "Montserrat", "Noto Sans", san-serif;
+
+$loading-ios-spinner-color: #ffffff;
+$loading-md-spinner-color: #ffffff;
+$loading-wp-spinner-color: #ffffff;
+
+$loading-ios-background: #1396e2;
+$loading-wp-background: #1396e2;
+$loading-md-background: #1396e2;
+
+$loading-ios-text-color: #ffffff;
+$loading-md-text-color: #ffffff;
+$loading-wp-text-color: #ffffff;
+

@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Register</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list-header style="text-align: center;font-size: 2.5rem;">
+    Select Your Hotel Type
+    </ion-list-header>    
+      <ion-grid>          
+        <ion-row *ngFor="let i of rows">
+            <ion-col *ngFor="let p of services | slice:(i*2):(i+1)*2" (click)="selectvalue(p)">
+              <img style="height: 12em;" src="https://www.forehotels.com/public/assets/img/{{p.icon}}"/> 
+                  <h2>{{p.title}}</h2>
+            </ion-col>
+        </ion-row>
+        </ion-grid>
+</ion-content>

@@ -1,0 +1,28 @@
+<ion-content>
+ <div *ngIf="emp_count == 0"><h2 style="text-align:center">No Matching Candidates Found</h2></div>
+<ion-list>
+  <ion-item *ngFor="let item of items">
+
+    <ion-thumbnail item-left>
+      <img src="{{item.profile_pic}}" onError="this.src='https://www.forehotels.com/public/assets/img/male.png';" style="border-radius:6px"><br />
+    </ion-thumbnail>
+    <h2 style="white-space:pre-wrap; font-size:1.8rem">{{item.name}}</h2>
+    <h3 style="white-space:pre-wrap">{{item.designation}}</h3>
+    <p><ion-icon name="briefcase"></ion-icon>  {{item.experience}} Years Of Experience</p>
+    <p><ion-icon name="ios-school"></ion-icon>  {{item.qualification}}<p>
+    <button ion-button full style="border-radius:50px"  (click)="employeedetail(item.id)">Read More</button>
+  </ion-item>
+</ion-list>
+
+<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <ion-fab right bottom style="position:fixed;margin-bottom:12%">
+    <button ion-fab (click)="searchEmployee()">
+   <ion-icon style="color:#fff" name="ios-funnel"></ion-icon>
+    </button>
+	</ion-fab>
+</ion-content>

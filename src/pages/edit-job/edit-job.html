@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Edit Job</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div *ngFor="let item of items">
+  <ion-row>
+    <ion-col width-60>
+
+    <ion-item>
+      <ion-icon name="ios-bookmark-outline" item-left large></ion-icon>
+      <p>Position Name</p>
+      <h2>{{item.pname}}</h2>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="ios-man-outline" item-left large></ion-icon>
+      <p>Number of heads</p>
+      <h2 style="white-space:pre-wrap">{{item.no_of_heads}}</h2>
+    </ion-item>
+     
+    <ion-item>
+      <ion-icon name="ios-pin-outline" item-left large></ion-icon>
+      <p>City</p>
+      <h2>{{item.city_name}} </h2>
+   </ion-item>
+
+  <ion-item>
+      <ion-icon name="ios-briefcase-outline" item-left large></ion-icon>
+      <p>Minimum Experience</p>
+      <h2 style="white-space:pre-wrap">{{item.min_experience}} </h2>
+        <ion-icon item-right (click)="min_experience()" name="md-open"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="ios-briefcase-outline" item-left large></ion-icon>
+      <p>Maxium Experience</p>
+      <h2>{{item.max_experience}} </h2>
+        <ion-icon item-right (click)="max_experience()" name="md-open"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="ios-play-outline" item-left large></ion-icon>
+      <p>Role</p>
+      <h2 style="white-space:pre-wrap">{{item.role}} </h2>
+        <ion-icon item-right (click)="role()" name="md-open"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="ios-key-outline" item-left large></ion-icon>
+      <p>Key Skills</p>
+      <h2 style="white-space:pre-wrap">{{item.key_skils}} </h2>
+        <ion-icon item-right (click)="key_skills()" name="md-open"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="ios-school-outline" item-left large ></ion-icon>
+      <p>Education</p>
+      <h2>{{item.education}} </h2>
+       <ion-icon item-right (click)="education()" name="md-open"></ion-icon>
+       </ion-item>
+
+    <ion-item>
+      <ion-icon name="ios-cash-outline" item-left large></ion-icon>
+      <p>Salary Range</p>
+      <h2>Rs. {{item.salary_range}} </h2>
+      <ion-icon item-right (click)="salary_range()" name="md-open"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="ios-browsers-outline" item-left large></ion-icon>
+      <p>Job Description</p>
+      <h2 style="white-space:pre-wrap">{{item.job_desc}} </h2>
+      <ion-icon item-right (click)="job_desc()" name="md-open"></ion-icon>
+      </ion-item>
+
+    </ion-col>
+  </ion-row>
+  
+    </div>
+</ion-content>
+

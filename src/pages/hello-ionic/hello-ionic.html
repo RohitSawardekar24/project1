@@ -1,0 +1,9 @@
+<ion-content>
+<div class="cont">
+    <ion-tabs>
+      <ion-tab tabIcon="person" tabBadge="{{this.emp_length}}" tabBadgeStyle="danger" tabTitle="Employee" [root]="tab1" [rootParams]="designation"></ion-tab>
+      <ion-tab tabIcon="restaurant" tabBadge="{{this.catering_length}}" tabBadgeStyle="danger" tabTitle="Catering" [root]="tab2" [rootParams]="designation"></ion-tab>
+      <ion-tab tabIcon="contact" tabBadge="{{this.intern_length}}" tabBadgeStyle="danger" tabTitle="Intern" [root]="tab3" [rootParams]="designation"></ion-tab>
+    </ion-tabs>
+</div>
+</ion-content>

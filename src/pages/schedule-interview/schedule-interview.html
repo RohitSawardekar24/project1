@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Schedule Interview</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+<div class="cont">
+  <div *ngIf="si_len == 0"><h2 style="text-align:center">Please shortlist candidates to schedule interview</h2></div>
+   <ion-list>
+     <ion-item-sliding class="item" *ngFor="let item of items">
+  <ion-item>
+    <div (click)="goToDetail(item.emp_id)" style="display:flex;">
+      <ion-thumbnail item-left>
+        <img style="border-radius:6px" src="http://www.forehotels.com/public/emp/avatar/{{item.profile_pic}}" onError="this.src='https://www.forehotels.com/public/assets/img/male.png';">
+      </ion-thumbnail>
+      <div style="padding-top: 9%;">
+        <h2 style="white-space: pre-wrap">{{item.name}}</h2>
+        <h2 style="white-space: pre-wrap">{{item.designation}} • {{item.city_name}}</h2>
+      </div>
+    </div>
+    <button [disabled]="item.is_read == '1'" ion-button default item-right (click)="scheduleInterview(item.name,item.emp_id)">Schedule</button>
+  </ion-item>
+    <ion-item-options side="right">
+      <button ion-button color="danger" (click)="removeItem(item.emp_id)"> Delete</button>
+    </ion-item-options>
+    </ion-item-sliding>
+     </ion-list>
+</div>
+</ion-content>

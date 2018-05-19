@@ -1,0 +1,86 @@
+<style>
+  .center {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align: center;
+  }
+  ion-col.col
+  {
+    border-top: solid 1px #808080;    
+    border-right: solid 1px #808080;
+    text-align: center;
+  }
+  .grid{
+    padding: 0px;
+    margin-right: -1px;
+  }
+  .inputtaag{
+    margin-left: -13px;
+    position: fixed;
+    top: 1%;
+    padding: 5%;
+    z-index: 99;
+    /*width: 89%;*/
+    background: transparent;
+  }	
+  .cardstyle{
+        background-color: #1396e2;
+        box-shadow: none;
+  }
+  .searchbox{
+        border-radius: 2px;
+    display: flex;
+    background-color: white;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  }
+  .searchmenuicon{
+    color: #5b5b5b;
+    padding: 8px;
+    margin: auto;
+    padding-left: 16px;
+    padding-top: 12px;
+  }
+  </style>
+<ion-content>
+<ion-list style="background-color:#1396e2;position: relative;top: -9px;">
+  <ion-list style="position: relative;top: 15px;">
+          <ion-card class="cardstyle">
+                  <ion-slides autoplay="5000" loop="true" speed="10" (click)="purchasePackage()">
+                      <ion-slide >                
+                        <img style="width:100%" src='assets/img/slide1.png'>
+                      </ion-slide>
+                      <ion-slide>
+                        <img style="width:100%" src='assets/img/slide2.png'>
+                      </ion-slide>
+                  </ion-slides>
+                    <div class="inputtaag" style="width:100%">
+                      <div class="searchbox">
+                      <div style="background-color:transparent">
+                        <ion-icon (click)=menuOpen() class="searchmenuicon" ios="ios-menu" md="md-menu"></ion-icon>
+                      </div>
+                      <ion-searchbar style="padding: 0px;"
+                        [(ngModel)]="myInput"
+                        [showCancelButton]="shouldShowCancel"
+                        (ionInput)="onInput($event)"
+                        (ionCancel)="onCancel($event)"
+                        (click)="SearchEmployee()">
+                        
+                      </ion-searchbar>
+                      </div>
+                    </div>
+          </ion-card>
+          <ion-list style="background-color:#ffffff;padding-top: 2%;">
+              <ion-grid>          
+                <ion-row *ngFor="let i of rows">
+                  <ion-col *ngFor="let p of pages | slice:(i*3):(i+1)*3" (click)="openPage(p)">
+                  <img [src]="p.img"/>
+                  <p>{{p.title}}</p>
+                </ion-col>
+                </ion-row>
+              <div style="border-top:solid 1px #808080"></div>
+              </ion-grid>
+        </ion-list>
+  </ion-list>
+</ion-list>
+</ion-content>

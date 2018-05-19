@@ -1,0 +1,101 @@
+<style type="text/css">
+	.card-content-ios {
+    padding: 1px 16px 14px !important;
+    font-size: 1.4rem;
+    line-height: 1.4;
+}
+</style>
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Package</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<ion-card-title style="border-bottom: 1px solid #1396e2;">
+      Select Your Package
+      </ion-card-title>
+<ion-card *ngFor="let d of data" style="box-shadow: 0 4px 10px #1396e2;">  
+  <ion-card-content>
+    <ion-card-title>
+    {{d.title}}	      
+      </ion-card-title>
+
+      					<ion-row>
+	    					<ion-col style="display: flex;">
+	    						<ion-icon [name]="d.icon1"></ion-icon>	    					
+	      						<p style="white-space: pre-wrap; padding-left: 20px" [innerHTML]="d.text1"></p>
+	      					</ion-col>
+	      					<ion-col>
+	      						<h5 style="float: right;" [innerHTML]="d.textamt"></h5>
+	      					</ion-col>	
+      					</ion-row>
+      					<ion-row>
+	    					<ion-col style="display: flex;">
+	    						<ion-icon [name]="d.icon1"></ion-icon>	    					
+	      						<p style="white-space: pre-wrap; padding-left: 20px" [innerHTML]="d.text2"></p>
+	      					</ion-col>
+	      					<ion-col>
+	      						<h5 style="float: right;" [innerHTML]="d.icon3"></h5>
+	      					</ion-col>
+      					</ion-row>
+
+
+
+    	<div *ngIf="d.showDetails">
+    					<ion-row>
+	    					<ion-col style="display: flex;">
+	    						<ion-icon [name]="d.icon1"></ion-icon>	    					
+	      						<p style="white-space: pre-wrap; padding-left: 20px" [innerHTML]="d.text4"></p>
+	      					</ion-col>
+	      					<ion-col>
+	      						<h5 style="float: right;" [innerHTML]="d.textamt2"></h5>
+	      					</ion-col>
+      					</ion-row>		
+      				<ion-row>
+	    					<ion-col style="display: flex;">
+	    						<ion-icon [name]="d.icon1"></ion-icon>	    					
+	      						<p style="white-space: pre-wrap; padding-left: 20px" [innerHTML]="d.text5"></p>
+	      					</ion-col>
+	      					<ion-col>
+	      						<ion-icon style="float: right;" [name]="d.icon2"></ion-icon>
+	      					</ion-col>
+      					</ion-row>
+      				<ion-row>
+	    					<ion-col style="display: flex;">
+	    						<ion-icon [name]="d.icon1"></ion-icon>	    					
+	      						<p style="white-space: pre-wrap; padding-left: 20px" [innerHTML]="d.text7"></p>
+	      					</ion-col>
+	      					<ion-col>
+	      						<h5 style="float: right;" [innerHTML]="d.textamt3"></h5>
+	      					</ion-col>
+      					</ion-row>
+      				<ion-row>
+	    					<ion-col style="display: flex;">
+	    						<ion-icon [name]="d.icon1"></ion-icon>	    					
+	      						<p style="white-space: pre-wrap; padding-left: 20px" [innerHTML]="d.text8"></p>
+	      					</ion-col>
+	      					<ion-col>
+	      						<ion-icon style="float: right;" [name]="d.icon2"></ion-icon>
+	      					</ion-col>
+      					</ion-row>
+      				<ion-row>
+	    					<ion-col style="display: flex;">
+	    						<ion-icon [name]="d.icon1"></ion-icon>	    					
+	      						<p style="white-space: pre-wrap; padding-left: 20px" [innerHTML]="d.text9"></p>
+	      					</ion-col>
+	      					<ion-col>
+	      						<h5 style="float: right;" [innerHTML]="d.textamt4"></h5>	      						
+	      					</ion-col>
+      					</ion-row>
+      			<button ion-button round full style="margin-top:10%" (click)="purchase(d.amt)">Purchase</button>
+      		</div>
+      			<ion-icon color="primary" item-right [name]="d.icon"></ion-icon>
+    		<button ion-button color="dark" clear (click)="toggleDetails(d)"> Read More</button>
+
+  </ion-card-content>
+</ion-card>
+</ion-content>
