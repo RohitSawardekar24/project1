@@ -1,0 +1,23 @@
+
+<ion-menu [content]="content">
+<ion-content>
+  <div (click)="moveToList()" padding-left *ngFor="let item of items" style="border-bottom:2px solid">
+    <img src="{{this.profilepic}}" style="max-width:50px !important;margin-top:6%;border-radius:50px;max-height:300px">
+    <h2 style="margin-top:-6.2rem;margin-left:8rem">Welcome {{this.hotelname}}</h2>
+    <h3 style="margin-top:-0.3rem;margin-left:8rem">{{this.city_name}}</h3>
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let p of pages" (click)="openPage(p.component)">
+      <ion-icon [ngStyle]="{'color':p.color}" class="center" name="{{p.icon}}"  color="{{p.color}}" item-start large></ion-icon>
+      <h2>{{p.title}}</h2>
+    </ion-item>   
+    <ion-item (click)="logout()">
+      <ion-icon style="color:#D50000" class="center" name="ios-log-out" item-start large></ion-icon>     
+        <h2>Logout</h2>    
+   </ion-item>
+
+  </ion-list>
+</ion-content>
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

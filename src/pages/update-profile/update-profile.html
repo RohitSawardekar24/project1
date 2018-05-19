@@ -1,0 +1,97 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Update Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<style>
+  #map {
+   display: none;
+  }
+  </style>
+<ion-content>
+    <div padding id="map"></div>
+  <div *ngFor="let item of items">
+      <ion-row class="item" style="margin: 10px;margin-left:7px;width:96%">
+        <ion-col width-30>
+      <a class="item-avatar" style="width:100%">
+        <img src="{{this.profilepic}}" style="border-radius:8px; max-height:200px;">
+        </a>
+        </ion-col>
+        <ion-col width-70>
+      <h1 style="white-space:pre-wrap">{{item.name}}</h1>
+      <p>{{item.city_name}}</p>
+      <button ion-button (click)="updateProfilePic()">Update Profile Pic</button>
+        </ion-col>
+      </ion-row>
+
+  <ion-row>
+    <ion-col width-60>
+    <ion-item>
+      <ion-icon name="ios-contact-outline" item-left large></ion-icon>
+      <h1>Basic Information</h1>
+
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="ios-home-outline" item-left large></ion-icon>
+      <p>Hotel Name</p>
+      <h2>{{item.name}}</h2>
+       <ion-icon item-right (click)="hotel_name()"name="md-open"></ion-icon>
+  </ion-item>
+
+    <ion-item>
+      <ion-icon name="ios-mail-outline" item-left large></ion-icon>
+      <p>Email</p>
+      <h2 style="white-space:pre-wrap">{{item.email}}</h2>
+    <ion-icon item-right (click)="email()" name="md-open"></ion-icon>
+    </ion-item>
+
+  <ion-item>
+      <ion-icon name="ios-pin-outline" item-left large></ion-icon>
+      <p>Address</p>
+      <h2 style="white-space:pre-wrap">{{item.address}} </h2>
+        <ion-icon item-right (click)="Updateaddress()" name="md-open"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="ios-person-outline" item-left large></ion-icon>
+      <p>HR/Manager Name</p>
+      <h2>{{item.hr_name}} </h2>
+        <ion-icon item-right (click)="hr_name()" name="md-open"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="ios-phone-portrait-outline" item-left large></ion-icon>
+      <p>HR/Manager Number</p>
+      <h2>{{item.hr_number}} </h2>
+        <ion-icon item-right (click)="hr_number()" name="md-open"></ion-icon>
+    </ion-item>
+      
+    <ion-item>
+      <ion-icon name="ios-home-outline" item-left large></ion-icon>
+      <p>State</p>
+      <h2>{{item.state_name}}</h2>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="ios-home-outline" item-left large></ion-icon>
+      <p>City</p>
+      <h2>{{item.city_name}} </h2>
+   </ion-item>
+
+    <ion-item>
+      <ion-icon name="ios-copy-outline" item-left large></ion-icon>
+      <p>Hotel Description</p>
+      <h2 style="white-space:pre-wrap">{{item.hotel_desc}} </h2>
+      <ion-icon item-right (click)="hotel_desc()" name="md-open"></ion-icon>
+      </ion-item>
+       
+    <button ion-button full class="login__submit" (click)="updatePassword()">Change Password</button>
+    
+    </ion-col>
+  </ion-row>
+  
+    </div>    
+</ion-content>

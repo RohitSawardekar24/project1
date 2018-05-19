@@ -1,0 +1,22 @@
+<ion-header color="primary">
+  <ion-navbar>
+    <ion-title>View Posted Job</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>    
+   <ion-list>
+     <ion-item-sliding class="item" *ngFor="let item of items">
+  <ion-item>
+    <h1 style="white-space: pre-wrap">{{item.pname}}</h1>
+    <h2 style="white-space: pre-wrap">{{item.city_name}} • {{item.min_experience}}-{{item.max_experience}} Years of experience</h2>
+    <button ion-button default item-right (click)="editJob(item.hj_id)">Edit</button>
+    </ion-item>
+    <ion-item-options side="right">
+      <button ion-button color="danger" (click)="removeItem(item.hj_id)"> Delete</button>
+    </ion-item-options>
+    
+    </ion-item-sliding>
+    
+     </ion-list>
+</ion-content>

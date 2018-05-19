@@ -1,0 +1,93 @@
+ <!--
+  Generated template for the SupplierDetail page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Supplier Detail</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+<div class="cont">
+  <div *ngFor="let item of items">
+      <ion-row class="item" style="margin: 10px;margin-left:7px;width:96%">
+        <ion-col width-30>
+      <a class="item-avatar" style="width:100%">
+        <img src="https://www.forehotels.com/public/supplier/avatar/{{item.profile_pic}}" onError="this.src='https://www.forehotels.com/public/assets/img/supplier/metha.jpg';" style="border-radius:8px; max-height:200px;">
+      </a>
+        </ion-col>
+        <ion-col width-70>
+      <h3 style="white-space:pre-wrap">{{item.name}}</h3>
+      <p>{{item.city_name}}</p>
+      <p style="white-space:pre-wrap">{{item.product_name}}</p>
+       </ion-col>
+      </ion-row>
+
+  <ion-row>
+    <ion-col width-60>
+    <ion-item>
+      <ion-icon name="ios-contact-outline" item-left large></ion-icon>
+      <h1>Quick Summary</h1>
+
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="ios-pin-outline" item-left large></ion-icon>
+      <p>Address</p>
+      <h2 style="white-space: pre-wrap">{{item.address}}</h2>
+  </ion-item>
+
+    <ion-item>
+      <ion-icon name="ios-clipboard-outline" item-left large></ion-icon>
+      <p>Category</p>
+      <h2 style="white-space:pre-wrap">{{item.sc_name}}</h2>
+    </ion-item>
+
+  <ion-item>
+      <ion-icon name="ios-cube-outline" item-left large></ion-icon>
+      <p>Product</p>
+      <h2 style="white-space:pre-wrap">{{item.product_name}} </h2>
+  </ion-item>
+
+<ion-item>
+      <ion-icon name="ios-book-outline" item-left large></ion-icon>
+      <p>Description</p>
+      <h2 style="white-space:pre-wrap">{{item.description}} </h2>
+  </ion-item>
+</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col width-60>
+    <ion-item>
+      <ion-icon name="ios-contact-outline" item-left large></ion-icon>
+      <h1>Supplier Details</h1>
+
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="ios-person-outline" item-left large></ion-icon>
+      <p>Name</p>
+      <h2>{{item.name}} </h2>
+    </ion-item>
+
+  <ion-item>
+      <ion-icon name="ios-mail-outline" item-left large></ion-icon>
+      <p>Email</p>
+      <h2 style="white-space:pre-wrap">{{item.email}}</h2>
+      </ion-item>
+
+    <ion-item>
+      <ion-icon name="ios-phone-portrait-outline" item-left large></ion-icon>
+      <p>Conatct Number</p>
+      <h2 style="white-space:pre-wrap">{{item.contact_no}} </h2>
+    </ion-item>
+    </ion-col>
+  </ion-row>
+    </div>
+  </div>
+</ion-content>

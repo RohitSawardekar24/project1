@@ -1,0 +1,21 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Payment Options</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content>
+<ion-list>
+    <ion-list-header>
+      Select an option to Pay
+    </ion-list-header>
+    <ion-item *ngFor="let d of data" (click)="toggleDetails(d)"><ion-icon color="primary" item-right [name]="d.icon"></ion-icon>
+      <h1 style="padding-left:20px">{{d.title}}</h1><img src="{{d.img}}" style="padding-right:11px"><img src="{{d.img1}}" style="padding-right:14px"><img src="{{d.img2}}">
+      <div *ngIf="d.showDetails"><p style="white-space: pre-wrap; padding-left: 20px" [innerHTML]="d.text1"></p><img src="{{d.img_wallet}}"/><p style="white-space: pre-wrap; padding-left: 20px" [innerHTML]="d.text2"></p><img src="{{d.img_select}}"/><p style="white-space: pre-wrap; padding-left: 20px" [innerHTML]="d.text3"></p>
+      <button ion-button round full style="margin-top:10%" (click)="paymentOption(d)">Proceed to Payment</button>
+      </div>
+      
+    </ion-item>
+  </ion-list>
+</ion-content>

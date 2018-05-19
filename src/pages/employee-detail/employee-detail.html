@@ -1,0 +1,182 @@
+<style>
+.top {
+  background: url("assets/img/goplus.jpg") no-repeat;
+  background-size: cover;
+  height: 30%;
+  position: relative;
+}
+.top .panel img {
+  border-radius: 50%;
+  width: 12rem;
+  height: 12rem;
+  top: 0.5em;
+  position: relative;
+}
+.top .panel .person {
+  color: #fff;
+  font-size: large;
+  line-height: 1.1;
+  padding: 0.25rem 0.75rem 0;
+}
+.top .panel .person .work {
+  font-weight: 400;
+  font-size: initial;
+  display: block;
+  letter-spacing: .5px;
+}
+
+.top button {
+  border-radius: 50%;
+  width: 5.5rem;
+  height: 5.5rem;
+  display: block;
+  position: absolute;
+  bottom: -2.5rem;
+  right: 0.75rem;
+  z-index: 10;
+  border: 0;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+  transition: box-shadow .2s;
+  background-color: #1396e2;
+  outline: 0;
+}
+.detailcard{
+padding: 2%;
+}
+.cardrow{
+padding: 2%;
+}
+.rowdiv{
+  display: flex; 
+  width: 40%;
+}
+
+</style>
+<ion-header>
+ <ion-navbar>
+    <ion-title>Employee Detail</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+<div *ngFor="let item of items">
+  <div class="top">    
+    <div class="panel" style="text-align: center;height: 15em;">
+      <img *ngIf="this.social_pic == false" src="https://www.forehotels.com/public/emp/avatar/{{item.profile_pic}}" onError="this.src='https://www.forehotels.com/public/assets/img/male.png';" class="face"/>
+      <img *ngIf="this.social_pic == true" src="{{item.profile_pic}}" onError="this.src='https://www.forehotels.com/public/assets/img/male.png';" class="face"/>
+      <br><p class="person">{{item.name}}<span class="work">{{item.designation}}</span></p>
+    </div>
+      <button ion-fab mini [ngStyle]="{'background-color': color }" (click)="shortlist()"><ion-icon name="ios-bookmark-outline"></ion-icon></button>
+  </div>
+
+  <ion-card class="detailcard">
+    <ion-card-header>Basic Information</ion-card-header>
+      <ion-list>
+          <ion-row class="cardrow">
+            <div class="rowdiv"> 
+              <ion-icon name="ios-mail-outline" item-start></ion-icon>                
+              <p style="margin-left: 0.6em;">Email</p>
+            </div>
+            <div style="width: 60%;">
+              <p>{{item.email}}</p>
+            </div>
+          </ion-row>
+
+           <ion-row class="cardrow">
+            <div class="rowdiv"> 
+              <ion-icon name="ios-call-outline" item-start></ion-icon>                
+              <p style="margin-left: 0.6em;">Phone</p>
+            </div>
+            <div style="width: 60%;">
+              <p>{{item.contact_no}}</p>
+          
+              <button ion-button (click)="call(item.contact_no)" style="height: 2.6rem;">Call</button>
+            </div>
+          </ion-row>   
+
+           <ion-row class="cardrow">
+            <div class="rowdiv"> 
+              <ion-icon name="ios-pin-outline" item-start></ion-icon>                
+              <p style="margin-left: 0.6em;">Preferred</p>
+            </div>
+            <div style="width: 60%;">
+              <p>{{item.city_name}}</p>
+            </div>
+          </ion-row>
+
+          <ion-row class="cardrow">
+            <div class="rowdiv"> 
+              <ion-icon name="ios-school-outline" item-start></ion-icon>                
+              <p style="margin-left: 0.6em;">Qualification</p>
+            </div>
+            <div style="width: 60%;">
+              <p>{{item.qualification}}</p>
+            </div>
+          </ion-row>
+
+          <ion-row class="cardrow">
+            <div class="rowdiv"> 
+              <ion-icon name="ios-bowtie-outline" item-start></ion-icon>                
+              <p style="margin-left: 0.6em;">Designation</p>
+            </div>
+            <div style="width: 60%;">
+              <p>{{item.designation}}</p>
+            </div>
+          </ion-row>  
+
+           <ion-row class="cardrow">
+            <div class="rowdiv"> 
+              <ion-icon name="ios-briefcase-outline" item-start></ion-icon>                
+              <p style="margin-left: 0.6em;">Experience</p>
+            </div>
+            <div style="width: 60%;">
+              <p>{{item.experience}}</p>
+            </div>
+          </ion-row>  
+
+           <ion-row class="cardrow">
+            <div class="rowdiv"> 
+              <ion-icon name="ios-home-outline" item-start></ion-icon>                
+              <p style="margin-left: 0.6em;">Current<br>Previous Organization</p>
+            </div>
+            <div style="width: 60%;">
+              <p>{{item.org}}</p>
+            </div>
+          </ion-row>  
+
+          <ion-row class="cardrow">
+            <div class="rowdiv"> 
+              <ion-icon name="ios-document-outline" item-start></ion-icon>                
+              <p style="margin-left: 0.6em;">CV</p>
+            </div>
+            <div style="width: 60%;">
+              <button ion-button (click)="downloadCV()" style="height: 2.6rem;">View Resume</button>
+            </div>
+          </ion-row>
+
+           <ion-row class="cardrow">
+            <div class="rowdiv"> 
+              <ion-icon name="ios-people-outline" item-start></ion-icon>                
+              <p style="margin-left: 0.6em;">Open for Internship</p>
+            </div>
+            <div style="width: 60%;">
+              <p>{{item.internship}}</p>
+            </div>
+          </ion-row>
+
+          <ion-row class="cardrow">
+            <div class="rowdiv"> 
+              <ion-icon name="ios-restaurant-outline" item-start></ion-icon>                
+              <p style="margin-left: 0.6em;">Open for Catering Staff</p>
+            </div>
+            <div style="width: 60%;">
+              <p>{{item.catering}}</p>
+            </div>
+          </ion-row>
+
+      </ion-list>
+
+      
+  </ion-card>
+  <br><br>
+</div>
+</ion-content>
