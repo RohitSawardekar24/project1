@@ -59,7 +59,7 @@ productCategory(){
           });
           let options = new RequestOptions({ headers: headers });
           this.http
-          .get("http://www.forehotels.com:3000/api/supplier_category", options)
+          .get("http://localhost:3000/api/supplier_category", options)
                 .subscribe(data =>{
                   this.items = JSON.parse(data._body)
                 let alert = this.alertCtrl.create();
@@ -104,7 +104,7 @@ productCategory(){
               'Authorization': hash
             });
             let options = new RequestOptions({ headers: headers });
-            this.http.post("http://www.forehotels.com:3000/api/suppliers", supplier_body, options)
+            this.http.post("http://localhost:3000/api/suppliers", supplier_body, options)
             .subscribe(data => {
               this.sup_items = JSON.parse(data._body).Users_Applied; //Bind data to items object
             for(let i=0; i<this.sup_items.length; i++){
@@ -114,7 +114,7 @@ productCategory(){
                     text:  'Hello '+this.sup_items[i].name+' there is a '+this.sup_items[i].sc_name+' requirement '+' for '+hotelname +', Contact '+number+' for further details'
                 });
                 this.http
-                      .post("http://forehotels.com:3000/api/send_sms", sms_body, options)
+                      .post("http://localhost:3000/api/send_sms", sms_body, options)
                             .subscribe(data =>{
         
                     }) 
@@ -132,7 +132,7 @@ productCategory(){
           category:this.product_cat
           });
           this.http
-              .post('http://forehotels.com:3000/api/post_supplier_requirement', body, options)
+              .post('http://localhost:3000/api/post_supplier_requirement', body, options)
               .subscribe(
               data => {
                 this.items=JSON.parse(data._body)

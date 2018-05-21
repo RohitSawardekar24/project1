@@ -68,7 +68,7 @@ export class ListPage {
         });
      let options = new RequestOptions({ headers: headers });
 
-      this.http.get("http://forehotels.com:3000/api/package/"+id, options)
+      this.http.get("http://localhost:3000/api/package/"+id, options)
          .subscribe(data =>{
           this.items=JSON.parse(data._body).Jobs; //Bind data to items object
          });
