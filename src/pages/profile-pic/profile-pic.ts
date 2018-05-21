@@ -59,7 +59,7 @@ export class ProfilePicPage {
                   this.ga.trackView("Update Profile Picture")
               });
                     this.http = http;
-                    var url="http://www.forehotels.com:3000/api/package/"+id;
+                    var url="http://localhost:3000/api/package/"+id;
                     this.getDetails(url, loader);
           });
         }             
@@ -167,7 +167,7 @@ export class ProfilePicPage {
               }
                 this.completed = false;
                 fileTransfer.onProgress(onProgress)
-                fileTransfer.upload(x, encodeURI("http://forehotels.com:3000/api/upload_hotel_image"), options, true)
+                fileTransfer.upload(x, encodeURI("http://localhost:3000/api/upload_hotel_image"), options, true)
                 .then((data) => {
                   this.progress=null;
                   this.completed=true;
@@ -176,7 +176,7 @@ export class ProfilePicPage {
                     content: "Fetching your Account Details. Kindly wait...",
                   });
                   loader.present();
-                  let url="http://www.forehotels.com:3000/api/package/"+id;
+                  let url="http://localhost:3000/api/package/"+id;
                   this.getDetails(url, loader);
                   //this.myapp.getDetails(this.id)
                 }, (err) => {

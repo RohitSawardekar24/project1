@@ -70,7 +70,7 @@ placedetails: any;
               let options = new RequestOptions({ headers: headers });
 
                 this.http
-                .get("http://forehotels.com:3000/api/package/"+id, options)
+                .get("http://localhost:3000/api/package/"+id, options)
                   .subscribe(data =>{
                     this.items=JSON.parse(data._body).Jobs; //Bind data to items object
                     if(this.items[0].profile_pic!= ''){
@@ -356,7 +356,7 @@ placedetails: any;
         });
         let options = new RequestOptions({ headers: headers });
         this.http
-            .put('http://www.forehotels.com:3000/api/hotel', body, options)
+            .put('http://localhost:3000/api/hotel', body, options)
             .map(res => res.json())
             .subscribe(
                 data => {
@@ -456,7 +456,7 @@ constructor(private alertCtrl: AlertController,
           new_password: this.items.password,
           });
           this.http
-              .put('http://forehotels.com:3000/api/password', body, options)
+              .put('http://localhost:3000/api/password', body, options)
               .subscribe(
                   data => {
                     let res = data.json();

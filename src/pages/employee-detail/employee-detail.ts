@@ -65,7 +65,7 @@ ionViewDidEnter() {
                     'Authorization': val
                   });
                   let options = new RequestOptions({ headers: headers });
-                  this.http.get("http://forehotels.com:3000/api/employee/"+this.emp, options)
+                  this.http.get("http://localhost:3000/api/employee/"+this.emp, options)
                         .subscribe(data =>{
                           this.checkShorlisted()
                           this.items=JSON.parse(data._body).Users;
@@ -93,7 +93,7 @@ ionViewDidEnter() {
             'Authorization': value
           });
           let options = new RequestOptions({ headers: headers });
-          this.http.get("http://forehotels.com:3000/api/shortlisted_employee/"+id, options)
+          this.http.get("http://localhost:3000/api/shortlisted_employee/"+id, options)
           .subscribe(data =>{
             this.checkemp=JSON.parse(data._body).Users; //Bind data to items object
             for(resitem of this.checkemp){
@@ -125,7 +125,7 @@ ionViewDidEnter() {
             });
             let options = new RequestOptions({ headers: headers });
             this.http
-                .post('http://forehotels.com:3000/api/cv', body, options)
+                .post('http://localhost:3000/api/cv', body, options)
                 .subscribe(
                     data => {
                     },
@@ -200,7 +200,7 @@ ionViewDidEnter() {
                 });
                 let options = new RequestOptions({ headers: headers });
                 this.http
-                    .post('http://forehotels.com:3000/api/emp_wishlist', body, options)
+                    .post('http://localhost:3000/api/emp_wishlist', body, options)
                     .map(res => res.json())
                     .subscribe(
                         data => {

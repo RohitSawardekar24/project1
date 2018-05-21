@@ -52,7 +52,7 @@ export class SearchSupplierPage {
                 'Authorization': val
               });
               let options = new RequestOptions({ headers: headers });
-              this.http.post("http://www.forehotels.com:3000/api/suppliers", body, options)
+              this.http.post("http://localhost:3000/api/suppliers", body, options)
                 .subscribe(data => {
                   this.items = JSON.parse(data._body).Users_Applied; //Bind data to items object
                   loading.dismiss()
@@ -104,7 +104,7 @@ export class SearchSupplierPage {
               });
               let options = new RequestOptions({ headers: headers });
               this.http
-                .post('http://forehotels.com:3000/api/suppliers', body, options)
+                .post('http://localhost:3000/api/suppliers', body, options)
                 .subscribe(
                 data => {
                   this.items = JSON.parse(data._body).Users_Applied;

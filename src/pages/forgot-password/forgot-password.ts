@@ -66,7 +66,7 @@ export class ForgotPasswordPage {
           email: this.items.email,
           });
           let options = new RequestOptions({ headers: headers });
-          this.http.get("http://forehotels.com:3000/api/hotel_users", options)
+          this.http.get("http://localhost:3000/api/hotel_users", options)
                   .subscribe(data =>{
                     loading.dismiss()
                   this.checkusers=JSON.parse(data._body).Users;//Bind data to items object
@@ -87,7 +87,7 @@ export class ForgotPasswordPage {
                 });
                 let options1 = new RequestOptions({ headers: headers1 });
                     this.http
-                      .post('http://forehotels.com:3000/api/send_email', email_body, options1)
+                      .post('http://localhost:3000/api/send_email', email_body, options1)
                       .subscribe(
                           data => {
                         this.toast.show("A Mail has been sent to your Email ID", '7000', 'bottom').subscribe(
@@ -134,7 +134,7 @@ export class ForgotPasswordPage {
           mail : 'forgot_password'
           });
           let options = new RequestOptions({ headers: headers });
-          this.http.get("http://forehotels.com:3000/api/hotel_users", options)
+          this.http.get("http://localhost:3000/api/hotel_users", options)
                   .subscribe(data =>{
                   this.checkcontact=JSON.parse(data._body).Users;//Bind data to items object
                   let checker = 0;
@@ -145,7 +145,7 @@ export class ForgotPasswordPage {
                     }
                     if(checker == 1){
                   this.http
-                  .post('http://forehotels.com:3000/api/send_email', sms_body, options)
+                  .post('http://localhost:3000/api/send_email', sms_body, options)
                   .subscribe(
                       data => {
                         loading.dismiss()

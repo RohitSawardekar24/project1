@@ -63,7 +63,7 @@ view:boolean=false
           'Authorization': this.hash
         });
         let options = new RequestOptions({ headers: headers });
-          this.http.get("http://forehotels.com:3000/api/shortlisted_employee/"+this.id, options)
+          this.http.get("http://localhost:3000/api/shortlisted_employee/"+this.id, options)
                 .subscribe(data =>{
                 this.items=JSON.parse(data._body).Users; //Bind data to items object\
                 this.si_len= this.items.length;
@@ -84,7 +84,7 @@ view:boolean=false
           });
         let options = new RequestOptions({ headers: headers });
           this.http
-          .delete("http://forehotels.com:3000/api/emp_wishlist/"+emp_id, options)
+          .delete("http://localhost:3000/api/emp_wishlist/"+emp_id, options)
                 .subscribe(data =>{
                   let alert = this.alertCtrl.create({
                       title: 'Candidate Removed!',
