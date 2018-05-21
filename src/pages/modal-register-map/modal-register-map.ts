@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { NetworkServiceProvider } from '../../providers/network-service/network-service';
 declare var google: any;
-var self=this;
+ var self=this;
 
 @Component({
   selector: 'page-modal-register-map',
   templateUrl: 'modal-register-map.html',
 })
 export class ModalRegisterMapPage implements OnInit{
-  autocompleteItems: any;
+  autocompleteItems: any[]=[];
     autocomplete: any;
     acService:any;
 
@@ -52,15 +52,15 @@ address:any = {
                 this.autocompleteItems = [];
                 return;
             }
-            let self = this;
+            // let self = this;
             let config = { 
                 input: this.autocomplete.query, 
                 componentRestrictions: { country: 'IN' } 
             }
             this.acService.getPlacePredictions(config, function (predictions, status) {
-                self.autocompleteItems = [];            
+                // this.autocompleteItems = [];            
                 predictions.forEach(function (prediction) {              
-                    self.autocompleteItems.push(prediction);
+                    this.autocompleteItems.push(prediction);
                 });
             });
         }

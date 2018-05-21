@@ -121,9 +121,10 @@ export class ModalHotelCategoryPage {
                 'Authorization': hash
                 });
                 let options = new RequestOptions({ headers: headers });
-                this.http.get("http://www.forehotels.com:3000/api/hotel_category", options)
+                this.http.get("http://localhost:3000/api/hotel_category", options)
                         .subscribe(data =>{
                         this.resitems=JSON.parse(data._body).Category;
+                        console.log(this.resitems);
                 loader.dismiss()
                 this.rows = Array.from(Array(Math.ceil(this.resitems.length/3)).keys());
             });

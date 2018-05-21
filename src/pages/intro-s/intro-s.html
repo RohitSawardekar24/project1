@@ -6,7 +6,7 @@
 <ion-slides #tourSlide (ionSlideDidChange)="onSlideChangeStart()" pager="true" paginationType="progress" style="background-color: #1396e2;">
     <ion-slide *ngFor="let slide of slides" style="height: 100%;">     
       <img [src]="slide.image" class="slide-image"/>
-      <h2 class="slide-title" [innerHTML]="slide.title"></h2>
+      <h2 class="slide-title" >{{slide.title}}</h2>
       <p class="pstyle" style="padding: 0 40px" [innerHTML]="slide.description"></p>       
     </ion-slide>
 
