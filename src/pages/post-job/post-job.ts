@@ -20,7 +20,7 @@ import { ToastController } from 'ionic-angular';
 export class PostJobPage {
   http:any
    rows: any;
-   resitems:any
+   resitems:any[]=[];
    service= []
    kitchen= []
    bartender= []
@@ -750,7 +750,7 @@ moveNext(){
         }
     }
 }
-
+          /*----------------Key skills page-------------------*/
 @Component({
   template: `
 <ion-content> 
@@ -947,7 +947,7 @@ moveNext(){
     }
   }
 }
-
+                      /* --------Tips page---------------*/
 @Component({
   template: `
 <ion-content> 
@@ -1113,6 +1113,7 @@ updateCheckedOptions(e: any, data) {
   </ion-list>
 </ion-content>`
 })
+                /*-------------- Job DEscription page---------------*/
 export class JDPage{
 
     salary_range: any;
@@ -1211,7 +1212,7 @@ postJob(){
                         });
                       
                         alert.present();
-                        this.navCtrl.popTo(ListPage)
+                        this.navCtrl.pop();
                 }); 
                        let emp_body = JSON.stringify({
                   //empty
