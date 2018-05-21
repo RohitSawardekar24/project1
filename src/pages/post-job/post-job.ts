@@ -1209,6 +1209,7 @@ postJob(){
                         title: 'Job Posted Successfully!',
                         buttons: ['OK']
                         });
+                      
                         alert.present();
                         this.navCtrl.popTo(ListPage)
                 }); 
