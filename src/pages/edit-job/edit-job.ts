@@ -57,7 +57,7 @@ postJobForm:any
             'Authorization': value
           });
           let options = new RequestOptions({ headers: headers });
-            this.http.get("http://www.forehotels.com:3000/api/jobs/"+this.hj_id, options)
+            this.http.get("http://localhost:3000/api/jobs/"+this.hj_id, options)
                   .subscribe(data =>{
                   this.items=JSON.parse(data._body).Jobs;
                   },error=>{
@@ -283,7 +283,7 @@ postJobForm:any
             let options = new RequestOptions({ headers: headers });
 
             this.http
-                .put('http://forehotels.com:3000/api/hotel_job', body, options)
+                .put('http://localhost:3000/api/hotel_job', body, options)
                 .map(res => res.json())
                 .subscribe(
                     data => {

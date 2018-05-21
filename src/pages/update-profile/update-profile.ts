@@ -73,10 +73,10 @@ placedetails: any;
                 .get("http://localhost:3000/api/package/"+id, options)
                   .subscribe(data =>{
                     this.items=JSON.parse(data._body).Jobs; //Bind data to items object
-                    if(this.items[0].profile_pic!= ''){
+                     if(this.items[0].profile_pic!= ''){
                       var Str = 'https://www.forehotels.com/public/hotel/avatar/'
                       this.profilepic = Str+this.items[0].profile_pic
-                    }else{
+                     }else{
                       this.profilepic = this.picpath;
                     }
                     

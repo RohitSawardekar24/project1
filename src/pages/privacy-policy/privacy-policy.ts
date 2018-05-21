@@ -28,7 +28,7 @@ export class PrivacyPolicyPage {
                 });
                 let options = new RequestOptions({ headers: headers });
                 this.http
-                    .get('http://forehotels.com:3000/api/config', options)
+                    .get('http://localhost:3000/api/config', options)
                     .subscribe(
                         data => {                  
                           this.items = JSON.parse(data._body);

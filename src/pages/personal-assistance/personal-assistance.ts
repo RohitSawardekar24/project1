@@ -144,7 +144,7 @@ export class PersonalAssistancePage {
                         buttons: ['OK']
                       });
                       alert.present();
-                      //applied =true;
+                      applied =true;
                       }
                     }
                 if(applied==false){

@@ -38,7 +38,7 @@ id:any;
                       'Authorization': val
                     });
                 let options = new RequestOptions({ headers: headers });
-                this.http.get("http://forehotels.com:3000/api/suppliers/"+this.id, options)
+                this.http.get("http://localhost:3000/api/suppliers/"+this.id, options)
                       .subscribe(data =>{
                       this.items=JSON.parse(data._body).Users_Applied; //Bind data to items object
                       },error=>{

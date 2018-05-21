@@ -73,7 +73,7 @@ export class EmployeeTabPage {
               'Authorization': this.hash
             });
             let options = new RequestOptions({ headers: headers });
-            this.http.post("http://forehotels.com:3000/api/users_list", body ,options)
+            this.http.post("http://localhost:3000/api/users_list", body ,options)
                   .subscribe(data =>{
                     this.items= []
                   this.resitems = JSON.parse(data._body).Users;          
@@ -203,7 +203,7 @@ searchEmployee(){
             });
             let options = new RequestOptions({ headers: headers });
             this.http
-                .post('http://www.forehotels.com:3000/api/users_list', body, options)
+                .post('http://localhost:3000/api/users_list', body, options)
                 .subscribe(
                     data => {
                       this.items.splice(0,this.items.length)
