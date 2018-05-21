@@ -106,7 +106,7 @@ this.icons = ['search','ios-contacts','md-calendar','md-open','ios-create','md-c
     this.storage.set("Hash",this.key);
     this.storage.get('loggedIn').then((id) => {
        if(id == true){
-         this.rootPage = ListPage;
+         this.rootPage = PostJobPage;
          this.storage.get('id').then((id) => {
           this.getDetails(id)
           console.log(id)
@@ -116,7 +116,8 @@ this.icons = ['search','ios-contacts','md-calendar','md-open','ios-create','md-c
          this.rootPage = IntroSPage;
        }
      })
-
+    //this.rootPage = PostJobPage;
+    //this.nav.setRoot(SelectDesignationPage)
     this.platform.ready().then(() => {
       this.headerColor.tint('#f2a900');
       this.statusbar.backgroundColorByHexString('#1396e2');
