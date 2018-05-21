@@ -23,7 +23,7 @@ export class Category {
       'Authorization': hash
     });
     let options = new RequestOptions({ headers: headers });
-      this.http.get("http://www.forehotels.com:3000/api/supplier_category", options)
+      this.http.get("http://localhost:3000/api/supplier_category", options)
             .subscribe(data =>{
             console.log(data);
              this.resitems=data.json();
