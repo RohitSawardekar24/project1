@@ -1,5 +1,5 @@
 {
-  "name": "myProject",
+  "name": "project1",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
@@ -43,8 +43,6 @@
     "@ngx-translate/core": "8.0.0",
     "@ngx-translate/http-loader": "^2.0.0",
     "call-number": "^1.0.1",
-    "cordova-android": "^7.0.0",
-    "cordova-browser": "^5.0.3",
     "cordova-plugin-app-version": "^0.1.9",
     "cordova-plugin-contacts": "^3.0.1",
     "cordova-plugin-device": "^2.0.2",
@@ -55,6 +53,7 @@
     "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-google-analytics": "^1.8.3",
     "cordova-plugin-headercolor": "^1.0.0",
+    "cordova-plugin-inappbrowser": "^3.0.0",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.1.19",
     "cordova-plugin-network-information": "^2.0.1",
@@ -65,9 +64,12 @@
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
     "mx.ferreyra.callnumber": "~0.0.2",
+    "onesignal-cordova-plugin": "^2.4.0",
     "rxjs": "5.5.10",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.26"
+    "zone.js": "0.8.26",
+    "cordova-browser": "~5.0.3",
+    "cordova-android": "~7.0.0"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.9",
@@ -76,6 +78,10 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
+      "cordova-plugin-inappbrowser": {},
+      "onesignal-cordova-plugin": {},
+      "cordova-plugin-google-analytics": {},
+      "cordova-plugin-x-toast": {},
       "cordova-plugin-network-information": {},
       "cordova-plugin-app-version": {},
       "cordova-plugin-contacts": {},
@@ -83,11 +89,9 @@
       "cordova-plugin-file-transfer": {},
       "cordova-plugin-filepath": {},
       "cordova-plugin-filechooser": {},
-      "cordova-plugin-x-toast": {},
       "cordova-plugin-geolocation": {
         "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
       },
-      "cordova-plugin-google-analytics": {},
       "mx.ferreyra.callnumber": {},
       "cordova.plugins.diagnostic": {},
       "cordova-plugin-whitelist": {},
