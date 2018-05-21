@@ -25,7 +25,7 @@ addr:any;
 map: any;
 markers = [];
 placedetails: any;
-  items:any;
+  items:any=['abd','78u'];
   http:any;
   hash:any;
   hotel_id:any;
