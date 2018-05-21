@@ -82,7 +82,7 @@ export class PostJobPage {
                         if(this.resitems[i].parent_id == 6){
                           this.other.push(this.resitems[i])
                         }
-                    }
+                      }
                 loader.dismiss()
                 this.rows = Array.from(Array(Math.ceil(this.resitems.length/3)).keys());
             });              
