@@ -1,7 +1,7 @@
 <ion-toolbar>
-        <ion-buttons end>
+        <ion-buttons end *ngIf="this.currentIndex != 3">
           <button ion-button color="primary" (click)="goToHome()">Skip</button>
-        </ion-buttons>
+        </ion-buttons>  
 </ion-toolbar>
 <ion-slides #tourSlide (ionSlideDidChange)="onSlideChangeStart()" pager="true" paginationType="progress" style="background-color: #1396e2;">
     <ion-slide *ngFor="let slide of slides" style="height: 100%;">     
@@ -12,12 +12,13 @@
 
     <ion-slide>
       <img src="assets/img/rank.jpg" class="slide-image"/>
-      <h2 class="slide-title">Start Using App</h2>
-      <button ion-button large clear icon-right color="primary" (click)="goToHome()">
-        Continue
-        <ion-icon name="arrow-forward"></ion-icon>
+      <button ion-button large style="align-content: center" (click)="goToHome()">
+        <h2 class="slide-title">Start Using App</h2>
       </button>
-    </ion-slide>
+      <!--<button ion-button large clear icon-right color="white" (click)="goToHome()">
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>-->
+      </ion-slide>
   </ion-slides>
 
     <ion-fab bottom right>
