@@ -27,7 +27,7 @@ export class Designation {
       'Authorization': hash
     });
     let options = new RequestOptions({ headers: headers });
-      this.http.get("http://www.forehotels.com:3000/api/designation", options)
+      this.http.get("http://localhost:3000/api/designation", options)
             .subscribe(data =>{
              this.resitems=data.json();
              for(let i of this.resitems){
