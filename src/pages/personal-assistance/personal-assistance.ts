@@ -57,7 +57,7 @@ export class PersonalAssistancePage {
           'Authorization': value
         });
         let options = new RequestOptions({ headers: headers });
-          this.http.get("http://localhost3000/api/job_posted/"+id, options)
+          this.http.get("http://localhost:3000/api/job_posted/"+id, options)
                 .subscribe(data =>{
                 this.items=JSON.parse(data._body).Jobs; //Bind data to items object
                 for(let response of this.items){
