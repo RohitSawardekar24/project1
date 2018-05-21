@@ -1206,10 +1206,7 @@ postJob(){
               .post('http://localhost:3000/api/post_job', body, options)
               .subscribe(
               data => {
-                console.log(data);
-                console.log(body);
-                console.log('----------------------');
-                console.log(data._body);
+                
                   let alert = this.alertCtrl.create({
                         title: 'Job Posted Successfully!',
                         buttons: ['OK']
