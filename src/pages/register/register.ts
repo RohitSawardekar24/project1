@@ -382,7 +382,7 @@ export class ModalHotelCategoryPage {
         });
         let options = new RequestOptions({ headers: headers });
         this.http
-            .get("http://forehotels.com:3000/api/state", options)
+            .get("http://localhost:3000/api/state", options)
               .subscribe(data =>{
                 this.response = JSON.parse(data._body)
                 for(let i=0; i<this.response.length; i++){
@@ -392,7 +392,7 @@ export class ModalHotelCategoryPage {
              }
           });
          this.http
-            .get("http://forehotels.com:3000/api/city", options)
+            .get("http://localhost:3000/api/city", options)
               .subscribe(data =>{
                 this.response_city = data.json()
                 for(let i=0; i<this.response_city.length; i++){
@@ -715,7 +715,7 @@ loginForm(){
             });
             let options = new RequestOptions({ headers: headers });
             this.http
-                .post('http://forehotels.com:3000/api/users_hotel', body, options)
+                .post('http://localhost:3000/api/users_hotel', body, options)
                 .subscribe(
                     datas => {
                 this.items = JSON.parse(datas._body)
@@ -755,7 +755,7 @@ loginForm(){
               });
               let options = new RequestOptions({ headers: headers });
               this.http
-              .post("http://forehotels.com:3000/api/send_sms", body, options)
+              .post("http://localhost:3000/api/send_sms", body, options)
                     .subscribe(data =>{
             })
         })

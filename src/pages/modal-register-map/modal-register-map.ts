@@ -52,15 +52,15 @@ address:any = {
                 this.autocompleteItems = [];
                 return;
             }
-            // let self = this;
+            let self = this;
             let config = { 
                 input: this.autocomplete.query, 
                 componentRestrictions: { country: 'IN' } 
             }
             this.acService.getPlacePredictions(config, function (predictions, status) {
-                // this.autocompleteItems = [];            
+                self.autocompleteItems = [];            
                 predictions.forEach(function (prediction) {              
-                    this.autocompleteItems.push(prediction);
+                    self.autocompleteItems.push(prediction);
                 });
             });
         }
