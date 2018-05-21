@@ -68,7 +68,7 @@ export class UpgradePackageProvider {
                           }
                         }
                         console.log('Length of SI ',len1.length)                
-                        this.remainig_interviews = len - len1.length 
+                        this.remainig_interviews = len - len1.length ;
                     })
               })
           })
@@ -95,7 +95,7 @@ export class UpgradePackageProvider {
   }
 
   interviewAlert(){
-    this.load()
+    this.load();
       console.log('ream',this.remainig_interviews)
         if(this.remainig_interviews == 0){
         console.log('if called',this.remainig_interviews)
@@ -106,6 +106,7 @@ export class UpgradePackageProvider {
       }     
     }
   s_alert(){ 
+    this.load();
           let alert = this.alertCtrl.create({})
           alert.setTitle('Your remaining interviews '+this.remainig_interviews)  
             alert.addButton({
@@ -117,6 +118,7 @@ export class UpgradePackageProvider {
           alert.present() 
     }
   si_alert(){ 
+    this.load();
       let alert = this.alertCtrl.create({})
       alert.setTitle('Your remaining interviews '+this.remainig_interviews)  
         alert.addButton({
@@ -129,7 +131,7 @@ export class UpgradePackageProvider {
     }
  
   checkerPostJob(){     
-      this.load()
+      this.load();
           if(this.remaining_jobs == 0){
             console.log('if called')
             return true
@@ -138,7 +140,8 @@ export class UpgradePackageProvider {
             return false
           }
     }
-  resalert(){         
+  resalert(){     
+    this.load();    
           let alert = this.alertCtrl.create({}) 
                     alert.setTitle('Your Remaining Jobs ' + this.remaining_jobs)                    
                       alert.addButton({
@@ -148,9 +151,11 @@ export class UpgradePackageProvider {
                         }
                       })
                      alert.present();
+                     this.navCtrl.push(PackagePage);
         }
         
   sucalert(){
+    this.load();
           let alert = this.alertCtrl.create({})             
               alert.setTitle('Your Remaining Jobs ' + this.remaining_jobs)
               alert.addButton({
@@ -160,5 +165,6 @@ export class UpgradePackageProvider {
                 }
               })
               alert.present();
+              this.navCtrl.push(PostJobPage);
         }
 }
