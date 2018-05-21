@@ -97,6 +97,7 @@
     </plugin>
     <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
     <plugin name="cordova.plugins.diagnostic" spec="^4.0.7" />
-    <allow-navigation href="http://192.168.100.218:8100" />
-    <engine name="browser" spec="5.0.3" />
+    <allow-navigation href="http://192.168.100.155:8100" />
+    <engine name="browser" spec="~5.0.3" />
+    <engine name="android" spec="~7.0.0" />
 </widget>
