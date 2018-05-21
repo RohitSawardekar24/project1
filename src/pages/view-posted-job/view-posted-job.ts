@@ -41,7 +41,7 @@ items:any
           'Authorization': value
         });
         let options = new RequestOptions({ headers: headers });
-          this.http.get("http://www.forehotels.com:3000/api/job_posted/"+id, options)
+          this.http.get("http://localhost:3000/api/job_posted/"+id, options)
                 .subscribe(data =>{
                 this.items=JSON.parse(data._body).Jobs; //Bind data to items object
                 },error=>{
@@ -94,7 +94,7 @@ items:any
             });
           let options = new RequestOptions({ headers: headers });
             this.http
-            .delete("http://forehotels.com:3000/api/jobs/"+data, options)
+            .delete("http://localhost:3000/api/jobs/"+data, options)
                   .subscribe(data =>{
                     
                     let alert = this.alertCtrl.create({

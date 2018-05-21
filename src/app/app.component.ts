@@ -103,6 +103,7 @@ this.icons = ['search','ios-contacts','md-calendar','md-open','ios-create','md-c
       { title: 'Packages', component: PackagePage, icon: this.icons[10] ,color: this.colors[10]},
       { title:'About Us', component: AboutUsPage, icon : this.icons[11], color: this.colors[11]},
       ];
+      
     this.storage.set("Hash",this.key);
     this.storage.get('loggedIn').then((id) => {
        if(id == true){
