@@ -97,7 +97,7 @@ export class UpgradePackageProvider {
   interviewAlert(){
     this.load();
       console.log('ream',this.remainig_interviews)
-        if(this.remainig_interviews == 0){
+        if(this.remainig_interviews <= 0){
         console.log('if called',this.remainig_interviews)
         return true
       }
@@ -132,7 +132,7 @@ export class UpgradePackageProvider {
  
   checkerPostJob(){     
       this.load();
-          if(this.remaining_jobs == 0){
+          if(this.remaining_jobs <= 0){
             console.log('if called')
             return true
           }else{
@@ -151,7 +151,6 @@ export class UpgradePackageProvider {
                         }
                       })
                      alert.present();
-                     this.navCtrl.push(PackagePage);
         }
         
   sucalert(){
@@ -165,6 +164,5 @@ export class UpgradePackageProvider {
                 }
               })
               alert.present();
-              this.navCtrl.push(PostJobPage);
         }
 }
