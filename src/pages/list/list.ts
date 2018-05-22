@@ -1,4 +1,4 @@
-import { Component,ViewChild } from '@angular/core';
+import { Component,ViewChild, OnInit } from '@angular/core';
 import { Slides,Platform, App, ToastController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { NavController, NavParams, MenuController } from 'ionic-angular'; 
@@ -26,7 +26,7 @@ import { TabsPersonalAssistancePage } from '../tabs-personal-assistance/tabs-per
   selector: 'page-list',
   templateUrl: 'list.html'
 })
-export class ListPage {
+export class ListPage implements OnInit{
   @ViewChild(Slides) slides: Slides;
   icons: string[];
   loggedIn:boolean;
@@ -38,6 +38,10 @@ export class ListPage {
   images: Array<string>;  
   rows: any;
   pages: Array<{title: string, img:any, component:any}>;
+  ngOnInit()
+  {
+    this.upgrade.load();
+  }
 
   constructor(public app: App,
               public toast: Toast,
@@ -103,7 +107,10 @@ menuOpen(){
         case TabsPersonalAssistancePage:
                                         //free user
                                         if(this.getUserStatus())
+                                        {
                                             this.upgrade.upgradepackage();
+                                            this.navCtrl.push(PackagePage);
+                                        }
                                         else
                                             this.navCtrl.push(p.component);
                                         break;
