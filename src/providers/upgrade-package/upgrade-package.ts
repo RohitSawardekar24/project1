@@ -10,14 +10,14 @@ import { ScheduleInterviewPage } from '../../pages/schedule-interview/schedule-i
 
 @Injectable()
 export class UpgradePackageProvider {
-  totaljod: any;
-   totalpostjobs: any;
-   counter: any;
-   remaining_jobs: any;
-   http: any;
-   si_len: any;
-   items: any;
-   remainig_interviews: any;
+  totaljod: any=0;
+   totalpostjobs: any=0;
+   counter: any=0;
+   remaining_jobs: any=0;
+   http: any=0;
+   si_len: any=0;
+   items: any=0;
+   remainig_interviews: any=0;
   constructor(protected app: App,
               http: Http,
               public storage: Storage,
