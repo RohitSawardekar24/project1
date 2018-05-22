@@ -64,9 +64,10 @@ export class PersonalAssistancePage {
                   if(response.paid != 1){                   
                    this.list.push(response)
                    if(response.cart == 1){
-                        this.hotel_id.push(response.hj_id)
+                        this.hotel_id.push(response.hj_id);
                         this.total += 4000;
-                        this.value++
+                        this.value++;
+                        response.cart--;
                       }
                   }
                 }         
