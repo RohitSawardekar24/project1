@@ -108,8 +108,7 @@ menuOpen(){
                 this.navCtrl.push(p.component,{},{animate:true,animation:'transition',duration:500,direction:'forward'})
               }
             }
-          }else{
-            if(p.component === PostJobPage || p.component === CateringRequirementPage){
+          }else if(p.component === PostJobPage || p.component === CateringRequirementPage){
                 if(this.upgrade.checkerPostJob()){
                   this.upgrade.resalert()
                 }else{
