@@ -119,8 +119,7 @@ menuOpen(){
             
           }          
         }
-    }
-  }  
+    } 
   SearchEmployee(){
     if(this.network.noConnection()){
        this.network.showNetworkAlert()
