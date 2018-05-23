@@ -1,4 +1,4 @@
-import { Component,ViewChild } from '@angular/core';
+import { Component,ViewChild, OnInit } from '@angular/core';
 import { Slides,Platform, App, ToastController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { NavController, NavParams, MenuController } from 'ionic-angular'; 
@@ -26,7 +26,7 @@ import { TabsPersonalAssistancePage } from '../tabs-personal-assistance/tabs-per
   selector: 'page-list',
   templateUrl: 'list.html'
 })
-export class ListPage {
+export class ListPage implements OnInit{
   @ViewChild(Slides) slides: Slides;
   icons: string[];
   loggedIn:boolean;
@@ -38,6 +38,10 @@ export class ListPage {
   images: Array<string>;  
   rows: any;
   pages: Array<{title: string, img:any, component:any}>;
+  ngOnInit()
+  {
+    this.upgrade.load();
+  }
 
   constructor(public app: App,
               public toast: Toast,
@@ -75,7 +79,7 @@ export class ListPage {
        });  
      });  
     this.pages = [
-      { title: 'Personal Assistance', img: this.images[0], component: TabsPersonalAssistancePage },
+      { title: 'Personal Assistance', img: this.images[0], component:TabsPersonalAssistancePage },
       { title: 'Schedule Interview', img: this.images[1], component: ScheduleInterviewPage },
       { title: 'Update Profile', img: this.images[2], component:UpdateProfilePage },
       { title: 'Post Job', img: this.images[3], component:PostJobPage },
@@ -91,36 +95,70 @@ menuOpen(){
   this.menu.open()
 }
   openPage(p){
-    if(this.network.noConnection()){
-           this.network.showNetworkAlert()
-      }else{
-        if(p.component === PersonalAssistancePage || p.component === ScheduleInterviewPage || p.component === MyHistoryReportPage){
-              if(localStorage.getItem('status') == 'free'){
-                this.upgrade.upgradepackage()
-              }else{
-                if(p.component === ScheduleInterviewPage){
-                      if(this.upgrade.interviewAlert()){
-                        this.upgrade.s_alert()
-                      }else{
-                        this.upgrade.si_alert()
-                      }
-                }else{
-                this.navCtrl.push(p.component,{},{animate:true,animation:'transition',duration:500,direction:'forward'})
-              }
-            }
-          }else if(p.component === PostJobPage || p.component === CateringRequirementPage){
-                if(this.upgrade.checkerPostJob()){
-                  this.upgrade.resalert()
-                }else{
-                  this.upgrade.sucalert()
-                }
-          }else{
-            this.navCtrl.push(p.component,{},{animate:true,animation:'transition',duration:500,direction:'forward'})                            
-            
-          }          
+    let status=this.getUserStatus();      
+     switch(p.component)
+     {
+       case UpdateProfilePage:
+       case SearchSupplierPage:
+       case SupplierRequirementPage:
+       case  ViewPostedJobPage:
+       case  MyHistoryReportPage: this.navCtrl.push(p.component);
+                                  break;
+        case TabsPersonalAssistancePage:
+                                        //free user
+                                        if(this.getUserStatus())
+                                        {
+                                            this.upgrade.upgradepackage();
+                                            this.navCtrl.push(PackagePage);
+                                        }
+                                        else
+                                            this.navCtrl.push(p.component);
+                                        break;
+        case ScheduleInterviewPage: if(this.getUserStatus())
+                                        this.upgrade.upgradepackage();
+                                    else if(this.upgrade.interviewAlert())
+                                          this.upgrade.s_alert();
+                                    else  
+                                    this.upgrade.si_alert();
+                                    break;
+       case PostJobPage:
+       case CateringRequirementPage:if(this.getUserStatus())
+                                          this.upgrade.upgradepackage();
+                                    else if(this.upgrade.checkerPostJob())
+                                          this.upgrade.resalert();
+                                    else  
+                                          this.upgrade.sucalert();
+                                    break;
+     }
         }
-    }
-  
+      getUserStatus()
+      {
+        this.storage.get("id").then((id)=>{ 
+          this.storage.get("Hash").then((value) => {
+          let headers = new Headers({
+          'Content-Type': 'application/json',
+          'Authorization': value
+        });
+        let options = new RequestOptions({ headers: headers });
+
+          this.http
+          .get("http://localhost:3000/api/package/"+id, options)
+            .subscribe(
+              (data) =>{
+              this.items=JSON.parse(data._body).Jobs; //Bind data to items object
+               console.log(this.items);
+               if(this.items.status=='free')
+                    return true;
+                else
+                  return false;
+              },
+              
+              (error)=>{
+              } );
+          });  
+        }) ;
+
+      }
   SearchEmployee(){
     if(this.network.noConnection()){
        this.network.showNetworkAlert()
