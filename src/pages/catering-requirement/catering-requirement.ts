@@ -1101,7 +1101,7 @@ postJob(){
                     app_id: 'a8874a29-22e2-486f-b4b3-b3d09e8167a5'
                   })
                 let Noti_options = new RequestOptions({headers : Noti_headers})
-                this.http.post('http://www.forehotels.com::3000/api/single_notification', Noti_body, Noti_options)
+                this.http.post('http://www.forehotels.com:3000/api/single_notification', Noti_body, Noti_options)
                 .subscribe(data =>{
               });
               }    

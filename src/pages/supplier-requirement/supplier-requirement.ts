@@ -104,7 +104,7 @@ productCategory(){
               'Authorization': hash
             });
             let options = new RequestOptions({ headers: headers });
-            this.http.post("http://www.forehotels.com::3000/api/suppliers", supplier_body, options)
+            this.http.post("http://www.forehotels.com:3000/api/suppliers", supplier_body, options)
             .subscribe(data => {
               this.sup_items = JSON.parse(data._body).Users_Applied; //Bind data to items object
             for(let i=0; i<this.sup_items.length; i++){
