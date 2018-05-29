@@ -37,46 +37,6 @@ export class PersonalAssistancePage {
               this.loadData()
               
         }
-  loadData(){
-    if(this.network.noConnection()){
-       this.network.showNetworkAlert()
-      }else{ 
-        
-        this.total = 0
-        this.list = [];
-          this.storage.get("id").then((id)=>{
-          this.storage.get("Hash").then((value)=>{
-          this.platform.ready().then(() => {
-                this.ga.trackEvent("Personal Assistance", "Opened", "New Session Started", id, true)
-                this.ga.setAllowIDFACollection(true)
-                this.ga.setUserId(id)
-                this.ga.trackView("Personal Assistance")
-          })
-          let headers = new Headers({
-          'Content-Type': 'application/json',
-          'Authorization': value
-        });
-        let options = new RequestOptions({ headers: headers });
-          this.http.get("http://www.forehotels.com:3000/api/job_posted/"+id, options)
-                .subscribe(data =>{
-                this.items=JSON.parse(data._body).Jobs; //Bind data to items object
-                for(let response of this.items){
-                  if(response.paid != 1){                   
-                   this.list.push(response)
-                   if(response.cart == 1){
-                        this.hotel_id.push(response.hj_id);
-                        this.total += 4000;
-                        this.value++;
-                        response.cart--;
-                      }
-                  }
-                }         
-              },error=>{
-              });
-            })
-        })
-    }
-}
   deleteJob(hotel_id){
     if(this.network.noConnection()){
        this.network.showNetworkAlert()
@@ -85,7 +45,7 @@ export class PersonalAssistancePage {
           this.hotel_id.splice(index,1)
           this.storage.get("id").then((user_id)=>{
           this.storage.get("Hash").then((hash)=>{
-          var applied = false;
+          var applied = false
           let headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': hash
@@ -118,9 +78,9 @@ export class PersonalAssistancePage {
     }
 }
    addToCart(id){
-     if(this.network.noConnection()){
+    if(this.network.noConnection()){
         this.network.showNetworkAlert()
-        }else{
+    }else{
           this.hotel_id.push(id)
           this.storage.get("id").then((user_id)=>{
           this.storage.get("Hash").then((hash)=>{
@@ -138,41 +98,41 @@ export class PersonalAssistancePage {
                   .subscribe(data =>{
                   this.checkJobs=JSON.parse(data._body).Jobs;
                   for(let item of this.checkJobs ){
-                      if(item.hj_id == id){
+                      if(item.hj_id.equals(id)){
                         let alert = this.alertCtrl.create({
-                        title: 'Oops..!!',
-                        subTitle: 'Job already added to cart.',
-                        buttons: ['OK']
-                      });
-                      alert.present();
-                      applied =true;
+                          title: 'Oops..!!',
+                          subTitle: 'Job already added to cart.',
+                          buttons: ['OK']
+                        });
+                        alert.present();
+                        applied = true;
                       }
-                    }
-                if(applied==false){
-                  this.http
-                  .post('http://www.forehotels.com:3000/api/pa', body, options)
-                  .map(res => res.json())
-                  .subscribe(
-                  detail => {              
-                    let alert = this.alertCtrl.create({
-                      title: 'Success!',
-                      subTitle: 'Job added to cart.',
-                      buttons: ['OK']
+                  }
+                  if(applied==false){
+                    console.log('in pa post request0');
+                    this.http
+                    .post('http://localhost:3000/api/pa', body, options)
+                    .map(res => res.json())
+                    .subscribe(
+                      detail => {    
+                        this.value++;
+                        this.updateTotal(this.value)
+                        this.loadData();          
+                        let alert = this.alertCtrl.create({
+                          title: 'Success!',
+                          subTitle: 'Job added to cart.',
+                          buttons: ['OK']
+                        });
+                        alert.present(); 
                       });
-                      alert.present();
-                      
-                      this.updateTotal(this.value)
-                      this.loadData()
-                        this.value++
-                  });
-                }
+                  }
                 });
               });
             });
         }
   }
     updateTotal(item){
-      this.total = item * 4000
+      this.total = item * 4000;
     }
     personalAssistance(){
       if(this.network.noConnection()){
@@ -190,5 +150,48 @@ export class PersonalAssistancePage {
               });
         }
       }
-  } 
+  }
+  loadData(){
+    if(this.network.noConnection()){
+       this.network.showNetworkAlert()
+      }else{ 
+        
+        this.total = 0
+        this.list = [];
+          this.storage.get("id").then((id)=>{
+          this.storage.get("Hash").then((value)=>{
+          this.platform.ready().then(() => {
+            
+                this.ga.trackEvent("Personal Assistance", "Opened", "New Session Started", id, true)
+                this.ga.setAllowIDFACollection(true)
+                this.ga.setUserId(id)
+                this.ga.trackView("Personal Assistance")
+          })
+          let headers = new Headers({
+          'Content-Type': 'application/json',
+          'Authorization': value
+        });
+        let options = new RequestOptions({ headers: headers });
+          this.http.get("http://localhost:3000/api/job_posted/"+id, options)
+                .subscribe(data =>{
+                  
+                this.items=JSON.parse(data._body).Jobs; //Bind data to items object
+                console.log(id);
+                for(let response of this.items){
+                  console.log(response);
+                  if(response.paid != 1){                   
+                   this.list.push(response)
+                   if(response.cart == 1){
+                        this.hotel_id.push(response.hj_id);
+                        this.total += 4000;
+                        this.value++
+                      }
+                  }
+                }         
+              },error=>{
+              });
+            })
+        })
+    }
+} 
 }
