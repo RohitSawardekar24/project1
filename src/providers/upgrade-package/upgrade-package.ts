@@ -42,7 +42,7 @@ export class UpgradePackageProvider {
               });
               let options = new RequestOptions({ headers: headers });
 
-              this.http.get("http://localhost:3000/api/package/"+id, options)
+              this.http.get("http://www.forehotels.com:3000/api/package/"+id, options)
                   .subscribe(data =>{
                   let resitems = JSON.parse(data._body).Jobs;
                  this.totaljod = resitems[0].remaining_jobs;                   
@@ -50,7 +50,7 @@ export class UpgradePackageProvider {
                   console.log('remaining interviews ',len)
                   }); 
 
-                this.http.get("http://localhost:3000/api/job_posted/"+id, options)
+                this.http.get("http://www.forehotels.com:3000/api/job_posted/"+id, options)
                 .subscribe(data =>{
                 this.totalpostjobs =JSON.parse(data._body).Jobs; //Bind data to items object
                 let len = this.totalpostjobs.length
@@ -58,7 +58,7 @@ export class UpgradePackageProvider {
                 this.remaining_jobs = this.totaljod - len
                 console.log("Remain >",this.remaining_jobs)
               })
-                this.http.get("http://localhost:3000/api/shortlisted_employee/"+id, options)
+                this.http.get("http://www.forehotels.com:3000/api/shortlisted_employee/"+id, options)
                       .subscribe(data =>{
                       this.items=JSON.parse(data._body).Users; //Bind data to items object\
                       this.si_len= this.items.length;
@@ -108,7 +108,8 @@ export class UpgradePackageProvider {
   s_alert(){ 
     this.load();
           let alert = this.alertCtrl.create({})
-          alert.setTitle('Your remaining interviews '+this.remainig_interviews)  
+          // alert.setTitle('Your remaining interviews '+this.remainig_interviews)  
+          alert.setTitle('Your remaining interviews 0') ;
             alert.addButton({
               text:'Upgrade your Package',
               handler : () =>{

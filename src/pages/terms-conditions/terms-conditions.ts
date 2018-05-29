@@ -23,7 +23,7 @@ items:any
               });
               let options = new RequestOptions({ headers: headers });
               this.http
-                  .get('http://localhost:3000/api/config', options)
+                  .get('http://www.forehotels.com:3000/api/config', options)
                   .subscribe(
                       data => {                          
                         this.items = JSON.parse(data._body);
