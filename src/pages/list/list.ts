@@ -72,7 +72,7 @@ export class ListPage implements OnInit{
         });
      let options = new RequestOptions({ headers: headers });
 
-      this.http.get("http://localhost:3000/api/package/"+id, options)
+      this.http.get("http://www.forehotels.com:3000/api/package/"+id, options)
          .subscribe(data =>{
           this.items=JSON.parse(data._body).Jobs; //Bind data to items object
          });
@@ -109,7 +109,6 @@ menuOpen(){
                                         if(this.getUserStatus())
                                         {
                                             this.upgrade.upgradepackage();
-                                            this.navCtrl.push(PackagePage);
                                         }
                                         else
                                             this.navCtrl.push(p.component);
@@ -142,7 +141,7 @@ menuOpen(){
         let options = new RequestOptions({ headers: headers });
 
           this.http
-          .get("http://localhost:3000/api/package/"+id, options)
+          .get("http://www.forehotels.com:3000/api/package/"+id, options)
             .subscribe(
               (data) =>{
               this.items=JSON.parse(data._body).Jobs; //Bind data to items object

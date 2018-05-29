@@ -57,7 +57,7 @@ export class PersonalAssistancePage {
           'Authorization': value
         });
         let options = new RequestOptions({ headers: headers });
-          this.http.get("http://localhost:3000/api/job_posted/"+id, options)
+          this.http.get("http://www.forehotels.com:3000/api/job_posted/"+id, options)
                 .subscribe(data =>{
                 this.items=JSON.parse(data._body).Jobs; //Bind data to items object
                 for(let response of this.items){
@@ -91,7 +91,7 @@ export class PersonalAssistancePage {
             'Authorization': hash
           });
           let options = new RequestOptions({ headers: headers });
-            this.http.delete("http://localhost:3000/api/personal_assistance/"+user_id+"/"+hotel_id, options)
+            this.http.delete("http://www.forehotels.com:3000/api/personal_assistance/"+user_id+"/"+hotel_id, options)
                   .subscribe(data =>{
                     if(this.total > 0){             
                     this.total = this.total - 4000
@@ -134,7 +134,7 @@ export class PersonalAssistancePage {
             'Authorization': hash
           });
           let options = new RequestOptions({ headers: headers });
-            this.http.get("http://localhost:3000/api/personal_assistance/"+user_id, options)
+            this.http.get("http://www.forehotels.com:3000/api/personal_assistance/"+user_id, options)
                   .subscribe(data =>{
                   this.checkJobs=JSON.parse(data._body).Jobs;
                   for(let item of this.checkJobs ){
@@ -150,7 +150,7 @@ export class PersonalAssistancePage {
                     }
                 if(applied==false){
                   this.http
-                  .post('http://localhost:3000/api/pa', body, options)
+                  .post('http://www.forehotels.com:3000/api/pa', body, options)
                   .map(res => res.json())
                   .subscribe(
                   detail => {              

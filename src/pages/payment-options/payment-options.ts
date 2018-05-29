@@ -58,7 +58,7 @@ data: Array<{title:any,img : any, img1: any,img2:any,icon:string,text1:any,text2
           this.purpose = 'NTK4205'
         }
         else{
-           this.http.get("http://localhost:3000/api/package/"+id, options)
+           this.http.get("http://www.forehotels.com:3000/api/package/"+id, options)
             .subscribe(data =>{
              this.items=JSON.parse(data._body).Jobs; //Bind data to items object
              let hotel_type = this.items[0].hotel_type
