@@ -96,14 +96,13 @@ export class UpgradePackageProvider {
 
   interviewAlert(){
     this.load();
-      console.log('ream',this.remainig_interviews)
-        if(this.remainig_interviews <= 0){
-        console.log('if called',this.remainig_interviews)
-        return true
-      }
-      else{
-        return false
-      }     
+    if(this.remaining_jobs <= 0){
+      console.log('if called')
+      return true
+    }else{
+      console.log('else called')
+      return false
+    }
     }
   s_alert(){ 
     this.load();

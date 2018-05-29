@@ -37,46 +37,6 @@ export class PersonalAssistancePage {
               this.loadData()
               
         }
-  loadData(){
-    if(this.network.noConnection()){
-       this.network.showNetworkAlert()
-      }else{ 
-        
-        this.total = 0
-        this.list = [];
-          this.storage.get("id").then((id)=>{
-          this.storage.get("Hash").then((value)=>{
-          this.platform.ready().then(() => {
-                this.ga.trackEvent("Personal Assistance", "Opened", "New Session Started", id, true)
-                this.ga.setAllowIDFACollection(true)
-                this.ga.setUserId(id)
-                this.ga.trackView("Personal Assistance")
-          })
-          let headers = new Headers({
-          'Content-Type': 'application/json',
-          'Authorization': value
-        });
-        let options = new RequestOptions({ headers: headers });
-          this.http.get("http://www.forehotels.com:3000/api/job_posted/"+id, options)
-                .subscribe(data =>{
-                this.items=JSON.parse(data._body).Jobs; //Bind data to items object
-                for(let response of this.items){
-                  if(response.paid != 1){                   
-                   this.list.push(response)
-                   if(response.cart == 1){
-                        this.hotel_id.push(response.hj_id);
-                        this.total += 4000;
-                        this.value++;
-                        response.cart--;
-                      }
-                  }
-                }         
-              },error=>{
-              });
-            })
-        })
-    }
-}
   deleteJob(hotel_id){
     if(this.network.noConnection()){
        this.network.showNetworkAlert()
@@ -147,17 +107,23 @@ export class PersonalAssistancePage {
                         alert.present();
                         applied = true;
                       }
-                    }
-                if(applied==false){
-                  this.http
-                  .post('http://www.forehotels.com:3000/api/pa', body, options)
-                  .map(res => res.json())
-                  .subscribe(
-                  detail => {              
-                    let alert = this.alertCtrl.create({
-                      title: 'Success!',
-                      subTitle: 'Job added to cart.',
-                      buttons: ['OK']
+                  }
+                  if(applied==false){
+                    console.log('in pa post request0');
+                    this.http
+                    .post('http://localhost:3000/api/pa', body, options)
+                    .map(res => res.json())
+                    .subscribe(
+                      detail => {    
+                        this.value++;
+                        this.updateTotal(this.value)
+                        this.loadData();          
+                        let alert = this.alertCtrl.create({
+                          title: 'Success!',
+                          subTitle: 'Job added to cart.',
+                          buttons: ['OK']
+                        });
+                        alert.present(); 
                       });
                   }
                 });
@@ -185,7 +151,7 @@ export class PersonalAssistancePage {
         }
       }
   }
-  loadData1(){
+  loadData(){
     if(this.network.noConnection()){
        this.network.showNetworkAlert()
       }else{ 
