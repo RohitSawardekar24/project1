@@ -52,12 +52,12 @@ intern_length:any
             this.events.subscribe('emp_length', (user) => {
               this.emp_length = user
             });
-            this.http.get("http://localhost:3000/api/catering_users_list", options)
+            this.http.get("http://www.forehotels.com:3000/api/catering_users_list", options)
                     .subscribe(data =>{
                     this.c_items=JSON.parse(data._body).Jobs; 
                     this.catering_length = this.c_items.length
                 });   
-              this.http.get("http://localhost:3000/api/intern_users_list", options)
+              this.http.get("http://www.forehotels.com:3000/api/intern_users_list", options)
                     .subscribe(data =>{
                     this.i_items=JSON.parse(data._body).Jobs; //Bind data to items object
                     this.intern_length = this.i_items.length        

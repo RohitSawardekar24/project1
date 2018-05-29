@@ -69,7 +69,7 @@ loginForm(){
             });
             let options = new RequestOptions({ headers: headers });
             this.http
-                .post('http://localhost:3000/api/hotel_auth', body, options)
+                .post('http://www.forehotels.com:3000/api/hotel_auth', body, options)
                 .subscribe(
                     data => {
                       this.login = data.json();
@@ -89,7 +89,7 @@ loginForm(){
                       });
                       let options = new RequestOptions({ headers: headers });
                       this.http
-                          .put('http://localhost:3000/api/device_id', onesignalbody, options)
+                          .put('http://www.forehotels.com:3000/api/device_id', onesignalbody, options)
                           .subscribe(
                               data => {
                                 this.device_details = data.json();
@@ -132,7 +132,7 @@ loginForm(){
               'Authorization': key
             });
           let options = new RequestOptions({ headers: headers });
-          this.http.post("http://localhost:3000/api/pl",body,options)
+          this.http.post("http://www.forehotels.com:3000/api/pl",body,options)
             .subscribe(data =>{
             let result =JSON.parse(data._body); //Bind data to items object        
             },error=>{});

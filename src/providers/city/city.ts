@@ -20,7 +20,7 @@ export class City {
       'Authorization': hash
     });
     let options = new RequestOptions({ headers: headers });
-      this.http.get("http://localhost:3000/api/city", options)
+      this.http.get("http://www.forehotels.com:3000/api/city", options)
             .subscribe(data =>{
             this.items = [];
              this.resitems = data.json();

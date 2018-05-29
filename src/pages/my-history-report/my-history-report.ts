@@ -146,7 +146,7 @@ export class CvDownloadedPage {
        'Authorization': value
      });
      let options = new RequestOptions({ headers: headers });
-      this.http.get("http://localhost:3000/api/cv/"+id, options)
+      this.http.get("http://www.forehotels.com:3000/api/cv/"+id, options)
             .subscribe(data =>{
               this.cv=JSON.parse(data._body).Jobs;
               this.length = this.cv.length
@@ -266,7 +266,7 @@ export class JobPostedPage {
           'Authorization': hash
         });
         let options = new RequestOptions({ headers: headers });
-          this.http.get("http://localhost:3000/api/job_posted/"+id, options)
+          this.http.get("http://www.forehotels.com:www.forehotels.com:3000/api/job_posted/"+id, options)
                 .subscribe(data =>{
                 this.job_ps=JSON.parse(data._body).Jobs; //Bind data to items object
                 this.length = this.job_ps.length            
@@ -391,7 +391,7 @@ export class JobsAppliedPage{
           'Authorization': hash
         });
         let options = new RequestOptions({ headers: headers });
-          this.http.get("http://localhost:3000/api/job_applied/"+id, options)
+          this.http.get("http://www.forehotels.com:3000/api/job_applied/"+id, options)
                 .subscribe(data =>{
                 this.job_ap=JSON.parse(data._body).Jobs; //Bind data to items object
                 this.length = this.job_ap.length
