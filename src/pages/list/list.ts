@@ -91,6 +91,12 @@ export class ListPage implements OnInit{
   ];
 }
 
+ionViewWillEnter()
+{
+  this.upgrade.load();
+
+}
+
 menuOpen(){
   this.menu.open()
 }

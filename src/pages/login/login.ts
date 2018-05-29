@@ -72,7 +72,10 @@ loginForm(){
                 .post('http://www.forehotels.com:3000/api/hotel_auth', body, options)
                 .subscribe(
                     data => {
-                      this.login = data.json();
+                      console.log('1'+data);
+
+                      this.login = JSON.stringify(data._body);
+                      console.log('2'+this.login);
                       if(this.login.length > 0) {
                       this.storage.set('id', this.login["0"].id);
                       this.storage.set('loggedIn', true);
