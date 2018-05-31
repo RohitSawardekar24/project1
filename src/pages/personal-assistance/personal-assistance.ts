@@ -158,13 +158,15 @@ export class PersonalAssistancePage {
                       title: 'Success!',
                       subTitle: 'Job added to cart.',
                       buttons: ['OK']
-                      });
-                  }
-                });
+                    });
+                  });
+                }
               });
             });
+          });
         }
-  }
+      }
+
     updateTotal(item){
       this.total = item * 4000;
     }
