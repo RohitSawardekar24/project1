@@ -1213,31 +1213,31 @@ postJob(){
                         });
                       
                         alert.present();
-                        this.navCtrl.setRoot(ListPage);
+                        this.navCtrl.push(ListPage);
                 }); 
                        let emp_body = JSON.stringify({
                   //empty
                 })
-          // this.http.post('http://www.forehotels.com:3000/api/users_list', options, emp_body)
-          //           .subscribe(data =>{             
-          //             this.resitems = JSON.parse(data._body).Users;
-          //         for(let i=0 ;i <this.resitems.length; i++){
-          //             let Noti_headers = new Headers({
-          //                 'Content-Type': 'application/json',
-          //                 'Authorization': 'Basic NzE2MWM1N2MtY2U2OC00NDM5LWIwMzktNjM3ZjA2MTYyN2Y0',
-          //                 'Cache-Control': 'no-cache'
-          //             })
-          //             let Noti_body = JSON.stringify({
-          //               device_id: this.resitems[i].device_id,
-          //               message: 'A new '+ this.designation +' job has been posted at Forehotels',
-          //               app_id: 'a8874a29-22e2-486f-b4b3-b3d09e8167a5'
-          //           })
-          //             let Noti_options = new RequestOptions({headers : Noti_headers})
-          //             this.http.post('http://www.forehotels.com:3000/api/single_notification',  Noti_body, Noti_options,)
-          //             .subscribe(data =>{
-          //         });
-          //       }    
-          //     });             
+          this.http.post('http://www.forehotels.com:3000/api/users_list', options, emp_body)
+                    .subscribe(data =>{             
+                      this.resitems = JSON.parse(data._body).Users;
+                  for(let i=0 ;i <this.resitems.length; i++){
+                      let Noti_headers = new Headers({
+                          'Content-Type': 'application/json',
+                          'Authorization': 'Basic NzE2MWM1N2MtY2U2OC00NDM5LWIwMzktNjM3ZjA2MTYyN2Y0',
+                          'Cache-Control': 'no-cache'
+                      })
+                      let Noti_body = JSON.stringify({
+                        device_id: this.resitems[i].device_id,
+                        message: 'A new '+ this.designation +' job has been posted at Forehotels',
+                        app_id: 'a8874a29-22e2-486f-b4b3-b3d09e8167a5'
+                    })
+                      let Noti_options = new RequestOptions({headers : Noti_headers})
+                      this.http.post('http://www.forehotels.com:3000/api/single_notification',  Noti_body, Noti_options,)
+                      .subscribe(data =>{
+                  });
+                }    
+              });             
             });
         });err => {let alert = this.alertCtrl.create({
                         title: 'Something went wrong!',

@@ -34,7 +34,8 @@ export class PersonalAssistancePage {
               public storage: Storage,
               public toast: Toast) {
               this.http = http;
-              this.loadData()
+              this.loadData1();
+
               
         }
   loadData(){
@@ -103,7 +104,8 @@ export class PersonalAssistancePage {
                       buttons: ['OK']
                       });
                       alert.present();
-                      this.loadData()
+                      // this.loadData()
+                      this.navCtrl.push(PersonalAssistancePage);
                   });
                   err=>{
                     let alert = this.alertCtrl.create({
@@ -121,13 +123,16 @@ export class PersonalAssistancePage {
     if(this.network.noConnection()){
         this.network.showNetworkAlert()
     }else{
-          this.hotel_id.push(id)
+          this.hotel_id.push(id);
+          console.log('a');
           this.storage.get("id").then((user_id)=>{
           this.storage.get("Hash").then((hash)=>{
+            console.log('b');  
           var applied = false;
           let body = JSON.stringify({
             usr_id: user_id,
             hotel_id: id,
+            qty:'1'
             });
             let headers = new Headers({
             'Content-Type': 'application/json',
@@ -136,9 +141,11 @@ export class PersonalAssistancePage {
           let options = new RequestOptions({ headers: headers });
             this.http.get("http://www.forehotels.com:3000/api/personal_assistance/"+user_id, options)
                   .subscribe(data =>{
+                    console.log('c');
                   this.checkJobs=JSON.parse(data._body).Jobs;
                   for(let item of this.checkJobs ){
-                      if(item.hj_id.equals(id)){
+                      if(item.hj_id==id){
+                        console.log('XXXXX');
                         let alert = this.alertCtrl.create({
                           title: 'Oops..!!',
                           subTitle: 'Job already added to cart.',
@@ -153,12 +160,16 @@ export class PersonalAssistancePage {
                   .post('http://www.forehotels.com:3000/api/pa', body, options)
                   .map(res => res.json())
                   .subscribe(
-                  detail => {              
+                  detail => {             
+                    console.log('d'); 
                     let alert = this.alertCtrl.create({
                       title: 'Success!',
                       subTitle: 'Job added to cart.',
                       buttons: ['OK']
                     });
+                    
+                    alert.present();
+                    this.navCtrl.push(PersonalAssistancePage);
                   });
                 }
               });
@@ -174,13 +185,16 @@ export class PersonalAssistancePage {
       if(this.network.noConnection()){
            this.network.showNetworkAlert()
         }else{ 
+         console.log('1');
           if(this.total > 0){
+            console.log('2');
               this.navCtrl.push(PaymentOptionsPage,{
                   amt: this.total,
                   purpose: 'personal_assistance',
                   hotel_id: this.hotel_id
               });
           }else{
+            console.log('3');
               this.toast.show('Please add Job to Cart to proceed','5000','bottom').subscribe(toast=>{
                 console.log(toast)
               });
@@ -221,6 +235,7 @@ export class PersonalAssistancePage {
                         this.hotel_id.push(response.hj_id);
                         this.total += 4000;
                         this.value++
+                       
                       }
                   }
                 }         
