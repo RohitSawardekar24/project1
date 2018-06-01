@@ -556,6 +556,14 @@ export class ModalHotelCategoryPage {
   <ion-navbar>
     <ion-title>Register</ion-title>
   </ion-navbar>
+  <style>  
+    .field-wrapper input {
+    }
+    .required-field::before { 
+        content: "*";
+        color: red;
+    }
+  </style>
 </ion-header>
 <ion-content>
   <form [formGroup]="registrationForm" (ngSubmit)="loginForm(registrationForm.value)">
@@ -564,11 +572,11 @@ export class ModalHotelCategoryPage {
          Owner/Manager Details
        </ion-list-header>
        <ion-item>
-        <ion-label color="primary" stacked>User Name</ion-label>
+        <ion-label color="primary" stacked>User Name<p style="display:inline;"  class="field-wrapper required-field"></p></ion-label>
         <ion-input type="text" formControlName="user_name" placeholder="Ex: Owner's name" required></ion-input>
     </ion-item> 
        <ion-item>
-    <ion-label color="primary" stacked>Owner/Manager Name</ion-label>
+    <ion-label color="primary" stacked>Owner/Manager Name<p style="display:inline;"  class="field-wrapper required-field"></p></ion-label>
     <ion-input type="text" [formControl]="registrationForm.controls['hr_name']" placeholder="Mr. ABC"></ion-input>
         </ion-item>
         <div *ngFor="let validation of validation_messages" class="error-box">
@@ -577,7 +585,7 @@ export class ModalHotelCategoryPage {
         </div>
       </div>
          <ion-item>
-    <ion-label color="primary" stacked>Owner/Manager Email</ion-label>
+    <ion-label color="primary" stacked>Owner/Manager Email<p style="display:inline;"  class="field-wrapper required-field"></p></ion-label>
     <ion-input type="email" [formControl]="registrationForm.controls['email']" placeholder="example@gmail.com"></ion-input>
         </ion-item>
     <div *ngFor="let validation of validation_Email" class="error-box">
@@ -586,7 +594,7 @@ export class ModalHotelCategoryPage {
     </div>
     </div>   
     <ion-item>
-    <ion-label color="primary" stacked>Owner/Manager Number</ion-label>
+    <ion-label color="primary" stacked>Owner/Manager Number<p style="display:inline;"  class="field-wrapper required-field"></p></ion-label>
     <ion-input type="number" [formControl]="registrationForm.controls['hr_number']"></ion-input>
         </ion-item> 
      <div *ngFor="let validation of validation_Number" class="error-box">
@@ -596,7 +604,7 @@ export class ModalHotelCategoryPage {
       </div>   
         
         <ion-item>
-    <ion-label color="primary" stacked>Set Password</ion-label>
+    <ion-label color="primary" stacked>Set Password<p style="display:inline;"  class="field-wrapper required-field"></p></ion-label>
     <ion-input type="password" [formControl]="registrationForm.controls['password']" placeholder="******"></ion-input>
         </ion-item>         
         <div *ngFor="let validation of validation_Password" class="error-box">
