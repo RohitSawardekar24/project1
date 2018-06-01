@@ -162,11 +162,11 @@ export class PersonalAssistancePage {
                   });
                 }
               });
-           
+            });
           });
-        });
-      }  
-    }   
+        }
+      }
+
     updateTotal(item){
       this.total = item * 4000;
     }

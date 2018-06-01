@@ -17,7 +17,8 @@ export class UpgradePackageProvider {
    http: any=0;
    si_len: any=0;
    items: any=0;
-   remainig_interviews: any=0;
+   remaining_interviews: any=0;
+   length: number=1;
   constructor(protected app: App,
               http: Http,
               public storage: Storage,
@@ -33,7 +34,7 @@ export class UpgradePackageProvider {
 
   load(){
      let len1 =[]
-              let len:any
+              let len:number
        this.storage.get("Hash").then((value)=>{
                   this.storage.get("id").then((id)=>{
                 let headers = new Headers({
@@ -47,6 +48,7 @@ export class UpgradePackageProvider {
                   let resitems = JSON.parse(data._body).Jobs;
                  this.totaljod = resitems[0].remaining_jobs;                   
                   len = resitems[0].remaining_interviews 
+                  this.length = resitems[0].remaining_interviews
                   console.log('remaining interviews ',len)
                   }); 
 
@@ -68,7 +70,7 @@ export class UpgradePackageProvider {
                           }
                         }
                         console.log('Length of SI ',len1.length)                
-                        this.remainig_interviews = len - len1.length ;
+                        this.remaining_interviews = len - len1.length ;
                     })
               })
           })
@@ -96,9 +98,9 @@ export class UpgradePackageProvider {
 
   interviewAlert(){
     this.load();
-      console.log('ream',this.remainig_interviews)
-        if(this.remainig_interviews <= 0){
-        console.log('if called',this.remainig_interviews)
+      console.log('ream',this.length)
+        if(this.remaining_interviews <= 0){
+        console.log('if called',this.length)
         return true
       }
       else{
@@ -121,7 +123,7 @@ export class UpgradePackageProvider {
   si_alert(){ 
     this.load();
       let alert = this.alertCtrl.create({})
-      alert.setTitle('Your remaining interviews '+this.remainig_interviews)  
+      alert.setTitle('Your remaining interviews '+this.length)  
         alert.addButton({
           text:'OK',
           handler : ()=>{

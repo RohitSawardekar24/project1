@@ -314,14 +314,21 @@ data: Array<{title:any,img : any, img1: any,img2:any,icon:string,text1:any,text2
             let value = options[key];
             formHtml+='<input type="hidden" id="'+key+'" name="'+key+'" value="'+value+'" />';
           }
-          let url = "https://www.forehotels.com/payment/app"
+          let url = "https://www.forehotels.com/payment"
           let payScript = "var form = document.getElementById('ts-app-payment-form-redirect'); ";
           payScript += "form.innerHTML = '" + formHtml + "';";
           payScript += "form.action = '" + url + "';";
           payScript += "form.method = 'POST';" ;
           payScript += "setTimeout(function(){ form.submit(); }, 4000);" ;
-
-          let browser = this.inappb.create('redirect.html', '_blank', "location=no, clearsessioncache=yes, clearcache=yes, hidden=yes");
+          
+          //let browser = this.inappb.create('https://www.forehotels.com/payment');
+          // browser.on('loadstop').subscribe(
+          //   event => {
+          //     console.log("TEST");
+          //   }
+          // );
+          // browser.close();
+          let browser = this.inappb.create('https://www.forehotels.com/payment', '_blank', "location=no, clearsessioncache=yes, clearcache=yes, hidden=yes");
                 browser.on('loadstart')
                           .subscribe(
                               event => {

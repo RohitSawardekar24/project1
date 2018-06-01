@@ -89,6 +89,7 @@ export class ListPage implements OnInit{
       { title: 'View Posted Job', img: this.images[7], component:ViewPostedJobPage },
       { title: 'History Report', img: this.images[8], component:MyHistoryReportPage },
   ];
+  this.upgrade.load();
 }
 
 menuOpen(){
@@ -147,7 +148,7 @@ menuOpen(){
               this.items=JSON.parse(data._body).Jobs; //Bind data to items object
                console.log(this.items);
                if(this.items.status=='free')
-                    return true;
+                  return true;
                 else
                   return false;
               },
