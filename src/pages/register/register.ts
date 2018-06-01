@@ -273,10 +273,10 @@ export class ModalHotelCategoryPage {
                   'Authorization': hash
                 });
                 let options = new RequestOptions({ headers: headers });
-            //     this.http
-            //     .post("http://forehotels.com:3000/api/send_sms", body, options)
-            //           .subscribe(data =>{
-            //   })
+                this.http
+                .post("http://forehotels.com:3000/api/send_sms", body, options)
+                      .subscribe(data =>{
+              })
             })
           this.navCtrl.push(OtpPage,{
           hotelType: this.hotelType,

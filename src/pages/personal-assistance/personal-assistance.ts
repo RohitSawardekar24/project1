@@ -158,13 +158,15 @@ export class PersonalAssistancePage {
                       title: 'Success!',
                       subTitle: 'Job added to cart.',
                       buttons: ['OK']
-                      });
-                  }
-                });
+                    });
+                  });
+                }
               });
-            });
-        }
-  }
+           
+          });
+        });
+      }  
+    }   
     updateTotal(item){
       this.total = item * 4000;
     }
@@ -206,7 +208,7 @@ export class PersonalAssistancePage {
           'Authorization': value
         });
         let options = new RequestOptions({ headers: headers });
-          this.http.get("http://localhost:3000/api/job_posted/"+id, options)
+          this.http.get("http://www.forehotels.com:3000/api/job_posted/"+id, options)
                 .subscribe(data =>{
                   
                 this.items=JSON.parse(data._body).Jobs; //Bind data to items object
