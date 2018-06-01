@@ -46,10 +46,10 @@ export class RegisterPage {
             this.menu.enable(false)
             this.http = http;
             this.services =[
-                {title:'Standalone', icon:'std.png'},
-                {title:'State Chain', icon:'state.png'},
-                {title:'National Chain', icon:'nat.png'},
-                {title:'International Chain', icon:'inter.png'},]
+                {title:'standalone', icon:'std.png'},
+                {title:'state Chain', icon:'state.png'},
+                {title:'national Chain', icon:'nat.png'},
+                {title:'international Chain', icon:'inter.png'},]
                 this.rows = Array.from(Array(Math.ceil(this.services.length/2)).keys());
     }
 
@@ -273,10 +273,10 @@ export class ModalHotelCategoryPage {
                   'Authorization': hash
                 });
                 let options = new RequestOptions({ headers: headers });
-            //     this.http
-            //     .post("http://forehotels.com:3000/api/send_sms", body, options)
-            //           .subscribe(data =>{
-            //   })
+                this.http
+                .post("http://forehotels.com:3000/api/send_sms", body, options)
+                      .subscribe(data =>{
+              })
             })
           this.navCtrl.push(OtpPage,{
           hotelType: this.hotelType,
