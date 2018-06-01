@@ -564,6 +564,10 @@ export class ModalHotelCategoryPage {
          Owner/Manager Details
        </ion-list-header>
        <ion-item>
+        <ion-label color="primary" stacked>User Name</ion-label>
+        <ion-input type="text" formControlName="user_name" placeholder="Ex: Owner's name" required></ion-input>
+    </ion-item> 
+       <ion-item>
     <ion-label color="primary" stacked>Owner/Manager Name</ion-label>
     <ion-input type="text" [formControl]="registrationForm.controls['hr_name']" placeholder="Mr. ABC"></ion-input>
         </ion-item>
@@ -580,7 +584,7 @@ export class ModalHotelCategoryPage {
     <div style="text-align: center;color:#f53d3d" color="danger" *ngIf="registrationForm.controls['email'].hasError(validation.type) && registrationForm.controls['email'].touched">
           {{validation.message}}
     </div>
-    </div>    
+    </div>   
     <ion-item>
     <ion-label color="primary" stacked>Owner/Manager Number</ion-label>
     <ion-input type="number" [formControl]="registrationForm.controls['hr_number']"></ion-input>
@@ -590,10 +594,7 @@ export class ModalHotelCategoryPage {
           {{validation.message}}
         </div>
       </div>   
-        <ion-item>
-    <ion-label color="primary" stacked>User Name (Optional)</ion-label>
-    <ion-input type="text" formControlName="user_name" placeholder="Ex: Your Outlet Name"></ion-input>
-        </ion-item>
+        
         <ion-item>
     <ion-label color="primary" stacked>Set Password</ion-label>
     <ion-input type="password" [formControl]="registrationForm.controls['password']" placeholder="******"></ion-input>
