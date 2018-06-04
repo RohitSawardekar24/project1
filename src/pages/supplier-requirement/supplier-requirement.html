@@ -17,8 +17,13 @@
       <ion-input type="text" formControlName="contact_name" placeholder="Contact Person Name"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" formControlName="contact_num" placeholder="Contact Person Number"></ion-input>
+      <ion-input type="number" formControlName="contact_num" placeholder="Contact Person Number"></ion-input>
     </ion-item>
+    <div *ngFor="let validation of validation_Number" class="error-box">
+      <div style="text-align: center;color:#f53d3d" color="danger" *ngIf="supplierReqForm.controls['contact_num'].hasError(validation.type) && supplierReqForm.controls['contact_num'].touched">
+      {{validation.message}}
+      </div>
+  </div>  
     <ion-item (click)="productCategory()">
       <ion-label>Choose Product Category</ion-label>
       <ion-option item-right>{{this.sc_name}}</ion-option>
@@ -27,12 +32,23 @@
       <ion-textarea formControlName="produt_desc" placeholder="Product Description"></ion-textarea>
     </ion-item>
     <ion-item>
-      <ion-input type="text" formControlName="no_of_units" placeholder="Number of Units"></ion-input>
+      <ion-input type="number" formControlName="no_of_units" placeholder="Number of Units"></ion-input>
     </ion-item> 
+    <div *ngFor="let validation of validation_Number" class="error-box">
+        <div style="text-align: center;color:#f53d3d" color="danger" *ngIf="supplierReqForm.controls['no_of_units'].hasError(validation.type) && supplierReqForm.controls['no_of_units'].touched">
+        {{validation.message}}
+        </div>
+    </div> 
     <ion-item>
-      <ion-input type="text" formControlName="budget" placeholder="Your Tentative budget"></ion-input>
+      <ion-input type="number" formControlName="budget" placeholder="Your Tentative budget"></ion-input>
     </ion-item>
+    <div *ngFor="let validation of validation_Number" class="error-box">
+        <div style="text-align: center;color:#f53d3d" color="danger" *ngIf="supplierReqForm.controls['budget'].hasError(validation.type) && supplierReqForm.controls['budget'].touched">
+        {{validation.message}}
+        </div>
+    </div> 
     <ion-item>
+      
       <ion-textarea formControlName="h_address" placeholder="Delivery Address"></ion-textarea>
     </ion-item>
     <button type="submit" [disabled]="!supplierReqForm.valid" round ion-button full>Post Supplier Requirement</button><br>
