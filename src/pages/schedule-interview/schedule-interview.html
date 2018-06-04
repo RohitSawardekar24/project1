@@ -18,12 +18,12 @@
         <h2 style="white-space: pre-wrap">{{item.designation}} • {{item.city_name}}</h2>
       </div>
     </div>
-    <button [disabled]="item.is_read == '1'" ion-button default item-right (click)="scheduleInterview(item.name,item.emp_id)">Schedule</button>
-  </ion-item>
-    <ion-item-options side="right">
-      <button ion-button color="danger" (click)="removeItem(item.emp_id)"> Delete</button>
-    </ion-item-options>
-    </ion-item-sliding>
-     </ion-list>
+    <div>
+      <button [disabled]="item.is_read == '1'" ion-button default item-right (click)="scheduleInterview(item.name,item.emp_id,item.designation)">Schedule</button>
+      <button ion-button color="danger" ion-button default item-right (click)="removeItem(item.emp_id)">Delete</button>
+    </div>
+    </ion-item>
+  </ion-item-sliding>
+  </ion-list>
 </div>
 </ion-content>
