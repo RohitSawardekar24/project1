@@ -30,6 +30,7 @@ export class PageGmapAutocomplete implements OnInit {
     pata:any
     mapAddr:any
     name:any
+    designation:any
     mainname:any
     pname:any
     out:any
@@ -53,6 +54,7 @@ export class PageGmapAutocomplete implements OnInit {
                 private modalCtrl: ModalController, private navParams: NavParams) { 
       this.name = navParams.get('name');   
       this.emp_id = navParams.get('emp_id')
+      this.designation = navParams.get('designation')
       this.http = http;
       this.formMap = this.form.group({
         "hotel_id":["", Validators.compose([Validators.required])],
