@@ -35,7 +35,7 @@
       <ion-input type="number" formControlName="no_of_units" placeholder="Number of Units"></ion-input>
     </ion-item> 
     <div *ngFor="let validation of validation_Number" class="error-box">
-        <div style="text-align: center;color:#f53d3d" color="danger" *ngIf="supplierReqForm.controls['contact_num'].hasError(validation.type) && supplierReqForm.controls['contact_num'].touched">
+        <div style="text-align: center;color:#f53d3d" color="danger" *ngIf="supplierReqForm.controls['no_of_units'].hasError(validation.type) && supplierReqForm.controls['no_of_units'].touched">
         {{validation.message}}
         </div>
     </div> 
@@ -43,7 +43,7 @@
       <ion-input type="number" formControlName="budget" placeholder="Your Tentative budget"></ion-input>
     </ion-item>
     <div *ngFor="let validation of validation_Number" class="error-box">
-        <div style="text-align: center;color:#f53d3d" color="danger" *ngIf="supplierReqForm.controls['contact_num'].hasError(validation.type) && supplierReqForm.controls['contact_num'].touched">
+        <div style="text-align: center;color:#f53d3d" color="danger" *ngIf="supplierReqForm.controls['budget'].hasError(validation.type) && supplierReqForm.controls['budget'].touched">
         {{validation.message}}
         </div>
     </div> 
