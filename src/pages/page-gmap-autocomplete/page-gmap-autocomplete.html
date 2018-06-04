@@ -50,10 +50,7 @@
           <ion-label>{{this.name}}</ion-label>
         </ion-item>
         <ion-item >
-        <ion-label>Select Post</ion-label>
-          <ion-select [formControl]="formMap.controls['hotel_id']" [(ngModel)]="this.hotel_id">
-            <ion-option *ngFor="let item of items" value="{{item.hj_id}}">{{item.pname}}</ion-option>
-            </ion-select>
+          <ion-label>{{this.designation}}</ion-label>
         </ion-item> 
         <ion-item>
       <ion-label style="white-space:pre-wrap">Interview Date & Time</ion-label>
