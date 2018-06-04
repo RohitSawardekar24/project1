@@ -258,6 +258,7 @@ import { GoogleMapsProvider } from '../providers/google-maps/google-maps';
     NetworkServiceProvider,
     ConnectivityServiceProvider,
     GoogleMapsProvider,
+    ConnectivityServiceProvider,
       ]
 })
 export class AppModule {}

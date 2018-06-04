@@ -37,7 +37,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-   <div padding id="map"></div>
+   <div padding id="map" #map></div>
    <form [formGroup]="formMap" (ngSubmit)="apply(formMap.value)">  
         <ion-list style="margin:0px">
         <ion-item (click)="showModal()">
