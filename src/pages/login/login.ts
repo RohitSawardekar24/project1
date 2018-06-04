@@ -37,7 +37,7 @@ export class LoginPage {
               private alertCtrl: AlertController, public storage: Storage) {
               this.menu.enable(false)
               this.registrationForm = this.form.group({
-              "user_name":["", Validators.required],
+              "email":["", Validators.required],
               "password":["",Validators.required]
             })
             this.http = http;      
@@ -58,7 +58,7 @@ loginForm(){
         }else{  
           this.items = this.registrationForm.value;
           let body = JSON.stringify({
-            user_name: this.items.user_name,
+            email: this.items.email,
             password: this.items.password
           });
           this.storage.get('Hash').then((hash) => {
