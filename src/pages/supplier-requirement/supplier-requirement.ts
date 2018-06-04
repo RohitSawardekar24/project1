@@ -19,7 +19,8 @@ http:any;
   sup_items:any
   product_cat:any;
   i:any;
-  sc_name:any
+  sc_name:any;
+  validation_Number:Array<{type:any,message:any}> 
   constructor(public storage: Storage,
               private form: FormBuilder,http: Http,
               private alertCtrl: AlertController,
@@ -40,12 +41,17 @@ http:any;
           })
               this.supplierReqForm = this.form.group({
               "contact_name":["", Validators.required],
-              "contact_num":["", Validators.required],
+              "contact_num":["", Validators.compose([Validators.maxLength(10),Validators.minLength(10),Validators.required])],
               "produt_desc":["", Validators.required],
               "no_of_units":["",Validators.required],
               "budget":["",Validators.required],
               "h_address":["",Validators.required]
             })
+            this.validation_Number = [
+              { type: 'required', message: 'Number is required.' },
+              { type: 'minlength', message: 'Number must be at least 10 Numbers long.' },
+              { type: 'maxlength', message: 'Number cannot be more than 10 Numbers long.' },
+              { type: 'pattern', message: 'Sorry you can not use characters' }]
   }
    
 productCategory(){
