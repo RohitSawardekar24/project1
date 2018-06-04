@@ -91,9 +91,11 @@ productCategory(){
     }else{
       if(window.localStorage.getItem('status') == 'free'){
           this.upgrade.upgradepackage()
+          console.log('1');
         }else{
         this.items = this.supplierReqForm.value;
         let number = this.items.contact_num;
+        console.log('2');
         this.storage.get("id").then((id)=>{
           this.storage.get("hotelname").then((hotelname)=>{
             this.storage.get("Hash").then((hash)=>{
@@ -135,6 +137,7 @@ productCategory(){
               .post('http://www.forehotels.com:3000/api/post_supplier_requirement', body, options)
               .subscribe(
               data => {
+                console.log('3');
                 this.items=JSON.parse(data._body)
                 if(this.items.Error == false){
                   let alert = this.alertCtrl.create({
@@ -145,6 +148,7 @@ productCategory(){
                         this.navCtrl.setRoot(ListPage)
                   }
                 else{
+                  console.log('4');
                     let alert = this.alertCtrl.create({
                         title: 'Something went wrong!',
                         subTitle: 'Please try after sometime',
