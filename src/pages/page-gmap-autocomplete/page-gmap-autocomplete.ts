@@ -145,6 +145,7 @@ export class PageGmapAutocomplete implements OnInit {
  ngOnInit() {
         this.initMap();
         this.initPlacedetails();
+        console.log("CURRENT DATE: "+this.myDate);
     }
 
  showModal() {
