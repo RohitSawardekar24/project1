@@ -130,8 +130,8 @@ export class ForgotPasswordPage {
           });                 
           
           let sms_body = JSON.stringify({
-          contact_no: this.items.contact_no,
-          mail : 'forgot_password'
+          number: this.items.contact_no,
+          text : 'forgot_password'
           });
           let options = new RequestOptions({ headers: headers });
           this.http.get("http://www.forehotels.com:3000/api/hotel_users", options)
@@ -145,7 +145,7 @@ export class ForgotPasswordPage {
                     }
                     if(checker == 1){
                   this.http
-                  .post('http://www.forehotels.com:3000/api/send_email', sms_body, options)
+                  .post('http://www.forehotels.com:3000/api/send_sms', sms_body, options)
                   .subscribe(
                       data => {
                         loading.dismiss()
