@@ -23,7 +23,7 @@ export class ProfilePicPage {
   http:any;
   id:any;
   hash:any;
-  drive_name:any
+  drive_name:any;
   social_pic:any;
   constructor(public transfer: FileTransfer,
               private fp: FilePath ,
