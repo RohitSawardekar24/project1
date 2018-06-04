@@ -87,40 +87,25 @@ export class ProfilePicPage {
           }) 
    }
   findProfilePic(){
-    if(this.network.noConnection()){
-       this.network.showNetworkAlert()
-      }else{ 
-          this.diagnostic.requestExternalStorageAuthorization().then((status)=>{            
-            if(status == "GRANTED"){
-            this.fc.open()
-              .then(
-                uri => {               
-                  let DrivePicpath = uri.split(".") 
-                  if(DrivePicpath[1] == 'google'){                 
-                      let fileTransfer: FileTransferObject = this.transfer.create();
-                              fileTransfer.download(uri, "file:///storage/emulated/0/Download/" +this.drive_name+'.jpg').then((entry) => {                        
-                                let tourl = entry.toURL()
-                                this.profilePicUpload(tourl)
-                              }, (error) => { 
-                                // handle error
-                              });
-                  }else{
-                    this.fp.resolveNativePath(uri)                                
-                    .then(picpath => {                 
-                      this.profilePicUpload(picpath);
-                    });
-                }
-              });
-        }else{
-                let alert = this.alertCtrl.create({                              
-                                  subTitle: "Please Click on Allow to access Picture",
-                                  buttons: ['Dismiss']
-                                });
-                                alert.present();
-                      }  
-                  }).catch((e)=>{
-            }); 
-      } 
+    this.fc.open()
+      .then(
+        uri => {
+          let DrivePicpath = uri.split("/") 
+          if(DrivePicpath[0] == 'content:'){
+              let fileTransfer: FileTransferObject = this.transfer.create();
+                      fileTransfer.download(uri, "file:///storage/emulated/0/Download/" +this.drive_name[0]+'.jpg').then((entry) => {                        
+                        let tourl = entry.toURL()
+                        this.profilePicUpload(tourl)
+                      }, (error) => {
+                        // handle error
+                      });
+          }else{
+            this.fp.resolveNativePath(uri)
+            .then(filePath => {                 
+              this.profilePicUpload(filePath);
+            });
+        }
+      });
   }
   
   profilePicUpload(x){
