@@ -27,7 +27,7 @@ export class ModalAutocompleteItems implements OnInit{
     }
     ngOnInit() {
         this.acService = new google.maps.places.AutocompleteService();        
-        this.autocompleteItems = [];
+        this.autocompleteItems = [''];
         this.autocomplete = {
             query: ''
         };        
@@ -44,7 +44,7 @@ export class ModalAutocompleteItems implements OnInit{
            this.network.showNetworkAlert()
         }else{  
                 if (this.autocomplete.query == '') {
-                    this.autocompleteItems = [];
+                    this.autocompleteItems = [''];
                     return;
                 }
                 // let self = this;
@@ -53,7 +53,7 @@ export class ModalAutocompleteItems implements OnInit{
                     componentRestrictions: { country: 'IN' } 
                 }
                 this.acService.getPlacePredictions(config, function (predictions, status) {
-                    this.autocompleteItems = [];            
+                    this.autocompleteItems = [''];            
                     predictions.forEach(function (prediction) {              
                         this.autocompleteItems.push(prediction);
                     });

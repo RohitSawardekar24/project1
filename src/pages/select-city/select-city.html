@@ -1,11 +1,11 @@
 <ion-content>
- 
-    <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()"></ion-searchbar>
- 
-    <div *ngIf="searching" class="spinner-container">
-        <ion-spinner></ion-spinner>
-    </div>
- 
+    <ion-navbar>
+        <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()"></ion-searchbar>
+    
+        <div *ngIf="searching" class="spinner-container">
+            <ion-spinner></ion-spinner>
+        </div>
+    </ion-navbar>
     <ion-list>
         <ion-item *ngFor="let item of items" (click)="onClick(item.c_id)">
             {{item.city_name}}
