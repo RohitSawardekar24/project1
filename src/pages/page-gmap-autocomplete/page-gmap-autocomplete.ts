@@ -237,13 +237,17 @@ export class PageGmapAutocomplete implements OnInit {
     }
     addMarker(position,map)
     {
-        return new google.maps.Marker({position,map});
+        return new google.maps.Marker({position:position,
+                                        map:map,
+                                        animation: google.maps.Animation.DROP,
+                                        draggable: true});
     }
     private createMapMarker(place:any):void {
         var placeLoc = place.geometry.location;
         var marker = new google.maps.Marker({
           map: this.map,
           position: placeLoc
+          
         });    
         console.log("MARKER: "+marker)
         this.markers.push(marker);
