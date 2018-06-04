@@ -6,6 +6,7 @@ import { Toast } from '@ionic-native/toast';
 import { Storage } from '@ionic/storage';
 import { NetworkServiceProvider } from '../../providers/network-service/network-service';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-forgot-password',
@@ -129,10 +130,7 @@ export class ForgotPasswordPage {
             'Authorization': hash
           });                 
           
-          let sms_body = JSON.stringify({
-          contact_no: this.items.contact_no,
-          mail : 'forgot_password'
-          });
+         
           let options = new RequestOptions({ headers: headers });
           this.http.get("http://www.forehotels.com:3000/api/hotel_users", options)
                   .subscribe(data =>{
@@ -144,8 +142,13 @@ export class ForgotPasswordPage {
                       }
                     }
                     if(checker == 1){
+                      let temppass=Math.floor(Math.random()*10000);
+                      let sms_body = JSON.stringify({
+                        contact_no: this.items.contact_no,
+                        mail : 'Hi'+ this.items.name+'your new password is:'+temppass
+                        });
                   this.http
-                  .post('http://www.forehotels.com:3000/api/send_email', sms_body, options)
+                  .post('http://www.forehotels.com:3000/api/send_sms', sms_body, options)
                   .subscribe(
                       data => {
                         loading.dismiss()
@@ -155,6 +158,17 @@ export class ForgotPasswordPage {
                             }
                           );
                         });
+                        let pass=JSON.stringify({
+                          id:this.items.id,
+                          password:temppass
+                        
+                        })
+                        this.http.put('http://forehotels.com:3000/api/forgot_password',pass,options)
+                        .subscribe(
+                          data=>console.log('success'),
+                          err=>console.log('error')
+                        );
+                        this.navCtrl.push(LoginPage);
                       }
                     else{
                       let alerts = this.alertCtrl.create({
