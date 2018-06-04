@@ -11,7 +11,7 @@ import { GoogleAnalytics } from '@ionic-native/google-analytics';
 })
 export class PackagePage {
 
-		  data: Array<{amt:String;title:any;icon1:String;icon2:String;icon3:String;text1:any;text2:any;text4:any;text5:any;text7:any;text8:any;text9:any;textamt:any;textamt2:any;textamt3:any;textamt4:any}> = [];
+		  data: Array<{amt:number;title:any;icon1:String;icon2:String;icon3:String;text1:any;text2:any;text4:any;text5:any;text7:any;text8:any;text9:any;textamt:any;textamt2:any;textamt3:any;textamt4:any}> = [];
 		  http:any;
 		  hash:any;
 		  user:any;
@@ -59,7 +59,7 @@ export class PackagePage {
                  this.jobs = "5";
                  this.interview = "25";
                  this.days = "90";
-                 this.amount = "4000";
+                 this.amount = 4500;
              }
              console.log('Jobs '+this.jobs)
              if(this.items[0].hotel_type == 'state'){
@@ -102,7 +102,7 @@ export class PackagePage {
         });
      
         this.data.push({
-         title:"Yearly package Rs. 40000",
+         title:"Yearly package Rs. 45000",
          icon1: 'md-arrow-dropright',
          icon2: "md-checkmark",
          icon3:"10",
@@ -117,7 +117,7 @@ export class PackagePage {
          textamt2:"75",
          textamt3:"N/A",
          textamt4:"1 Year",
-         amt:'40000'
+         amt:45000
         });
       });  
     });

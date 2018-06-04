@@ -31,7 +31,7 @@
   <ion-header>
   <ion-toolbar>
     <ion-buttons start>
-      <button ion-button clear (click)="dismiss()" >x</button>
+      <button ion-button clear (click)="dismiss()" ><ion-icon name="close"></ion-icon></button>
     </ion-buttons>
     <ion-title>Filter</ion-title>
   </ion-toolbar>
@@ -53,11 +53,11 @@
           <ion-label>{{this.designation}}</ion-label>
         </ion-item> 
       <ion-item>
-        <ion-label style="white-space:pre-wrap">Interview Date</ion-label>
+        <ion-label style="color:black">Interview Date</ion-label>
         <ion-datetime [formControl]="formMap.controls['date']" [(ngModel)]="this.myDate" min="2017-11-24" max="2020-12-31" displayFormat="MMM  DD, YYYY"></ion-datetime>
       </ion-item>
       <ion-item>
-        <ion-label style="white-space:pre-wrap">Interview Time(24 hr)</ion-label>
+        <ion-label style="color:black">Interview Time(24 hr)</ion-label>
         <ion-datetime [formControl]="formMap.controls['date']" [(ngModel)]="this.myTime" displayFormat="HH:mm"></ion-datetime>
       </ion-item>
       </ion-list>

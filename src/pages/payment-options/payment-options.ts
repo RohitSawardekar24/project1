@@ -41,6 +41,7 @@ data: Array<{title:any,img : any, img1: any,img2:any,icon:string,text1:any,text2
             });
           })
         this.item = navParams.get('amt')
+        console.log("AMOUNT: "+this.item);
        // this.item = '10'
         this.pa = navParams.get('purpose')
         this.hotel_id = navParams.get('hotel_id')
