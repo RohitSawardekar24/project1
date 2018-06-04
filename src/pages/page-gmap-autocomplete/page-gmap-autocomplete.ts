@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Events, NavController, ModalController, ViewController, NavParams, AlertController,LoadingController } from 'ionic-angular';
 import { ModalAutocompleteItems } from '../modal-autocomplete-items/modal-autocomplete-items';
 import { Http, Headers, RequestOptions } from '@angular/http';
@@ -19,6 +19,7 @@ export class PageGmapAutocomplete implements OnInit {
         place: '',
         set: false,
     };
+    @ViewChild('map') mapRef:ElementRef;
     placesService:any;
     addr:any;
     map: any;
@@ -220,17 +221,23 @@ export class PageGmapAutocomplete implements OnInit {
         console.log(place)
     }
     private initMap() {
-        var point = {lat: -34.603684, lng: -58.381559}; 
+        // var point = {lat: -34.603684, lng: -58.381559}; 
+        const location=new google.maps.LatLng(-34.603684,-58.381559);
         let divMap = (<HTMLInputElement>document.getElementById('map'));
-        this.map = new google.maps.Map(divMap, {
-            center: point,
+        const options = {
+            center: location,
             zoom: 15,
-            disableDefaultUI: true,
-            draggable: false,
-            zoomControl: true
-        });
+            // disableDefaultUI: true,
+            // draggable: false,
+            // zoomControl: true
+        };
+        this.map=new google.maps.Map(this.mapRef.nativeElement,options);
+        this.addMarker(location,this.map);
     }
-
+    addMarker(position,map)
+    {
+        return new google.maps.Marker({position,map});
+    }
     private createMapMarker(place:any):void {
         var placeLoc = place.geometry.location;
         var marker = new google.maps.Marker({
