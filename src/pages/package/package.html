@@ -94,8 +94,8 @@
       			<button ion-button round full style="margin-top:10%" (click)="purchase(d.amt)">Purchase</button>
       		</div>
       			<ion-icon color="primary" item-right [name]="d.icon"></ion-icon>
-    		<button ion-button color="dark" clear (click)="toggleDetails(d)"> Read More</button>
-
+    		<button *ngIf="read(d)=true" ion-button color="dark" clear (click)="toggleDetails(d)"> Read More</button>
+			<button *ngIf="read(d)=false" ion-button color="dark" clear (click)="toggleDetails(d)"> Read Less</button>
   </ion-card-content>
 </ion-card>
 </ion-content>

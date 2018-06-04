@@ -133,6 +133,14 @@ export class PackagePage {
         data.icon = 'ios-arrow-up-outline';
     }
   }
+  read(data){
+    if(data.showDetails){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
   purchase(amt){
     this.navCtrl.push(PaymentOptionsPage, {
       amt: amt
