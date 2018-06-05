@@ -44,6 +44,7 @@ export class PageGmapAutocomplete implements OnInit {
     arr:any=[]
     formMap:any;
     resitems:any;
+    employeecontact:any
     constructor(public form: FormBuilder,
                 public events: Events,
                 public loadingCtrl: LoadingController,
@@ -56,6 +57,7 @@ export class PageGmapAutocomplete implements OnInit {
       this.name = navParams.get('name');   
       this.emp_id = navParams.get('emp_id')
       this.designation = navParams.get('designation')
+      this.employeecontact=navParams.get('contact')
       this.http = http;
       this.formMap = this.form.group({
         "hotel_id":["", Validators.compose([Validators.required])],
@@ -113,6 +115,15 @@ export class PageGmapAutocomplete implements OnInit {
                         });
                         alerts.present();
                     });
+                    let mssg=JSON.stringify({
+                        number:this.employeecontact,
+                        text:'You have been scheduled for Interview at '+this.items[0].name
+                    });
+                    this.http.post('http://forehotels.com:3000/api/send_sms',mssg,options).subscribe(
+                        data=>console.log('success'),
+                        err=>console.log(err)
+                    );
+            
                 this.http.get('http://forehotels.com:3000/api/employee/'+this.emp_id, options)
                     .subscribe(data =>{
                         this.resitems = JSON.parse(data._body).Users;
@@ -134,7 +145,10 @@ export class PageGmapAutocomplete implements OnInit {
                     });
                 });
             });
-        });          
+            
+        });       
+        
+
             this.navCtrl.setRoot(ListPage)
     }
 }
