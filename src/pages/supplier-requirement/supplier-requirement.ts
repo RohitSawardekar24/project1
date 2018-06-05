@@ -124,7 +124,7 @@ productCategory(){
                 this.http
                       .post("http://www.forehotels.com:3000/api/send_sms", sms_body, options)
                             .subscribe(data =>{
-        
+                              
                     }) 
               }
             }
