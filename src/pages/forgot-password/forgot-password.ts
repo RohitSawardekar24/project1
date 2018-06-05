@@ -20,6 +20,7 @@ export class ForgotPasswordPage {
    smsForm:any;
    checkusers:any;
    checkcontact:any;
+   temppass:string;
   constructor(public loadingCtrl: LoadingController,
               public toast: Toast, 
               public storage: Storage,http: Http,
@@ -138,39 +139,58 @@ export class ForgotPasswordPage {
           this.http.get("http://www.forehotels.com:3000/api/hotel_users", options)
                   .subscribe(data =>{
                   this.checkcontact=JSON.parse(data._body).Users;//Bind data to items object
+                  let user;
                   let checker = 0;
                   for(let item of this.checkcontact){
                       if(item.hr_number == this.items.contact_no){
                       checker = 1;
+                      user=item;
                       }
                     }
                     if(checker == 1){
-                      let temppass=Math.floor(Math.random()*10000);
+                       this.temppass='abcdfeiqurshjcoauspwtydiagdrtsqplskj';
+                      let start=Math.floor(Math.random()*(this.temppass.length-5));
+                      let end=start+5;
+                      this.temppass=this.temppass.slice(start,end);
                       let sms_body = JSON.stringify({
-                        contact_no: this.items.contact_no,
-                        mail : 'Hi'+ this.items.name+'your new password is:'+temppass
+                        number: this.items.contact_no,
+                        text: 'Hi '+ user.name+' your new password is: '+this.temppass
                         });
+                        console.log('1');
                   this.http
                   .post('http://www.forehotels.com:3000/api/send_sms', sms_body, options)
                   .subscribe(
                       data => {
-                        loading.dismiss()
+                        console.log('2');
+                        loading.dismiss();
                     this.toast.show("New password Sent to your Phone Number", '7000', 'bottom').subscribe(
                             toast => {
                               console.log("Toast Display");
                             }
                           );
-                        });
+                        },
+                      err=>console.log(err));
                         let pass=JSON.stringify({
-                          id:this.items.id,
-                          password:temppass
+                          password:this.temppass,
+                          id:user.user_id                          
                         
-                        })
+                        });
+                        console.log('3');
                         this.http.put('http://forehotels.com:3000/api/forgot_password',pass,options)
                         .subscribe(
-                          data=>console.log('success'),
+                          data=>{
+                            console.log('4');
+                            console.log('success');
+                          this.toast.show("Forgot"+this.temppass, '10000', 'top').subscribe(
+                            toast => {
+                              console.log("Toast Display");
+                            }
+                          );
+                        }
+                            ,
                           err=>console.log('error')
                         );
+                        console.log('5');
                         this.navCtrl.push(LoginPage);
                       }
                     else{

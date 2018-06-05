@@ -98,6 +98,8 @@ placedetails: any;
      }else{
           this.navCtrl.push(ProfilePicPage)
         }
+        this.initMap();
+      this.initPlacedetails()
     }
 
   hotel_name(){
