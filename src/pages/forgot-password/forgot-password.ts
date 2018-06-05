@@ -181,11 +181,7 @@ export class ForgotPasswordPage {
                           data=>{
                             console.log('4');
                             console.log('success');
-                          this.toast.show("Forgot"+this.temppass, '10000', 'top').subscribe(
-                            toast => {
-                              console.log("Toast Display");
-                            }
-                          );
+                  
                         }
                             ,
                           err=>console.log('error')
