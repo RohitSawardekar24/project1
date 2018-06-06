@@ -95,6 +95,7 @@ productCategory(){
     if(this.network.noConnection()){
        this.network.showNetworkAlert()
     }else{
+      console.log('start');
       if(window.localStorage.getItem('status') == 'free'){
           this.upgrade.upgradepackage()
           console.log('1');
@@ -105,15 +106,25 @@ productCategory(){
         this.storage.get("id").then((id)=>{
           this.storage.get("hotelname").then((hotelname)=>{
             this.storage.get("Hash").then((hash)=>{
+              let headers = new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': hash
+              });
+              console.log('2a');
+              let options = new RequestOptions({ headers: headers });
+              this.http
+          .get("http://www.forehotels.com:3000/api/package/"+id, options)
+            .subscribe(
+              (data) =>{
+              let a=JSON.parse(data._body).Jobs; //Bind data to items object
             let supplier_body = {
+              sc_name:this.product_cat,
+              c_id:a.city
             }
-            let headers = new Headers({
-              'Content-Type': 'application/json',
-              'Authorization': hash
-            });
-            let options = new RequestOptions({ headers: headers });
-            this.http.post("http://www.forehotels.com::3000/api/suppliers", supplier_body, options)
+            console.log('2');
+            this.http.post("http://www.forehotels.com:3000/api/suppliers", supplier_body, options)
             .subscribe(data => {
+              console.log('2c');
               this.sup_items = JSON.parse(data._body).Users_Applied; //Bind data to items object
             for(let i=0; i<this.sup_items.length; i++){
               if(this.sup_items[i].s_cat_id == this.product_cat){
@@ -121,11 +132,12 @@ productCategory(){
                     number: this.sup_items[i].hr_number,
                     text:  'Hello '+this.sup_items[i].name+' there is a '+this.sup_items[i].sc_name+' requirement '+' for '+hotelname +', Contact '+number+' for further details'
                 });
-                this.http
-                      .post("http://www.forehotels.com:3000/api/send_sms", sms_body, options)
-                            .subscribe(data =>{
+                console.log('mssg sent');
+                // this.http
+                //       .post("http://www.forehotels.com:3000/api/send_sms", sms_body, options)
+                //             .subscribe(data =>{
                               
-                    }) 
+                //     }) 
               }
             }
             });     
@@ -166,6 +178,7 @@ productCategory(){
             });   
             });
           });
+        });
       }
     } 
   }
