@@ -19,7 +19,7 @@
       </div>
     </div>
     <div>
-      <button [disabled]="item.is_read == '1'" ion-button default item-right (click)="scheduleInterview(item.name,item.emp_id,item.designation)">Schedule</button>
+      <button [disabled]="item.is_read == '1'" ion-button default item-right (click)="scheduleInterview(item.name,item.emp_id,item.designation,item.contact_no)">Schedule</button>
       <button ion-button color="danger" ion-button default item-right (click)="removeItem(item.emp_id)">Delete</button>
     </div>
     </ion-item>

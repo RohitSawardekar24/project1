@@ -108,7 +108,7 @@ view:boolean=false
           })
       }
     }  
-  scheduleInterview(name,id,designation){
+  scheduleInterview(name,id,designation,contact){
     if(this.network.noConnection()){
            this.network.showNetworkAlert()
         }else{ 
@@ -116,7 +116,8 @@ view:boolean=false
         this.navCtrl.push(PageGmapAutocomplete,{
           name:name,
           emp_id:id,
-          designation:designation
+          designation:designation,
+          contact:contact
         })  
       }
     }
