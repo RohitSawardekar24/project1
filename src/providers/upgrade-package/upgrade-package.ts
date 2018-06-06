@@ -19,6 +19,7 @@ export class UpgradePackageProvider {
    items: any=0;
    remaining_interviews: any=0;
    length: number=1;
+   len:number;
   constructor(protected app: App,
               http: Http,
               public storage: Storage,
@@ -34,7 +35,6 @@ export class UpgradePackageProvider {
 
   load(){
      let len1 =[]
-              let len:number
        this.storage.get("Hash").then((value)=>{
                   this.storage.get("id").then((id)=>{
                 let headers = new Headers({
@@ -46,31 +46,35 @@ export class UpgradePackageProvider {
               this.http.get("http://www.forehotels.com:3000/api/package/"+id, options)
                   .subscribe(data =>{
                   let resitems = JSON.parse(data._body).Jobs;
-                 this.totaljod = resitems[0].remaining_jobs;                   
-                  len = resitems[0].remaining_interviews 
-                  this.length = resitems[0].remaining_interviews
-                  console.log('remaining interviews ',len)
+                 this.totaljod = resitems[0].remaining_jobs; 
+                 console.log('total jobs'+this.totaljod);                  
+                  this.len = resitems[0].remaining_interviews 
+                  // this.length = resitems[0].remaining_interviews
+                  console.log('Total interviews ',this.len)
                   }); 
 
                 this.http.get("http://www.forehotels.com:3000/api/job_posted/"+id, options)
                 .subscribe(data =>{
                 this.totalpostjobs =JSON.parse(data._body).Jobs; //Bind data to items object
-                let len = this.totalpostjobs.length
-                console.log('total ',len)
-                this.remaining_jobs = this.totaljod - len
-                console.log("Remain >",this.remaining_jobs)
+                let l1 = this.totalpostjobs.length
+                console.log('job posted ',l1)
+                this.remaining_jobs = this.totaljod - l1
+                console.log("Remaining jobs >",this.remaining_jobs)
               })
                 this.http.get("http://www.forehotels.com:3000/api/shortlisted_employee/"+id, options)
                       .subscribe(data =>{
                       this.items=JSON.parse(data._body).Users; //Bind data to items object\
                       this.si_len= this.items.length;
+                      console.log('shortlisted employees'+this.si_len);
                         for(let i=0 ; i<this.si_len; i++){
                           if(this.items[i].is_read == '1'){
                             len1.push(this.items[i])
                           }
                         }
-                        console.log('Length of SI ',len1.length)                
-                        this.remaining_interviews = len - len1.length ;
+                        console.log('Scheduled for interview ',len1.length)
+                        console.log('Total interview ',this.len)                
+                        this.remaining_interviews =this.len - len1.length ;
+                        console.log("Remaining interview >",this.len-len1.length);
                     })
               })
           })
@@ -122,8 +126,9 @@ export class UpgradePackageProvider {
     }
   si_alert(){ 
     this.load();
+    console.log(this.remaining_interviews);
       let alert = this.alertCtrl.create({})
-      alert.setTitle('Your remaining interviews '+this.length)  
+      alert.setTitle('Your remaining interviews '+this.remaining_interviews); 
         alert.addButton({
           text:'OK',
           handler : ()=>{
