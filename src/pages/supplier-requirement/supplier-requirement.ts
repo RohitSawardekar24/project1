@@ -133,11 +133,7 @@ productCategory(){
                     text:  'Hello '+this.sup_items[i].name+' there is a '+this.sup_items[i].sc_name+' requirement '+' for '+hotelname +', Contact '+number+' for further details'
                 });
                 console.log('mssg sent');
-                // this.http
-                //       .post("http://www.forehotels.com:3000/api/send_sms", sms_body, options)
-                //             .subscribe(data =>{
-                              
-                //     }) 
+               
               }
             }
             });     
