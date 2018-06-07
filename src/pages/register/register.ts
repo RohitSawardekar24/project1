@@ -781,4 +781,3 @@ loginForm(){
     }
 }
 /************ManagerDetailsPageEnd************/
-     

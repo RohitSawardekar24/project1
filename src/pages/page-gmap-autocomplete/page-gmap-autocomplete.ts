@@ -1,12 +1,13 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Events, NavController, ModalController, ViewController, NavParams, AlertController,LoadingController } from 'ionic-angular';
-import { ModalAutocompleteItems } from '../modal-autocomplete-items/modal-autocomplete-items';
+//import { ModalAutocompleteItems } from '../modal-autocomplete-items/modal-autocomplete-items';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Validators, FormBuilder } from '@angular/forms'
 import { Storage } from '@ionic/storage';
 import { ListPage } from '../list/list';
 import { NetworkServiceProvider } from '../../providers/network-service/network-service';
-declare var google:any;
+import { ModalRegisterMapPage } from "../modal-register-map/modal-register-map";
+declare var google: any;
 var self = this;
 let loader
 @Component({
@@ -19,7 +20,6 @@ export class PageGmapAutocomplete implements OnInit {
         place: '',
         set: false,
     };
-    @ViewChild('map') mapRef:ElementRef;
     placesService:any;
     addr:any;
     map: any;
@@ -44,6 +44,7 @@ export class PageGmapAutocomplete implements OnInit {
     arr:any=[]
     formMap:any;
     resitems:any;
+    employeecontact:any
     constructor(public form: FormBuilder,
                 public events: Events,
                 public loadingCtrl: LoadingController,
@@ -56,6 +57,7 @@ export class PageGmapAutocomplete implements OnInit {
       this.name = navParams.get('name');   
       this.emp_id = navParams.get('emp_id')
       this.designation = navParams.get('designation')
+      this.employeecontact=navParams.get('contact')
       this.http = http;
       this.formMap = this.form.group({
         "hotel_id":["", Validators.compose([Validators.required])],
@@ -103,7 +105,7 @@ export class PageGmapAutocomplete implements OnInit {
             });
             let options = new RequestOptions({ headers: headers });
             this.http
-                .post('http://www.forehotels.com:3000/api/schedule_interview', body, options)
+                .post('http://forehotels.com:3000/api/schedule_interview', body, options)
                 .subscribe(
                     data => {
                         let alerts = this.alertCtrl.create({
@@ -113,7 +115,16 @@ export class PageGmapAutocomplete implements OnInit {
                         });
                         alerts.present();
                     });
-                this.http.get('http://www.forehotels.com:3000/api/employee/'+this.emp_id, options)
+                    let mssg=JSON.stringify({
+                        number:this.employeecontact,
+                        text:'You have been scheduled for Interview at '+this.items[0].name
+                    });
+                    this.http.post('http://forehotels.com:3000/api/send_sms',mssg,options).subscribe(
+                        data=>console.log('success'),
+                        err=>console.log(err)
+                    );
+            
+                this.http.get('http://forehotels.com:3000/api/employee/'+this.emp_id, options)
                     .subscribe(data =>{
                         this.resitems = JSON.parse(data._body).Users;
                         emp_device_id = this.resitems[0].device_id                    
@@ -129,12 +140,15 @@ export class PageGmapAutocomplete implements OnInit {
                             app_id: 'a8874a29-22e2-486f-b4b3-b3d09e8167a5'
                         })
                         let Noti_options = new RequestOptions({headers : Noti_headers})
-                        this.http.post('http://www.forehotels.com:3000/api/single_notification', Noti_body, Noti_options)
+                        this.http.post('http://forehotels.com:3000/api/single_notification', Noti_body, Noti_options)
                         .subscribe(data =>{
                     });
                 });
             });
-        });          
+            
+        });       
+        
+
             this.navCtrl.setRoot(ListPage)
     }
 }
@@ -146,7 +160,6 @@ export class PageGmapAutocomplete implements OnInit {
  ngOnInit() {
         this.initMap();
         this.initPlacedetails();
-        console.log("CURRENT DATE: "+this.myDate);
     }
 
  showModal() {
@@ -154,7 +167,7 @@ export class PageGmapAutocomplete implements OnInit {
            this.network.showNetworkAlert()
         }else{  
        this.reset();
-       let modal = this.modalCtrl.create(ModalAutocompleteItems);
+       let modal = this.modalCtrl.create(ModalRegisterMapPage);;
         modal.onDidDismiss(data => {
             loader = this.loadingCtrl.create({
                 spinner: 'bubbles',
@@ -222,32 +235,22 @@ export class PageGmapAutocomplete implements OnInit {
         console.log(place)
     }
     private initMap() {
-        // var point = {lat: -34.603684, lng: -58.381559}; 
-        const location=new google.maps.LatLng(-34.603684,-58.381559);
+        var point = {lat: -34.603684, lng: -58.381559}; 
         let divMap = (<HTMLInputElement>document.getElementById('map'));
-        const options = {
-            center: location,
+        this.map = new google.maps.Map(divMap, {
+            center: point,
             zoom: 15,
-            // disableDefaultUI: true,
-            // draggable: false,
-            // zoomControl: true
-        };
-        this.map=new google.maps.Map(this.mapRef.nativeElement,options);
-        this.addMarker(location,this.map);
+            disableDefaultUI: true,
+            draggable: false,
+            zoomControl: true
+        });
     }
-    addMarker(position,map)
-    {
-        return new google.maps.Marker({position:position,
-                                        map:map,
-                                        animation: google.maps.Animation.DROP,
-                                        draggable: true});
-    }
+
     private createMapMarker(place:any):void {
         var placeLoc = place.geometry.location;
         var marker = new google.maps.Marker({
           map: this.map,
           position: placeLoc
-          
         });    
         console.log("MARKER: "+marker)
         this.markers.push(marker);

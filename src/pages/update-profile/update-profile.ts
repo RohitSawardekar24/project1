@@ -47,7 +47,7 @@ placedetails: any;
               private alertCtrl: AlertController,) {
               this.http = http;
               this.social_pic = false;
-              this.loaddata()   
+              this.loaddata()   ;
   }
       loaddata(){
         if(this.network.noConnection()){
@@ -99,7 +99,7 @@ placedetails: any;
           this.navCtrl.push(ProfilePicPage)
         }
         this.initMap();
-      this.initPlacedetails()
+      this.initPlacedetails();
     }
 
   hotel_name(){
@@ -404,7 +404,7 @@ placedetails: any;
     <ion-input formControlName="old_password" type="password"></ion-input>
   </ion-item>
 <ion-item>
-    <ion-label floating>Password</ion-label>
+    <ion-label floating>Enter new Password</ion-label>
     <ion-input formControlName="password" type="password"></ion-input>
   </ion-item>
 

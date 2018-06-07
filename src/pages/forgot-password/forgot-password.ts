@@ -131,7 +131,10 @@ export class ForgotPasswordPage {
             'Authorization': hash
           });                 
           
-         
+          let sms_body = JSON.stringify({
+          number: this.items.contact_no,
+          text : 'forgot_password'
+          });
           let options = new RequestOptions({ headers: headers });
           this.http.get("http://www.forehotels.com:3000/api/hotel_users", options)
                   .subscribe(data =>{

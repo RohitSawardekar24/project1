@@ -52,6 +52,7 @@ export class MyHistoryReportPage {
         }
     }
   }
+                        /***** cv downloaded start***/
 @Component({
   template: `
   <style>
@@ -166,6 +167,8 @@ export class CvDownloadedPage {
     this.viewCtrl.dismiss();
   }
 }
+                          /***** cv downloaded      end***/
+                           /*****job posted start ********/
 @Component({
   template: `
   <style>
@@ -266,7 +269,7 @@ export class JobPostedPage {
           'Authorization': hash
         });
         let options = new RequestOptions({ headers: headers });
-          this.http.get("http://www.forehotels.com:www.forehotels.com:3000/api/job_posted/"+id, options)
+          this.http.get("http://www.forehotels.com:3000/api/job_posted/"+id, options)
                 .subscribe(data =>{
                 this.job_ps=JSON.parse(data._body).Jobs; //Bind data to items object
                 this.length = this.job_ps.length            
@@ -287,7 +290,8 @@ export class JobPostedPage {
     this.viewCtrl.dismiss();
   }
 }
-
+                             /*****job posted end ********/
+                              /*****job applied start ********/
 @Component({
   template: `
   <style>
@@ -413,3 +417,4 @@ export class JobsAppliedPage{
   }
 }
 
+                 /*****job applied end ********/
