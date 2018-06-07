@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Platform, NavController, NavParams, AlertController, MenuController, ModalController, ViewController, LoadingController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, FormBuilder,FormGroup,FormControl } from '@angular/forms';
 import { LoginPage } from '../login/login';
 import { ModalRegisterMapPage } from '../modal-register-map/modal-register-map';
 import { Storage } from '@ionic/storage';
 import { NetworkServiceProvider } from '../../providers/network-service/network-service';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { debounce } from 'rxjs/operators';
 declare var google :any
 var self = this;
 let loader;
@@ -154,6 +155,11 @@ export class ModalHotelCategoryPage {
   #myInput{
           height: 70px;
   }
+  .invalid
+  {
+      border:red;
+      colour:red;
+  }
     </style>
     <ion-header>
     <ion-navbar>
@@ -186,7 +192,9 @@ export class ModalHotelCategoryPage {
           <ion-list>        
               <ion-item>
                   <ion-label color="primary" stacked>Mobile Number</ion-label>
-                  <ion-input placeholder="Mobile Number" [formControl]="mobileForm.controls['number']" type="number" required></ion-input>
+                  <ion-input placeholder="Mobile Number" [formControl]="mobileForm.controls['number']" type="number" ng-class="{'invalid': invalid}" (keyup)="checkNumber(mobileForm.value.number)" ></ion-input>
+                  <ion-label *ngIf="invalid==true" style="text-align: center;color:#f53d3d">An account with this number exists already</ion-label>
+                 
               </ion-item>
               <div *ngFor="let validation of validation_Number" class="error-box">
                   <div style="text-align: center;color:#f53d3d" color="danger" *ngIf="mobileForm.controls['number'].hasError(validation.type) && mobileForm.controls['number'].touched">
@@ -195,13 +203,13 @@ export class ModalHotelCategoryPage {
               </div>  
           </ion-list>        
           <ion-item id="footer">
-              <button ion-button [disabled]="!mobileForm.valid" id="footerbtn">Generate OTP</button>
+              <button ion-button [disabled]="!mobileForm.valid||invalid" id="footerbtn">Generate OTP</button>
           </ion-item>
       </form>     
   </ion-content>
   `
   })
-  export class ModalHotelDetails {
+  export class ModalHotelDetails implements OnInit {
   
        address:any = {   
           place: '',
@@ -231,8 +239,9 @@ export class ModalHotelCategoryPage {
       otp:any;
       mobileForm:any;
       addplace:any;
+      invalid:any;
+    //   debouncer:any;
       validation_Number:Array<{type:any,message:any}> 
-  
       constructor(public navCtrl: NavController,
                   public viewCtrl: ViewController,
                   public storage: Storage,
@@ -241,14 +250,15 @@ export class ModalHotelCategoryPage {
                   public navParams: NavParams,
                   public modalCtrl: ModalController,
                   http: Http,
-                  public loadingCtrl: LoadingController) {
+                  public loadingCtrl: LoadingController,
+                  ) {
   
                   this.hotelType = navParams.get('hotelType'); 
                   this.hotelCatid= navParams.get('hotelCatid')
                   this.http =http 
                   this.otp = Math.floor(100000 + Math.random() * 900000)
             this.mobileForm = this.form.group({
-                      "number":["", Validators.compose([Validators.maxLength(10),Validators.minLength(10),Validators.required])],
+                      "number":["", Validators.compose([Validators.required,Validators.minLength(10),Validators.maxLength(10)])],
                       "addplace":["", Validators.compose([Validators.required])],
                       "thisaddplace":["", Validators.compose([Validators.required])]
                   })
@@ -257,7 +267,43 @@ export class ModalHotelCategoryPage {
                         { type: 'minlength', message: 'Number must be at least 10 Numbers long.' },
                         { type: 'maxlength', message: 'Number cannot be more than 10 Numbers long.' },
                         { type: 'pattern', message: 'Sorry you can not use characters' }]
-      }  
+      } 
+    checkNumber(no:number) {
+   
+        // console.log(this.debouncer);
+        // clearTimeout(this.debouncer);
+          console.log('chkpt1');
+        return new Promise(resolve => {
+     
+        //   this.debouncer = setTimeout(() => {
+            this.storage.get("Hash").then((hash)=>{           
+              let headers = new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': hash
+              });
+              console.log('chkpt2');
+              let options = new RequestOptions({ headers: headers });
+            //   this.http.get("http://www.forehotels.com:3000/api/hotel_category",options)
+            //               .subscribe(data =>{
+            //               console.log(data);
+            //               });
+              this.http.get('http://www.forehotels.com:3000/api/number/'+no,options)
+              .map((data: any) => data.json())
+              .subscribe(
+                (data: any) => {
+                    console.log(data.Error);
+                    this.invalid=data.Error;
+                    console.log(this.mobileForm);
+                    console.log('chkpt3');
+                },
+                err => {console.log(err)
+                  console.log('chkpt4');} // error
+            );
+                });
+                // }, 1000);     
+     
+        });
+      }
   selectvalue(data){
       if(this.network.noConnection()){
          this.network.showNetworkAlert()
@@ -293,6 +339,9 @@ export class ModalHotelCategoryPage {
  ngOnInit() {  
           this.initMap();
           this.initPlacedetails();
+          this.checkNumber(this.mobileForm);
+          console.log(this.mobileForm);
+          this.invalid=false;
       }
   
  showModal() {
