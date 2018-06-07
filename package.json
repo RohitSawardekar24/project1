@@ -46,6 +46,7 @@
     "call-number": "^1.0.1",
     "cordova-android": "7.0.0",
     "cordova-browser": "5.0.3",
+    "cordova-ios": "4.5.4",
     "cordova-plugin-app-version": "^0.1.9",
     "cordova-plugin-contacts": "^3.0.1",
     "cordova-plugin-device": "^2.0.2",

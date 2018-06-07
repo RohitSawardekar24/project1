@@ -86,9 +86,9 @@ import { TabsPersonalAssistancePage } from '../pages/tabs-personal-assistance/ta
 import { PaidPersonalAssistancePage } from '../pages/paid-personal-assistance/paid-personal-assistance';
 import { ConnectivityServiceProvider } from '../providers/connectivity-service/connectivity-service';
 import { GoogleMapsProvider } from '../providers/google-maps/google-maps';
-
 @NgModule({
   declarations: [
+  
     MyApp,
     HelloIonicPage,
     AboutUsPage,
