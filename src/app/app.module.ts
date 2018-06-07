@@ -10,6 +10,7 @@ import { PrivacyPolicyPage } from '../pages/privacy-policy/privacy-policy';
 import { TermsConditionsPage } from '../pages/terms-conditions/terms-conditions';
 
 import { HelloIonicPage} from '../pages/hello-ionic/hello-ionic';
+import { ServicesPaPage } from '../pages/services-pa/services-pa';
 import { ListPage } from '../pages/list/list';
 import { SelectCityPage } from '../pages/select-city/select-city';
 import { SelectDesignationPage } from '../pages/select-designation/select-designation';
@@ -106,6 +107,7 @@ import { GoogleMapsProvider } from '../providers/google-maps/google-maps';
     PaymentOptionsPage,
     UpdateProfilePage,
     ProfilePicPage,
+    ServicesPaPage,
     ModalRegisterMapPage,
     EmployeeDetailPage,
     KeySkillsPage,
@@ -178,6 +180,7 @@ import { GoogleMapsProvider } from '../providers/google-maps/google-maps';
     UpdatePasswordPage,
     SelectDesignationPage,
     PersonalAssistancePage,
+    ServicesPaPage,    
     ScheduleInterviewPage,
     PageGmapAutocomplete,
     ModalAutocompleteItems,

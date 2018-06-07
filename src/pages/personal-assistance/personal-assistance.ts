@@ -66,7 +66,7 @@ export class PersonalAssistancePage {
                    this.list.push(response)
                    if(response.cart == 1){
                         this.hotel_id.push(response.hj_id);
-                        this.total += 4000;
+                        this.total += 4500;
                         this.value++;
                         response.cart--;
                       }
@@ -95,7 +95,7 @@ export class PersonalAssistancePage {
             this.http.delete("http://www.forehotels.com:3000/api/personal_assistance/"+user_id+"/"+hotel_id, options)
                   .subscribe(data =>{
                     if(this.total > 0){             
-                    this.total = this.total - 4000
+                    this.total = this.total - 4500
                     this.value--
                   }
                   let alert = this.alertCtrl.create({
@@ -179,7 +179,7 @@ export class PersonalAssistancePage {
       }
 
     updateTotal(item){
-      this.total = item * 4000;
+      this.total = item * 4500;
     }
     personalAssistance(){
       if(this.network.noConnection()){
@@ -233,7 +233,7 @@ export class PersonalAssistancePage {
                    this.list.push(response)
                    if(response.cart == 1){
                         this.hotel_id.push(response.hj_id);
-                        this.total += 4000;
+                        this.total += 4500;
                         this.value++
                        
                       }
