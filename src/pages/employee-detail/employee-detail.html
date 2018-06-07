@@ -63,7 +63,7 @@ padding: 2%;
       <img *ngIf="this.social_pic == true" src="{{item.profile_pic}}" onError="this.src='https://www.forehotels.com/public/assets/img/male.png';" class="face"/>
       <br><p class="person">{{item.name}}<span class="work">{{item.designation}}</span></p>
     </div>
-      <button ion-fab mini [ngStyle]="{'background-color': color }" (click)="shortlist()"><ion-icon name="ios-bookmark-outline"></ion-icon></button>
+      <!--<button ion-fab mini [ngStyle]="{'background-color': color }" (click)="shortlist()"><ion-icon name="ios-bookmark-outline"></ion-icon></button>-->
   </div>
 
   <ion-card class="detailcard">
@@ -170,6 +170,12 @@ padding: 2%;
               <p>{{item.catering}}</p>
             </div>
           </ion-row>
+
+          
+ <div align="center">
+    <button ion-button [ngStyle]="{'background-color': color }" (click)="shortlist()">Schedule Interview</button>
+    </div>  
+
 
       </ion-list>
 
