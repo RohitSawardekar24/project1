@@ -34,7 +34,7 @@ export class PersonalAssistancePage {
               public storage: Storage,
               public toast: Toast) {
               this.http = http;
-              this.loadData1();
+              this.loadData();
 
               
         }
@@ -201,48 +201,5 @@ export class PersonalAssistancePage {
         }
       }
   }
-  loadData1(){
-    if(this.network.noConnection()){
-       this.network.showNetworkAlert()
-      }else{ 
-        
-        this.total = 0
-        this.list = [];
-          this.storage.get("id").then((id)=>{
-          this.storage.get("Hash").then((value)=>{
-          this.platform.ready().then(() => {
-            
-                this.ga.trackEvent("Personal Assistance", "Opened", "New Session Started", id, true)
-                this.ga.setAllowIDFACollection(true)
-                this.ga.setUserId(id)
-                this.ga.trackView("Personal Assistance")
-          })
-          let headers = new Headers({
-          'Content-Type': 'application/json',
-          'Authorization': value
-        });
-        let options = new RequestOptions({ headers: headers });
-          this.http.get("http://www.forehotels.com:3000/api/job_posted/"+id, options)
-                .subscribe(data =>{
-                  
-                this.items=JSON.parse(data._body).Jobs; //Bind data to items object
-                console.log(id);
-                for(let response of this.items){
-                  console.log(response);
-                  if(response.paid != 1){                   
-                   this.list.push(response)
-                   if(response.cart == 1){
-                        this.hotel_id.push(response.hj_id);
-                        this.total += 4500;
-                        this.value++
-                       
-                      }
-                  }
-                }         
-              },error=>{
-              });
-            })
-        })
-    }
-} 
+  
 }

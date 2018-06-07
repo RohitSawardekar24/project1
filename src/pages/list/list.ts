@@ -92,6 +92,12 @@ export class ListPage implements OnInit{
   this.upgrade.load();
 }
 
+ionViewWillEnter()
+{
+  this.upgrade.load();
+
+}
+
 menuOpen(){
   this.menu.open()
 }
@@ -117,9 +123,9 @@ menuOpen(){
         case ScheduleInterviewPage: if(this.getUserStatus())
                                         this.upgrade.upgradepackage();
                                     else if(this.upgrade.interviewAlert())
-                                          this.upgrade.s_alert();
+                                        this.upgrade.s_alert();
                                     else  
-                                    this.upgrade.si_alert();
+                                        this.upgrade.si_alert();
                                     break;
        case PostJobPage:
        case CateringRequirementPage:if(this.getUserStatus())

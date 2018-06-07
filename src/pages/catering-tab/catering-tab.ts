@@ -46,7 +46,7 @@ resitems:any;
                 'Authorization': this.hash
               });
               let options = new RequestOptions({ headers: headers });
-              this.http.get("http:/www.forehotels.com:3000/api/catering_users_list", options)
+              this.http.get("http://www.forehotels.com:3000/api/catering_users_list", options)
                     .subscribe(data =>{
                       this.items= []
                       this.resitems = JSON.parse(data._body).Jobs;
