@@ -318,6 +318,7 @@ placedetails: any;
         }else{
           let prompt = this.alertCtrl.create({
           title: 'Hotel Description',
+          cssClass: 'but',
           inputs: [
             {
               value: this.items["0"].hotel_desc
