@@ -60,12 +60,12 @@
                         <ion-icon (click)=menuOpen() class="searchmenuicon" ios="ios-menu" md="md-menu"></ion-icon>
                       </div>
                       <ion-searchbar style="padding: 0px;"
+                        placeholder="Search Employees"
                         [(ngModel)]="myInput"
                         [showCancelButton]="shouldShowCancel"
                         (ionInput)="onInput($event)"
                         (ionCancel)="onCancel($event)"
                         (click)="SearchEmployee()">
-                        
                       </ion-searchbar>
                       </div>
                     </div>
