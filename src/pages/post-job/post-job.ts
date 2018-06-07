@@ -1213,7 +1213,7 @@ postJob(){
                         });
                       
                         alert.present();
-                        this.navCtrl.push(ListPage);
+                        this.navCtrl.setRoot(ListPage);
                 }); 
                        let emp_body = JSON.stringify({
                   //empty
