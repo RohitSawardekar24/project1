@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { Platform, NavController, NavParams, AlertController, MenuController, ModalController, ViewController, LoadingController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, FormBuilder,ValidatorFn,AbstractControl, FormControl } from '@angular/forms';
 import { LoginPage } from '../login/login';
 import { ModalRegisterMapPage } from '../modal-register-map/modal-register-map';
 import { Storage } from '@ionic/storage';
 import { NetworkServiceProvider } from '../../providers/network-service/network-service';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
+
 declare var google :any
 var self = this;
 let loader;
@@ -144,6 +145,9 @@ export class ModalHotelCategoryPage {
 /*****************ModalHotelCategoryPage*****************/
 
 /*****************ModalHotelDetails******************/
+//<div *ngIf = "validDigits()">
+//<p style="text-align: center;color:#f53d3d" color="danger" *ngIf="!validMobile()">Mobile Number already exists!</p>
+//</div>
 @Component({
     template: `
     <style>
@@ -186,13 +190,13 @@ export class ModalHotelCategoryPage {
           <ion-list>        
               <ion-item>
                   <ion-label color="primary" stacked>Mobile Number</ion-label>
-                  <ion-input placeholder="Mobile Number" [formControl]="mobileForm.controls['number']" type="number" required></ion-input>
+                  <ion-input placeholder="Mobile Number" [(ngModel)]="number" [formControl]="mobileForm.controls['number']" type="number" required></ion-input>
               </ion-item>
-              <div *ngFor="let validation of validation_Number" class="error-box">
+                <div *ngFor="let validation of validation_Number" class="error-box">
                   <div style="text-align: center;color:#f53d3d" color="danger" *ngIf="mobileForm.controls['number'].hasError(validation.type) && mobileForm.controls['number'].touched">
-                  {{validation.message}}
+                    {{validation.message}}
                   </div>
-              </div>  
+                </div>  
           </ion-list>        
           <ion-item id="footer">
               <button ion-button [disabled]="!mobileForm.valid" id="footerbtn">Generate OTP</button>
@@ -232,7 +236,7 @@ export class ModalHotelCategoryPage {
       mobileForm:any;
       addplace:any;
       validation_Number:Array<{type:any,message:any}> 
-  
+      public number: String;
       constructor(public navCtrl: NavController,
                   public viewCtrl: ViewController,
                   public storage: Storage,
@@ -242,13 +246,19 @@ export class ModalHotelCategoryPage {
                   public modalCtrl: ModalController,
                   http: Http,
                   public loadingCtrl: LoadingController) {
-  
+                    this.http =http 
                   this.hotelType = navParams.get('hotelType'); 
                   this.hotelCatid= navParams.get('hotelCatid')
-                  this.http =http 
+                  
                   this.otp = Math.floor(100000 + Math.random() * 900000)
             this.mobileForm = this.form.group({
-                      "number":["", Validators.compose([Validators.maxLength(10),Validators.minLength(10),Validators.required])],
+                      "number":["", 
+                        Validators.compose([
+                          Validators.maxLength(10),
+                          Validators.minLength(10),
+                          Validators.required
+                        ]),
+                    ],
                       "addplace":["", Validators.compose([Validators.required])],
                       "thisaddplace":["", Validators.compose([Validators.required])]
                   })
@@ -258,7 +268,7 @@ export class ModalHotelCategoryPage {
                         { type: 'maxlength', message: 'Number cannot be more than 10 Numbers long.' },
                         { type: 'pattern', message: 'Sorry you can not use characters' }]
       }  
-  selectvalue(data){
+    selectvalue(data){
       if(this.network.noConnection()){
          this.network.showNetworkAlert()
         }else{            
