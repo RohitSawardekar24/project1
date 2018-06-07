@@ -145,6 +145,9 @@ export class ModalHotelCategoryPage {
 /*****************ModalHotelCategoryPage*****************/
 
 /*****************ModalHotelDetails******************/
+//<div *ngIf = "validDigits()">
+//<p style="text-align: center;color:#f53d3d" color="danger" *ngIf="!validMobile()">Mobile Number already exists!</p>
+//</div>
 @Component({
     template: `
     <style>
@@ -196,11 +199,11 @@ export class ModalHotelCategoryPage {
                   <ion-label *ngIf="invalid==true" style="text-align: center;color:#f53d3d">An account with this number exists already</ion-label>
                  
               </ion-item>
-              <div *ngFor="let validation of validation_Number" class="error-box">
+                <div *ngFor="let validation of validation_Number" class="error-box">
                   <div style="text-align: center;color:#f53d3d" color="danger" *ngIf="mobileForm.controls['number'].hasError(validation.type) && mobileForm.controls['number'].touched">
-                  {{validation.message}}
+                    {{validation.message}}
                   </div>
-              </div>  
+                </div>  
           </ion-list>        
           <ion-item id="footer">
               <button ion-button [disabled]="!mobileForm.valid||invalid" id="footerbtn">Generate OTP</button>
@@ -250,15 +253,20 @@ export class ModalHotelCategoryPage {
                   public navParams: NavParams,
                   public modalCtrl: ModalController,
                   http: Http,
-                  public loadingCtrl: LoadingController,
-                  ) {
-  
+                  public loadingCtrl: LoadingController) {
+                    this.http =http 
                   this.hotelType = navParams.get('hotelType'); 
                   this.hotelCatid= navParams.get('hotelCatid')
-                  this.http =http 
+                  
                   this.otp = Math.floor(100000 + Math.random() * 900000)
             this.mobileForm = this.form.group({
-                      "number":["", Validators.compose([Validators.required,Validators.minLength(10),Validators.maxLength(10)])],
+                      "number":["", 
+                        Validators.compose([
+                          Validators.maxLength(10),
+                          Validators.minLength(10),
+                          Validators.required
+                        ]),
+                    ],
                       "addplace":["", Validators.compose([Validators.required])],
                       "thisaddplace":["", Validators.compose([Validators.required])]
                   })
