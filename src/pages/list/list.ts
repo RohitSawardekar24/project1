@@ -44,7 +44,7 @@ export class ListPage implements OnInit{
   }
   ionViewDidLoad()
   {
-    this.menuToggle();
+    // this.menuToggle();
   }
 
   constructor(public app: App,
