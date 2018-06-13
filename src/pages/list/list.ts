@@ -42,6 +42,10 @@ export class ListPage implements OnInit{
   {
     this.upgrade.load();
   }
+  ionViewDidLoad()
+  {
+    this.menuToggle();
+  }
 
   constructor(public app: App,
               public toast: Toast,
@@ -92,8 +96,8 @@ export class ListPage implements OnInit{
   this.upgrade.load();
 }
 
-menuOpen(){
-  this.menu.open()
+menuToggle(){
+  this.menu.open();
 }
   openPage(p){
     let status=this.getUserStatus();      
