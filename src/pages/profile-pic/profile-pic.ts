@@ -233,10 +233,11 @@ ionViewDidEnter(){
       this.c+=1;
       this.storage.set("counter",this.c).then(()=>
       {
-        let a=this.alertCtrl.create({
-        title:'Storage updated to'+this.c,
-        buttons:['OK']});
-        a.present();
+        // let a=this.alertCtrl.create({
+        // title:'Storage updated to'+this.c,
+        // buttons:['OK']});
+        // a.present();
+        this.events.publish('user:profilepic','doone');
         this.navCtrl.push(ListPage);
       });
     });

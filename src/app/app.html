@@ -2,7 +2,7 @@
 <ion-menu [content]="content">
 <ion-content>
   <div (click)="moveToList()" padding-left *ngFor="let item of items" style="border-bottom:2px solid">
-    <img src="{{this.profilepic}}" style="max-width:50px !important;margin-top:6%;border-radius:50px;max-height:300px">
+    <img [src]="profilepic" style="max-width:50px !important;margin-top:6%;border-radius:50px;max-height:300px">
     <h2 style="margin-top:-6.2rem;margin-left:8rem">Welcome {{this.hotelname}}</h2>
     <h3 style="margin-top:-0.3rem;margin-left:8rem">{{this.city_name}}</h3>
   </div>

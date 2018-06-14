@@ -87,6 +87,32 @@ export class MyApp {
     this.http = http
   }
   initializeApp() {
+    this.events.subscribe('user:updatename',(data)=>{
+      this.hotelname=data;
+    });
+    this.events.subscribe('user:profilepic',(data)=>{
+      this.storage.get("id").then((id) => {
+        this.storage.get("Hash").then((value) => {
+           this.platform.ready().then(() => {
+             this.ga.trackEvent("Dashboard", "Opened", "New Session Started", id, true)
+             this.ga.setAllowIDFACollection(true)
+             this.ga.setUserId(id)
+             this.ga.trackView("Dashboard")
+           });
+           let headers = new Headers({
+             'Content-Type': 'application/json',
+             'Authorization': value
+           });
+        let options = new RequestOptions({ headers: headers });
+   
+         this.http.get("http://www.forehotels.com:3000/api/package/"+id, options)
+            .subscribe(data =>{
+             this.items=JSON.parse(data._body).Jobs; //Bind data to items object
+              this.profilepic=this.items["0"].profile_pic;
+            });
+          });  
+        });  
+    });
     this.loggedIn = false
     this.social_pic = false
 this.colors = ['#1396e2','#f2a900','#69a984','#073855','#00BCD4','#5c6bc0','#ff9800','#26a69a','#ce93d8','#ec407a','#073855'];    
@@ -236,6 +262,7 @@ this.icons = ['search','ios-contacts','md-calendar','md-open','ios-create','md-c
           this.ga.trackTiming("Android", total_time, "App Opening Time", "app_open")          
       
     });
+    
   }
 getDetails(id){
      this.storage.get("Hash").then((value) => {

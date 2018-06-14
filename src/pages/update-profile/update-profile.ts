@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { Platform, NavController, NavParams, AlertController, ViewController, ModalController,LoadingController } from 'ionic-angular';
+import { Platform, NavController, NavParams, AlertController, ViewController, ModalController,LoadingController, Events } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { FormBuilder, Validators } from '@angular/forms'
 import { Storage } from '@ionic/storage';
@@ -44,7 +44,8 @@ placedetails: any;
               public ga: GoogleAnalytics,
               public platform: Platform,
               private storage: Storage,
-              private alertCtrl: AlertController,) {
+              private alertCtrl: AlertController,
+              public events:Events ) {
               this.http = http;
               this.social_pic = false;
               this.loaddata()   ;
@@ -132,6 +133,7 @@ placedetails: any;
             handler: name => {
             this.items["0"].name = name["0"];
               this.callAPI("name", name["0"])
+              this.events.publish('user:updatename',name["0"]);
             }
           }
         ]
