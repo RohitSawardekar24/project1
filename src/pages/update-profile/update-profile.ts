@@ -75,7 +75,8 @@ placedetails: any;
                     this.items=JSON.parse(data._body).Jobs; //Bind data to items object
                      if(this.items[0].profile_pic!= ''){
                       var Str = 'https://www.forehotels.com/public/hotel/avatar/'
-                      this.profilepic = Str+this.items[0].profile_pic
+                      this.profilepic = Str+this.items["0"].profile_pic
+                      console.log('1234');
                      }else{
                       this.profilepic = this.picpath;
                     }
@@ -89,7 +90,14 @@ placedetails: any;
 
   ngOnInit() {
       this.initMap();
-      this.initPlacedetails()
+      this.initPlacedetails();
+      this.loaddata();
+  }
+  ionViewDidLoad(){
+    this.loaddata();
+  }
+  ionViewWillEnter(){
+    this.loaddata();
   }
   
   updateProfilePic(){

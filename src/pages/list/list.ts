@@ -1,5 +1,5 @@
 import { Component,ViewChild, OnInit } from '@angular/core';
-import { Slides,Platform, App, ToastController } from 'ionic-angular';
+import { Slides,Platform, App, ToastController, AlertController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { NavController, NavParams, MenuController } from 'ionic-angular'; 
 import { HomePage } from '../home/home'; 
@@ -45,6 +45,32 @@ export class ListPage implements OnInit{
   ionViewDidLoad()
   {
     // this.menuToggle();
+    this.storage.get("id").then((id) => {
+      this.storage.get("Hash").then((value) => {
+         this.platform.ready().then(() => {
+           this.ga.trackEvent("Dashboard", "Opened", "New Session Started", id, true)
+           this.ga.setAllowIDFACollection(true)
+           this.ga.setUserId(id)
+           this.ga.trackView("Dashboard")
+         });
+         let headers = new Headers({
+           'Content-Type': 'application/json',
+           'Authorization': value
+         });
+      let options = new RequestOptions({ headers: headers });
+ 
+       this.http.get("http://www.forehotels.com:3000/api/package/"+id, options)
+          .subscribe(data =>{
+           this.items=JSON.parse(data._body).Jobs; //Bind data to items object
+           let alert=this.alertCtrl.create({
+             title:JSON.stringify(this.items),
+             buttons:['OK']
+           });
+           alert.present();
+          });
+        });  
+      });  
+
   }
 
   constructor(public app: App,
@@ -58,7 +84,8 @@ export class ListPage implements OnInit{
               public navParams: NavParams,
               public network: NetworkServiceProvider, 
               public navCtrl: NavController,
-              public menu: MenuController) {
+              public menu: MenuController,
+              private alertCtrl:AlertController) {
      this.images = ['assets/img/personal_assistance.png','assets/img/schedule_interview.png','assets/img/update_profile.png','assets/img/post_job.png','assets/img/catering_requirement.png','assets/img/search_supplier.png','assets/img/post_supplier_requirement.png','assets/img/view_posted_job.png','assets/img/history_report.png']
      this.rows = Array.from(Array(Math.ceil(9/3)).keys());
      this.http = http

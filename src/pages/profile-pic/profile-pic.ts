@@ -8,6 +8,7 @@ import { NgZone } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { NetworkServiceProvider } from '../../providers/network-service/network-service';
+import { ListPage } from '../list/list';
 @Component({
   selector: 'page-profile-pic',
   templateUrl: 'profile-pic.html'
@@ -26,6 +27,8 @@ ionViewDidEnter(){
   hash:any;
   social_pic:any;
   drive_name:any;
+  image:any;
+  c:number;
   constructor(private loadingCtrl: LoadingController, 
               http: Http, 
               public network: NetworkServiceProvider,
@@ -78,10 +81,13 @@ ionViewDidEnter(){
             this.http.get(x, options)
             .subscribe(data =>{
              this.items=JSON.parse(data._body).Jobs;
+             console.log('profilepic'+this.items["0"].profile_pic);
              let img = this.items[0].profile_pic.split("/")
              this.drive_name = this.items["0"].email.split('@')
+             this.image='https://www.forehotels.com/public/hotel/avatar/'+this.items["0"].profile_pic;
              if(img.length > 1){
                this.social_pic = true;
+
              }
              loader.dismiss();
             },error=>{
@@ -121,7 +127,7 @@ ionViewDidEnter(){
       let file = fileArray[len - 1];
       var filebits = file.split(".");
       var f = filebits[1];
-
+      //file=filebits[0]+c+filebits[1];
       if((f != "jpg") && (f != "png") && (f != "jpeg")){
         let alert = this.alertCtrl.create({
               title: "Invalid File Format",
@@ -131,6 +137,13 @@ ionViewDidEnter(){
             alert.present();
       }
       else{
+        this.storage.get("counter").then((count)=>{this.c=count;
+        file=filebits[0]+this.c+'.'+filebits[1];
+        let alert=this.alertCtrl.create({
+          title:file,
+          buttons:['OK']
+        })
+        alert.present();
         let fileTransfer: FileTransferObject = this.filetransfer.create();
       this.options = {
         fileKey: 'img',
@@ -144,6 +157,7 @@ ionViewDidEnter(){
           id: this.id
         }
       }
+      
       
        let onProgress =  (progressEvent: ProgressEvent) : void => {
         this.ngZone.run(() => {
@@ -163,8 +177,31 @@ ionViewDidEnter(){
           content: "Fetching your Account Details. Kindly wait...",
         });
         loader.present();
+        let headers = new Headers({
+          'Content-Type': 'application/json',
+          'Authorization': this.hash
+        });
+        let options = new RequestOptions({ headers: headers });
         let url="http://www.forehotels.com:3000/api/package/"+this.id;
-        this.getDetails(url, loader);
+        this.http.get(url, options)
+            .subscribe(data =>{
+             this.items=JSON.parse(data._body).Jobs;
+             let img = this.items[0].profile_pic.split("/")
+             this.drive_name = this.items["0"].email.split('@')
+             if(img.length > 1){
+              this.image='https://www.forehotels.com/public/hotel/avatar/'+this.items["0"].profile_pic
+               this.social_pic = true;
+               let alert=this.alertCtrl.create({
+                title:'Profile pic uploaded',
+                buttons:['OK']
+              })
+              alert.present();
+             }
+             loader.dismiss();
+            },error=>{
+                console.log(error);
+            } 
+            );
       }, (err) => {
         let alert = this.alertCtrl.create({
               title: err.text(),
@@ -173,6 +210,10 @@ ionViewDidEnter(){
             });
             alert.present();
       });
+    });
+    this.c++;
+      this.storage.set("counter",this.c);
+      this.navCtrl.push(ListPage);
       }
     }
   }
