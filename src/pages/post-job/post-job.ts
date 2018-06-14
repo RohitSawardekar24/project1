@@ -1105,7 +1105,7 @@ updateCheckedOptions(e: any, data) {
 <ion-content> 
   <ion-item>
     <ion-label color="primary" stacked style="text-align:center;font-size:20px;font-weight:bold">Job Description</ion-label>
-    <ion-textarea style="font-size:14px" type="text" value="{{this.jd}}"></ion-textarea>
+    <ion-textarea style="font-size:14px;overflow: auto;" type="text" value="{{this.jd}}"></ion-textarea>
   </ion-item>
   <br>
   <ion-list style="text-align: center;">
