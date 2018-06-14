@@ -117,7 +117,8 @@ export class PageGmapAutocomplete implements OnInit {
                     });
                     let mssg=JSON.stringify({
                         number:this.employeecontact,
-                        text:'You have been scheduled for Interview at '+this.items[0].name
+                        text:'You have been scheduled for Interview at '+this.items[0].name+'.\n Location: '+this.pata+'.\n Interview date and time: '+this.myDate
+
                     });
                     this.http.post('http://forehotels.com:3000/api/send_sms',mssg,options).subscribe(
                         data=>console.log('success'),
