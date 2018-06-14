@@ -1213,7 +1213,7 @@ postJob(){
                         });
                       
                         alert.present();
-                        this.navCtrl.push(ListPage);
+                        
                 }); 
                        let emp_body = JSON.stringify({
                   //empty
@@ -1239,12 +1239,14 @@ postJob(){
                 }    
               });             
             });
+          
         });err => {let alert = this.alertCtrl.create({
                         title: 'Something went wrong!',
                         buttons: ['Retry']
                         });
                         alert.present();
                       }
+                      this.navCtrl.setRoot(ListPage);
         }
     }
 }
