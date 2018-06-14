@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { App, Platform,NavController, NavParams, AlertController, ModalController, ViewController, LoadingController,PopoverController } from 'ionic-angular';
+import { App, Platform,NavController, NavParams, AlertController, ModalController, ViewController, LoadingController,PopoverController, MenuController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { City } from '../../providers/city/city';
 import { ListPage } from '../list/list';
 import 'rxjs/add/operator/debounceTime';
@@ -107,14 +107,12 @@ export class PostJobPage {
 /***************Select City***************/
 @Component({
   template: `
+ 
   <ion-header>
-  <ion-navbar color="primary">
-    <ion-title>
-      Select City
-    </ion-title>
+    <ion-navbar>
+    <ion-title>Select City</ion-title>
   </ion-navbar>
 </ion-header>
- 
 <ion-content>
  
     <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()"></ion-searchbar>
@@ -189,79 +187,56 @@ export class ModalPage {
 /****************No. of Heads/Minimum Exp./Maximum Exp.**************/
 @Component({
   template: `  
+  <ion-header>
+    <ion-navbar>
+    <ion-title>Other Details</ion-title>
+  </ion-navbar>
+</ion-header>
   <ion-content> 
-  
- <ion-list> 
-    <ion-card style="box-shadow: 0 4px 10px rgba(19, 150, 226, 0.6);">
-          <ion-card-header>  
-            <ion-list style="margin: 0px 0 0px;"  >
-                <ion-item>
-                  <ion-icon name="ios-man-outline" item-start></ion-icon>
-                  <ion-label style="font-size: 21px;font-weight: 800;letter-spacing: 0.5px;">Number of Heads</ion-label>
-              </ion-item>
-            </ion-list>
-          </ion-card-header>     
-       <ion-card-content>
-            <ion-list style="margin-top: -16px;">                                    
-                  <button ion-button style="color: black;text-transform: none;" color="light" (click)="presentPopoverNoOfHeadds($event)" clear icon-right>
-                    Select Your Number of heads &nbsp;&nbsp;{{this.no_of_heads}} 
-                  <ion-icon style="color: black;" name="ios-arrow-down-outline"></ion-icon>          
-                </button>
-            </ion-list>
-          </ion-card-content>
-    </ion-card>
+ <form [formGroup]="otherDetails" (ngSubmit)="submit()">
+        <ion-list>
+            <ion-item>
+            <ion-label>Select no of heads</ion-label>
+            <ion-select formControlName="heads" required >
+            <ion-option value="None" selected disabled></ion-option>
+                <ion-option *ngFor="let val of head" [value]="val">
+                  {{val}}
+                </ion-option>
+            </ion-select>
+            </ion-item>
+            <ion-item>
+            <ion-label>Min Experience</ion-label>
+            <ion-select formControlName="minExp" required >
+            <ion-option value="None" selected disabled></ion-option>
+                <ion-option *ngFor="let val of exp" [value]="val">
+                  {{val}}
+                </ion-option>
+            </ion-select>
+            </ion-item>
+            <ion-item>
+            <ion-label>Max Experience</ion-label>
+            <ion-select formControlName="maxExp" required >
+            <ion-option value="None" selected disabled></ion-option>
+                <ion-option *ngFor="let val of exp" [value]="val">
+                  {{val}}
+                </ion-option>
+            </ion-select>
+            </ion-item>
+            <ion-item>
+            <ion-label>Salary</ion-label>
+            <ion-select formControlName="salary"  required>
+            <ion-option value="None" selected disabled></ion-option>
+                <ion-option *ngFor="let val of Sal" [value]="val">
+                  {{val}}
+                </ion-option>
+            </ion-select>
+            </ion-item>
+        </ion-list>
+         <button ion-button  *ngIf="otherDetails.valid" round full type="submit" [disabled]="!otherDetails.valid">
+         Proceed             
+        </button> 
+  </form>
 
-    <ion-list style="margin: 0px 0 0px;">
-
-        <ion-card *ngIf="this.view == true" style="box-shadow: 0 4px 10px rgba(19, 150, 226, 0.6);">
-          <ion-card-header>  
-            <ion-list style="margin: 0px 0 0px;"  >
-                <ion-item>
-                  <ion-icon name="ios-briefcase-outline" item-start></ion-icon>
-                  <ion-label style="font-size: 21px;font-weight: 800;letter-spacing: 0.5px;">Experience</ion-label>
-              </ion-item>
-            </ion-list>
-          </ion-card-header>
-      <ion-card-content>
-        <ion-grid style="margin-top: -16px;">
-              <ion-row> 
-                  <ion-col style="display:flex">                     
-                      <button ion-button style="color: black;text-transform: none;" color="light" (click)="presentPopoverMinimum($event)" clear icon-right>
-                        Minimum &nbsp;&nbsp;{{this.minValue}}
-                      <ion-icon style="color: black;" name="ios-arrow-down-outline"></ion-icon>
-                    </button>
-                  </ion-col>
-                  <ion-col *ngIf="this.maximum == true">
-                        <button ion-button style="color: black;text-transform: none;" color="light" (click)="presentPopoverMaximum($event)" clear icon-right>
-                        Maximum &nbsp;&nbsp;{{this.maxValue}}
-                      <ion-icon style="color: black;" name="ios-arrow-down-outline"></ion-icon>          
-                    </button>                  
-                  </ion-col>
-              </ion-row>
-        </ion-grid>
-      </ion-card-content>
-    </ion-card>
-       <ion-card *ngIf="this.view2 == true" style="box-shadow: 0 4px 10px rgba(19, 150, 226, 0.6);">
-          <ion-card-header>  
-            <ion-list>
-                <ion-item>
-                  <ion-icon name="ios-cash-outline" item-start></ion-icon>
-                  <ion-label style="font-size: 21px;font-weight: 800;letter-spacing: 0.5px;">Salary</ion-label>
-              </ion-item>
-            </ion-list>
-          </ion-card-header>
-          <ion-card-content>
-            <ion-list style="margin-top: -16px;">                                    
-                  <button ion-button style="color: black;text-transform: none;" color="light" (click)="presentPopoverSalary($event)" clear icon-right>
-                    Select Your Salary Range &nbsp;&nbsp;{{this.selectedSalary}} 
-                  <ion-icon style="color: black;" name="ios-arrow-down-outline"></ion-icon>          
-                </button>
-            </ion-list>
-          </ion-card-content>
-        </ion-card>
-    </ion-list>
-   
-</ion-list>
 </ion-content>
 `
 })
@@ -277,7 +252,11 @@ export class ExperiencePage {
   designation: any;
   job_city: any;
   parent_id: any;
-
+  head:any[]=[];
+  otherDetails:FormGroup;
+  exp:any[]=[];
+  add:any;
+  Sal:any[]=[];
 constructor(public navCtrl: NavController,
             public navParams: NavParams, 
             public popoverCtrl: PopoverController, 
@@ -291,8 +270,36 @@ constructor(public navCtrl: NavController,
             this.designation = navParams.get('designation')
             this.parent_id = navParams.get('parent_id')
             this.job_city = navParams.get('job_city')
+            for(let i=0;i<=20;i++)
+            {
+                this.head.push(i);
+                this.exp.push(i);
+            }
+            for(let i=6000; i<=100000; i+=2000){     
+              this.add= i+2000;
+              this.Sal.push(i+' - '+this.add)        
+          }  
+            console.log(this.head);
+            this.otherDetails=new FormGroup({
+              heads:new FormControl(' ',Validators.required),
+              minExp:new FormControl(' ',Validators.required),
+              maxExp:new FormControl(' ',Validators.required),
+              salary:new FormControl(' ',Validators.required)
+            })
 }
-
+submit()
+{
+  console.log(this.otherDetails);
+  this.navCtrl.push(EducationAndRolePage,{
+    salary_range:this.otherDetails.value.salary,
+    min:this.otherDetails.value.minExp,
+    max:this.otherDetails.value.maxExp,
+    no_of_heads:this.otherDetails.value.heads,
+    designation:this.designation,
+    parent_id:this.parent_id,
+    job_city:this.job_city
+  })
+}
 
 presentPopoverNoOfHeadds(myEvent){
     let popover = this.popoverCtrl.create(PopoverPageNoOfHeadds);
@@ -356,6 +363,11 @@ presentPopoverNoOfHeadds(myEvent){
 /****************Number of Heads End**************/
 @Component({
   template: `  
+  <ion-header>
+    <ion-navbar>
+    <ion-title>Select Post</ion-title>
+  </ion-navbar>
+</ion-header>
     <ion-list>
         <ion-list-header>Select Number Of Heads</ion-list-header>      
         <button ion-item *ngFor="let i of NoHeads" (click)="updateNumber(i)">{{i}}</button>      
@@ -379,6 +391,11 @@ export class PopoverPageNoOfHeadds {
 /****************Minimum Experience**************/
 @Component({
   template: `
+  <ion-header>
+    <ion-navbar>
+    <ion-title>Select Post</ion-title>
+  </ion-navbar>
+</ion-header>
     <ion-list>
       <ion-list-header>Select Minimum Experience</ion-list-header>
       <button ion-item *ngFor="let i of min_exp" (click)="close(i)">{{i}}</button> 
@@ -402,6 +419,11 @@ export class PopoverPageMinimum {
 /****************Maximum Experience**************/
 @Component({
   template: `
+  <ion-header>
+    <ion-navbar>
+    <ion-title>Select Post</ion-title>
+  </ion-navbar>
+</ion-header>
     <ion-list>
       <ion-list-header>Select Maximum Experience</ion-list-header>
       <button ion-item *ngFor="let i of max_exp" (click)="close(i)">{{i}}</button>
@@ -427,6 +449,11 @@ export class PopoverPageMaximum {
 /****************Salary Range**************/
 @Component({
   template: `
+  <ion-header>
+    <ion-navbar>
+    <ion-title>Select Post</ion-title>
+  </ion-navbar>
+</ion-header>
     <ion-list>      
           <ion-list-header>Select Salary Range</ion-list-header>
       <button ion-item *ngFor="let item of Sal" (click)="close(item)">{{item}}</button>      
@@ -481,7 +508,12 @@ export class PopoverPageSalary {
 
 	/****************Education**************/
 	@Component({
-	  template: `
+    template: `
+    <ion-header>
+    <ion-navbar>
+    <ion-title>Select Education</ion-title>
+  </ion-navbar>
+</ion-header>
 	  <ion-content>
 	  <ion-list radio-group>
 	  <ion-list-header style="font-weight:bold">
@@ -568,6 +600,11 @@ export class PopoverPageSalary {
 /****************Role**************/
 @Component({
   template: `
+  <ion-header>
+    <ion-navbar>
+    <ion-title>Select Role</ion-title>
+  </ion-navbar>
+</ion-header>
 <ion-content> 
 
     <ion-list radio-group>
@@ -753,6 +790,11 @@ moveNext(){
           /*----------------Key skills page-------------------*/
 @Component({
   template: `
+  <ion-header>
+    <ion-navbar>
+    <ion-title>Key Skills</ion-title>
+  </ion-navbar>
+</ion-header>
 <ion-content> 
   <ion-list radio-group>
 
@@ -950,6 +992,11 @@ moveNext(){
                       /* --------Tips page---------------*/
 @Component({
   template: `
+  <ion-header>
+    <ion-navbar>
+    <ion-title>Select Other</ion-title>
+  </ion-navbar>
+</ion-header>
 <ion-content> 
   <ion-list radio-group>
 
@@ -1102,6 +1149,11 @@ updateCheckedOptions(e: any, data) {
     height: 20em;
 }
   </style>
+  <ion-header>
+    <ion-navbar>
+    <ion-title>Select Post</ion-title>
+  </ion-navbar>
+</ion-header>
 <ion-content> 
   <ion-item>
     <ion-label color="primary" stacked style="text-align:center;font-size:20px;font-weight:bold">Job Description</ion-label>
@@ -1146,7 +1198,8 @@ export class JDPage{
                public viewCtrl: ViewController, 
                public loadingCtrl: LoadingController,
                public storage: Storage,
-               public alertCtrl: AlertController) {
+               public alertCtrl: AlertController,
+               public menu:MenuController) {
             this.http = http
 
               this.salary_range = navParams.get('salary_range')
@@ -1246,7 +1299,7 @@ postJob(){
                         });
                         alert.present();
                       }
-                      this.navCtrl.setRoot(ListPage);
+                      this.navCtrl.push(ListPage);
         }
     }
 }
