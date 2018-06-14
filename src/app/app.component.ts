@@ -56,6 +56,7 @@ export class MyApp {
   hotelname:any;
   profilepic:any;
   counter:any;
+  no:number;
   app_Id = 'a8874a29-22e2-486f-b4b3-b3d09e8167a5'
   picpath='https://www.forehotels.com/public/assets/img/download1.jpg'
   pages: Array<{title: string, component: any, icon:any, color:any}>;
@@ -104,8 +105,8 @@ this.icons = ['search','ios-contacts','md-calendar','md-open','ios-create','md-c
       { title: 'Packages', component: PackagePage, icon: this.icons[10] ,color: this.colors[10]},
       { title:'About Us', component: AboutUsPage, icon : this.icons[11], color: this.colors[11]},
       ];
-    
-    this.storage.set("counter",0);
+    this.no=0;
+    this.storage.set("counter",this.no);
     this.storage.set("Hash",this.key);
     this.storage.get('loggedIn').then((id) => {
        if(id == true){

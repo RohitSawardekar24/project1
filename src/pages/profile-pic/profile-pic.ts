@@ -83,7 +83,8 @@ ionViewDidEnter(){
              this.items=JSON.parse(data._body).Jobs;
              console.log('profilepic'+this.items["0"].profile_pic);
              let img = this.items[0].profile_pic.split("/")
-             this.drive_name = this.items["0"].email.split('@')
+             this.drive_name = this.items["0"].email.split('@');
+            this.drive_name=this.drive_name["0"];
              this.image='https://www.forehotels.com/public/hotel/avatar/'+this.items["0"].profile_pic;
              if(img.length > 1){
                this.social_pic = true;
@@ -98,11 +99,21 @@ ionViewDidEnter(){
     this.filechooser.open()
       .then(
         uri => {
+          // let alert=this.alertCtrl.create({
+          //   title:'uri-->'+uri,
+          //   buttons:['OK']
+          // });
+          // alert.present();
           let DrivePicpath = uri.split("/") 
           if(DrivePicpath[0] == 'content:'){
               let fileTransfer: FileTransferObject = this.filetransfer.create();
-                      fileTransfer.download(uri, "file:///storage/emulated/0/Download/" +this.drive_name[0]+'.jpg').then((entry) => {                        
+                      fileTransfer.download(uri, "file:///storage/emulated/0/Download/" +this.drive_name+'.jpg').then((entry) => {                        
                         let tourl = entry.toURL()
+                        let alt=this.alertCtrl.create({
+                          title:'tourl ---->'+tourl,
+                          buttons:['OK']
+                        });
+                        alt.present();
                         this.profilePicUpload(tourl)
                       }, (error) => {
                         // handle error
@@ -128,6 +139,7 @@ ionViewDidEnter(){
       var filebits = file.split(".");
       var f = filebits[1];
       //file=filebits[0]+c+filebits[1];
+    
       if((f != "jpg") && (f != "png") && (f != "jpeg")){
         let alert = this.alertCtrl.create({
               title: "Invalid File Format",
@@ -138,16 +150,23 @@ ionViewDidEnter(){
       }
       else{
         this.storage.get("counter").then((count)=>{this.c=count;
-        file=filebits[0]+this.c+'.'+filebits[1];
+        // file=filebits[0]+this.c+'.'+filebits[1];
+        file='hotel_'+this.id+this.c+'.'+filebits[1];
         let alert=this.alertCtrl.create({
-          title:file,
+          title:file+'is the file name to be stored in db',
           buttons:['OK']
         })
         alert.present();
+      
+        let alt = this.alertCtrl.create({
+          title: "file name===>"+file,
+          buttons: ['Dismiss'],
+        });
+        alt.present();
         let fileTransfer: FileTransferObject = this.filetransfer.create();
       this.options = {
         fileKey: 'img',
-        fileName: x,
+        fileName: file,
         mimeType: "multipart/form-data",
         headers: {
           authorization : 'e36051cb8ca82ee0Lolzippu123456*='
@@ -187,7 +206,8 @@ ionViewDidEnter(){
             .subscribe(data =>{
              this.items=JSON.parse(data._body).Jobs;
              let img = this.items[0].profile_pic.split("/")
-             this.drive_name = this.items["0"].email.split('@')
+             this.drive_name = this.items["0"].email.split('@');
+             this.drive_name=this.drive_name["0"];
              if(img.length > 1){
               this.image='https://www.forehotels.com/public/hotel/avatar/'+this.items["0"].profile_pic
                this.social_pic = true;
@@ -210,10 +230,19 @@ ionViewDidEnter(){
             });
             alert.present();
       });
+      this.c+=1;
+      this.storage.set("counter",this.c).then(()=>
+      {
+        let a=this.alertCtrl.create({
+        title:'Storage updated to'+this.c,
+        buttons:['OK']});
+        a.present();
+        this.navCtrl.push(ListPage);
+      });
     });
-    this.c++;
-      this.storage.set("counter",this.c);
-      this.navCtrl.push(ListPage);
+    
+        
+     
       }
     }
   }

@@ -63,7 +63,7 @@ export class ListPage implements OnInit{
           .subscribe(data =>{
            this.items=JSON.parse(data._body).Jobs; //Bind data to items object
            let alert=this.alertCtrl.create({
-             title:JSON.stringify(this.items),
+             title:this.items["0"].profile_pic+'  is the profile pic retrived in list page' ,
              buttons:['OK']
            });
            alert.present();
