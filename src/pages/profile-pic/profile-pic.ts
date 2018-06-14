@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, AlertController, LoadingController, Platform, Events } from 'ionic-angular';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
@@ -13,10 +13,16 @@ import { ListPage } from '../list/list';
   selector: 'page-profile-pic',
   templateUrl: 'profile-pic.html'
 })
-export class ProfilePicPage {
+export class ProfilePicPage implements OnInit {
 ionViewDidEnter(){
      this.loadData()
     }
+    ionViewDidLoad(){
+      this.loadData()
+   }
+   ngOnInit(){
+     this.loadData();
+   }
   profilePicForm:any;
   items:any;
   options:any;
@@ -109,11 +115,11 @@ ionViewDidEnter(){
               let fileTransfer: FileTransferObject = this.filetransfer.create();
                       fileTransfer.download(uri, "file:///storage/emulated/0/Download/" +this.drive_name+'.jpg').then((entry) => {                        
                         let tourl = entry.toURL()
-                        let alt=this.alertCtrl.create({
-                          title:'tourl ---->'+tourl,
-                          buttons:['OK']
-                        });
-                        alt.present();
+                        // let alt=this.alertCtrl.create({
+                        //   title:'tourl ---->'+tourl,
+                        //   buttons:['OK']
+                        // });
+                        // alt.present();
                         this.profilePicUpload(tourl)
                       }, (error) => {
                         // handle error
@@ -158,11 +164,11 @@ ionViewDidEnter(){
         })
         alert.present();
       
-        let alt = this.alertCtrl.create({
-          title: "file name===>"+file,
-          buttons: ['Dismiss'],
-        });
-        alt.present();
+        // let alt = this.alertCtrl.create({
+        //   title: "file name===>"+file,
+        //   buttons: ['Dismiss'],
+        // });
+        // alt.present();
         let fileTransfer: FileTransferObject = this.filetransfer.create();
       this.options = {
         fileKey: 'img',
