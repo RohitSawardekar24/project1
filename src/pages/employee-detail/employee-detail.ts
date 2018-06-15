@@ -107,7 +107,43 @@ ionViewDidEnter() {
     });
   }
   call(number){
-      this.callnumber.callNumber("+91"+number,true)
+      this.callnumber.callNumber("+91"+number,true);
+      this.storage.get("id").then((id)=>{
+        this.storage.get("Hash").then((value)=>{
+      let headers = new Headers({
+        'Content-Type': 'application/json',
+        'Authorization': value
+      });
+      let options = new RequestOptions({ headers: headers });
+      this.http.get('http://www.forehotels.com:3000/api/package/5925',options).subscribe(
+        (data)=>{
+          let items=JSON.parse(data._body).Jobs;
+          let name=items["0"].name;
+          this.http.get("http://www.forehotels.com:3000/api/employee/"+this.emp, options) .subscribe(
+            (data) =>{
+              let items=JSON.parse(data._body).Users;
+              let empname=items["0"].name;
+              let post=items["0"].designation;
+              let ans=JSON.stringify({
+                hotelier:name,
+                employee:empname,
+                post:post
+              });
+              this.http.post('http://www.forehotels.com:3000/api/calllog',ans,options).subscribe(
+                (data)=>console.log('done posting in call log table'),
+                (err)=>console.log(err)
+              );
+
+
+
+                        });
+
+        }
+      )
+
+    });
+  });
+
   }
   downloadCV(){
      if(this.network.noConnection()){

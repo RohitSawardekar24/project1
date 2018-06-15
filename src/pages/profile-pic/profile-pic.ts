@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, AlertController, LoadingController, Platform, Events } from 'ionic-angular';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
@@ -8,14 +8,21 @@ import { NgZone } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { NetworkServiceProvider } from '../../providers/network-service/network-service';
+import { ListPage } from '../list/list';
 @Component({
   selector: 'page-profile-pic',
   templateUrl: 'profile-pic.html'
 })
-export class ProfilePicPage {
+export class ProfilePicPage implements OnInit {
 ionViewDidEnter(){
      this.loadData()
     }
+    ionViewDidLoad(){
+      this.loadData()
+   }
+   ngOnInit(){
+     this.loadData();
+   }
   profilePicForm:any;
   items:any;
   options:any;
@@ -26,6 +33,8 @@ ionViewDidEnter(){
   hash:any;
   social_pic:any;
   drive_name:any;
+  image:any;
+  c:number;
   constructor(private loadingCtrl: LoadingController, 
               http: Http, 
               public network: NetworkServiceProvider,
@@ -78,10 +87,14 @@ ionViewDidEnter(){
             this.http.get(x, options)
             .subscribe(data =>{
              this.items=JSON.parse(data._body).Jobs;
+             console.log('profilepic'+this.items["0"].profile_pic);
              let img = this.items[0].profile_pic.split("/")
-             this.drive_name = this.items["0"].email.split('@')
+             this.drive_name = this.items["0"].email.split('@');
+            this.drive_name=this.drive_name["0"];
+             this.image='https://www.forehotels.com/public/hotel/avatar/'+this.items["0"].profile_pic;
              if(img.length > 1){
                this.social_pic = true;
+
              }
              loader.dismiss();
             },error=>{
@@ -92,11 +105,21 @@ ionViewDidEnter(){
     this.filechooser.open()
       .then(
         uri => {
+          // let alert=this.alertCtrl.create({
+          //   title:'uri-->'+uri,
+          //   buttons:['OK']
+          // });
+          // alert.present();
           let DrivePicpath = uri.split("/") 
           if(DrivePicpath[0] == 'content:'){
               let fileTransfer: FileTransferObject = this.filetransfer.create();
-                      fileTransfer.download(uri, "file:///storage/emulated/0/Download/" +this.drive_name[0]+'.jpg').then((entry) => {                        
+                      fileTransfer.download(uri, "file:///storage/emulated/0/Download/" +this.drive_name+'.jpg').then((entry) => {                        
                         let tourl = entry.toURL()
+                        // let alt=this.alertCtrl.create({
+                        //   title:'tourl ---->'+tourl,
+                        //   buttons:['OK']
+                        // });
+                        // alt.present();
                         this.profilePicUpload(tourl)
                       }, (error) => {
                         // handle error
@@ -121,7 +144,8 @@ ionViewDidEnter(){
       let file = fileArray[len - 1];
       var filebits = file.split(".");
       var f = filebits[1];
-
+      //file=filebits[0]+c+filebits[1];
+    
       if((f != "jpg") && (f != "png") && (f != "jpeg")){
         let alert = this.alertCtrl.create({
               title: "Invalid File Format",
@@ -131,10 +155,24 @@ ionViewDidEnter(){
             alert.present();
       }
       else{
+        this.storage.get("counter").then((count)=>{this.c=count;
+        // file=filebits[0]+this.c+'.'+filebits[1];
+        file='hotel_'+this.id+this.c+'.'+filebits[1];
+        let alert=this.alertCtrl.create({
+          title:file+'is the file name to be stored in db',
+          buttons:['OK']
+        })
+        alert.present();
+      
+        // let alt = this.alertCtrl.create({
+        //   title: "file name===>"+file,
+        //   buttons: ['Dismiss'],
+        // });
+        // alt.present();
         let fileTransfer: FileTransferObject = this.filetransfer.create();
       this.options = {
         fileKey: 'img',
-        fileName: x,
+        fileName: file,
         mimeType: "multipart/form-data",
         headers: {
           authorization : 'e36051cb8ca82ee0Lolzippu123456*='
@@ -144,6 +182,7 @@ ionViewDidEnter(){
           id: this.id
         }
       }
+      
       
        let onProgress =  (progressEvent: ProgressEvent) : void => {
         this.ngZone.run(() => {
@@ -163,8 +202,32 @@ ionViewDidEnter(){
           content: "Fetching your Account Details. Kindly wait...",
         });
         loader.present();
+        let headers = new Headers({
+          'Content-Type': 'application/json',
+          'Authorization': this.hash
+        });
+        let options = new RequestOptions({ headers: headers });
         let url="http://www.forehotels.com:3000/api/package/"+this.id;
-        this.getDetails(url, loader);
+        this.http.get(url, options)
+            .subscribe(data =>{
+             this.items=JSON.parse(data._body).Jobs;
+             let img = this.items[0].profile_pic.split("/")
+             this.drive_name = this.items["0"].email.split('@');
+             this.drive_name=this.drive_name["0"];
+             if(img.length > 1){
+              this.image='https://www.forehotels.com/public/hotel/avatar/'+this.items["0"].profile_pic
+               this.social_pic = true;
+               let alert=this.alertCtrl.create({
+                title:'Profile pic uploaded',
+                buttons:['OK']
+              })
+              alert.present();
+             }
+             loader.dismiss();
+            },error=>{
+                console.log(error);
+            } 
+            );
       }, (err) => {
         let alert = this.alertCtrl.create({
               title: err.text(),
@@ -173,6 +236,20 @@ ionViewDidEnter(){
             });
             alert.present();
       });
+      this.c+=1;
+      this.storage.set("counter",this.c).then(()=>
+      {
+        // let a=this.alertCtrl.create({
+        // title:'Storage updated to'+this.c,
+        // buttons:['OK']});
+        // a.present();
+        this.events.publish('user:profilepic','doone');
+        this.navCtrl.push(ListPage);
+      });
+    });
+    
+        
+     
       }
     }
   }

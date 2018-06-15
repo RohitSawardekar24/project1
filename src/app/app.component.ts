@@ -55,6 +55,8 @@ export class MyApp {
   city_name:any;
   hotelname:any;
   profilepic:any;
+  counter:any;
+  no:number;
   app_Id = 'a8874a29-22e2-486f-b4b3-b3d09e8167a5'
   picpath='https://www.forehotels.com/public/assets/img/download1.jpg'
   pages: Array<{title: string, component: any, icon:any, color:any}>;
@@ -85,6 +87,32 @@ export class MyApp {
     this.http = http
   }
   initializeApp() {
+    this.events.subscribe('user:updatename',(data)=>{
+      this.hotelname=data;
+    });
+    this.events.subscribe('user:profilepic',(data)=>{
+      this.storage.get("id").then((id) => {
+        this.storage.get("Hash").then((value) => {
+           this.platform.ready().then(() => {
+             this.ga.trackEvent("Dashboard", "Opened", "New Session Started", id, true)
+             this.ga.setAllowIDFACollection(true)
+             this.ga.setUserId(id)
+             this.ga.trackView("Dashboard")
+           });
+           let headers = new Headers({
+             'Content-Type': 'application/json',
+             'Authorization': value
+           });
+        let options = new RequestOptions({ headers: headers });
+   
+         this.http.get("http://www.forehotels.com:3000/api/package/"+id, options)
+            .subscribe(data =>{
+             this.items=JSON.parse(data._body).Jobs; //Bind data to items object
+              this.profilepic=this.items["0"].profile_pic;
+            });
+          });  
+        });  
+    });
     this.loggedIn = false
     this.social_pic = false
 this.colors = ['#1396e2','#f2a900','#69a984','#073855','#00BCD4','#5c6bc0','#ff9800','#26a69a','#ce93d8','#ec407a','#073855'];    
@@ -103,7 +131,8 @@ this.icons = ['search','ios-contacts','md-calendar','md-open','ios-create','md-c
       { title: 'Packages', component: PackagePage, icon: this.icons[10] ,color: this.colors[10]},
       { title:'About Us', component: AboutUsPage, icon : this.icons[11], color: this.colors[11]},
       ];
-      
+    this.no=0;
+    this.storage.set("counter",this.no);
     this.storage.set("Hash",this.key);
     this.storage.get('loggedIn').then((id) => {
        if(id == true){
@@ -233,6 +262,7 @@ this.icons = ['search','ios-contacts','md-calendar','md-open','ios-create','md-c
           this.ga.trackTiming("Android", total_time, "App Opening Time", "app_open")          
       
     });
+    
   }
 getDetails(id){
      this.storage.get("Hash").then((value) => {
