@@ -158,11 +158,11 @@ ionViewDidEnter(){
         this.storage.get("counter").then((count)=>{this.c=count;
         // file=filebits[0]+this.c+'.'+filebits[1];
         file='hotel_'+this.id+this.c+'.'+filebits[1];
-        let alert=this.alertCtrl.create({
-          title:file+'is the file name to be stored in db',
-          buttons:['OK']
-        })
-        alert.present();
+        // let alert=this.alertCtrl.create({
+        //   title:file+'is the file name to be stored in db',
+        //   buttons:['OK']
+        // })
+        // alert.present();
       
         // let alt = this.alertCtrl.create({
         //   title: "file name===>"+file,

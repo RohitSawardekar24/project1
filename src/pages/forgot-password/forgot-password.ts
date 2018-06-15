@@ -89,7 +89,7 @@ export class ForgotPasswordPage {
                 });
                 let options1 = new RequestOptions({ headers: headers1 });
                     this.http
-                      .post('https://www.forehotels.com/alerts/forgot_password', email_body, options1)
+                      .post('https://www.forehotels.com/alerts/send_email', email_body, options1)
                       .subscribe(
                           data => {
                         this.toast.show("A Mail has been sent to your Email ID", '7000', 'bottom').subscribe(
