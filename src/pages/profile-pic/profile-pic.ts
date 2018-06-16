@@ -9,7 +9,7 @@ import { Storage } from '@ionic/storage';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { NetworkServiceProvider } from '../../providers/network-service/network-service';
 import { ListPage } from '../list/list';
-import { File } from '@ionic-native/file';
+//import { File } from '@ionic-native/file';
 @Component({
   selector: 'page-profile-pic',
   templateUrl: 'profile-pic.html'
@@ -113,14 +113,7 @@ ionViewDidEnter(){
           //   buttons:['OK']
           // });
           // alert.present();
-          this.file.resolveLocalFilesystemUrl(uri).then(fileEntry =>{
 
-            fileEntry.getMetadata(function(metadata){
-                console.log("size is "+metadata.size);
-                this.size = metadata.size;
-            }, (err) => {
-            });
-          });
           let DrivePicpath = uri.split("/") 
           if(DrivePicpath[0] == 'content:'){
               let fileTransfer: FileTransferObject = this.filetransfer.create();
