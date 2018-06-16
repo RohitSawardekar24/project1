@@ -9,7 +9,6 @@ import { Storage } from '@ionic/storage';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { NetworkServiceProvider } from '../../providers/network-service/network-service';
 import { ListPage } from '../list/list';
-import { File } from '@ionic-native/file';
 @Component({
   selector: 'page-profile-pic',
   templateUrl: 'profile-pic.html'
@@ -36,11 +35,9 @@ ionViewDidEnter(){
   drive_name:any;
   image:any;
   c:number;
-  size:any;
   constructor(private loadingCtrl: LoadingController, 
               http: Http, 
               public network: NetworkServiceProvider,
-              private file : File,
               private filePath: FilePath,
               private filetransfer: FileTransfer,
               private filechooser: FileChooser,
@@ -93,7 +90,7 @@ ionViewDidEnter(){
              console.log('profilepic'+this.items["0"].profile_pic);
              let img = this.items[0].profile_pic.split("/")
              this.drive_name = this.items["0"].email.split('@');
-             this.drive_name=this.drive_name["0"];
+            this.drive_name=this.drive_name["0"];
              this.image='https://www.forehotels.com/public/hotel/avatar/'+this.items["0"].profile_pic;
              if(img.length > 1){
                this.social_pic = true;
@@ -113,14 +110,6 @@ ionViewDidEnter(){
           //   buttons:['OK']
           // });
           // alert.present();
-          this.file.resolveLocalFilesystemUrl(uri).then(fileEntry =>{
-
-            fileEntry.getMetadata(function(metadata){
-                console.log("size is "+metadata.size);
-                this.size = metadata.size;
-            }, (err) => {
-            });
-          });
           let DrivePicpath = uri.split("/") 
           if(DrivePicpath[0] == 'content:'){
               let fileTransfer: FileTransferObject = this.filetransfer.create();
@@ -156,6 +145,7 @@ ionViewDidEnter(){
       var filebits = file.split(".");
       var f = filebits[1];
       //file=filebits[0]+c+filebits[1];
+    
       if((f != "jpg") && (f != "png") && (f != "jpeg")){
         let alert = this.alertCtrl.create({
               title: "Invalid File Format",
@@ -163,14 +153,6 @@ ionViewDidEnter(){
               buttons: ['Dismiss'],
             });
             alert.present();
-      }
-      else if(this.size > 2){
-        let alert = this.alertCtrl.create({
-          title: "File size exceeded",
-          subTitle: "File size must not exceed 2mB",
-          buttons: ['Dismiss'],
-        });
-        alert.present();
       }
       else{
         this.storage.get("counter").then((count)=>{this.c=count;
