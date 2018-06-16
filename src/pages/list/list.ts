@@ -111,7 +111,7 @@ export class ListPage implements OnInit{
      });  
     this.pages = [
       { title: 'Personal Assistance', img: this.images[0], component:TabsPersonalAssistancePage },
-      { title: 'ShortList&Schedule', img: this.images[1], component: ScheduleInterviewPage },
+      { title: 'ShortList', img: this.images[1], component: ScheduleInterviewPage },
       { title: 'Update Profile', img: this.images[2], component:UpdateProfilePage },
       { title: 'Post Job', img: this.images[3], component:PostJobPage },
       { title: 'Post Catering Requirement', img: this.images[4], component:CateringRequirementPage},
