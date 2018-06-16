@@ -66,7 +66,6 @@ import { City } from '../providers/city/city';
 import { Category } from '../providers/category/category';
 import { Designation } from '../providers/designation/designation';
 import { IonicStorageModule } from '@ionic/storage';
-
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { FileChooser } from '@ionic-native/file-chooser'
