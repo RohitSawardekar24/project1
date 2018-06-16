@@ -27,6 +27,7 @@
     "@ionic-native/contacts": "^4.7.0",
     "@ionic-native/core": "4.7.0",
     "@ionic-native/diagnostic": "^4.7.0",
+    "@ionic-native/file": "^4.7.0",
     "@ionic-native/file-chooser": "^4.7.0",
     "@ionic-native/file-path": "^4.7.0",
     "@ionic-native/file-transfer": "^4.7.0",
@@ -102,7 +103,8 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
-      "call-number": {}
+      "call-number": {},
+      "cordova-plugin-file": {}
     },
     "platforms": [
       "browser",
