@@ -18,10 +18,13 @@
 </ion-header>
 <ion-content>
 
-   <div style="margin: 0 auto;" *ngIf="this.length == 0"><h3>Please Pay for a Job posted by you to apply for Personal Assistance</h3>
-    <button ion-button color="black" outline (click)="goToPA()">
-        Go to Personal Asssistance Page&nbsp;&nbsp;
-    </button>
+    <div *ngIf="this.length == 0">
+      <div style="margin: 0 auto;">
+        <h3>Please Pay for a Job posted by you to apply for Personal Assistance</h3>
+        <button ion-button color="black" outline (click)="goToPA()">
+          Go to Personal Asssistance Page&nbsp;&nbsp;
+        </button>
+      </div>
     </div>
   <ion-list>
   <ion-item *ngFor="let item of list">

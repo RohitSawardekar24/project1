@@ -227,11 +227,6 @@ this.icons = ['search','ios-contacts','md-calendar','md-open','ios-create','md-c
               let app_id = this.items["1"].app_id
               var latest_version = this.items["1"].android_latest_version
               latest_version = latest_version.split(".")
-              if(app_id == 2){
-                if((app_version[0] != latest_version[0]) || (app_version[1] != latest_version[1]) || (app_version[2] != latest_version[2])){
-                  this.updateApp();
-                }
-              }
              },
             error=>{
                 console.log(error);// Error getting the data
@@ -341,27 +336,5 @@ getDetails(id){
       this.rootPage = HomePage;
       this.menu.enable(false);
     });
-  }
-  updateApp(){
-    let alert = this.alertCtrl.create({
-       title: 'Update',
-       message: 'Please update your app to enjoy better features',
-       buttons: [
-         {
-           text: 'Cancel',
-           role: 'cancel',
-           handler: () => {
-           }
-         },
-         {
-           text: 'Update',
-           handler: () => {
-             let browser = this.iab.create('https://play.google.com/store/apps/details?id=com.fore.v100','_system')
-             browser.show();
-           }
-         }
-       ]
-     });
-     alert.present();
   }
 }
