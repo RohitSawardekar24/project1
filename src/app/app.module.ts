@@ -82,7 +82,6 @@ import { Diagnostic } from '@ionic-native/diagnostic'
 import { UpgradePackageProvider } from '../providers/upgrade-package/upgrade-package';
 import { NetworkServiceProvider } from '../providers/network-service/network-service';
 import { HeaderColor } from '@ionic-native/header-color';
-import { TabsPersonalAssistancePage } from '../pages/tabs-personal-assistance/tabs-personal-assistance';
 import { PaidPersonalAssistancePage } from '../pages/paid-personal-assistance/paid-personal-assistance';
 import { ConnectivityServiceProvider } from '../providers/connectivity-service/connectivity-service';
 import { GoogleMapsProvider } from '../providers/google-maps/google-maps';
@@ -153,7 +152,6 @@ import { GoogleMapsProvider } from '../providers/google-maps/google-maps';
     IntroSPage,
     PackagePage,
     ForgotPasswordPage,
-      TabsPersonalAssistancePage,
       PaidPersonalAssistancePage
   ],
   imports: [
@@ -230,7 +228,6 @@ import { GoogleMapsProvider } from '../providers/google-maps/google-maps';
     EmployeeTabPage,
     IntroSPage,
     ForgotPasswordPage,
-      TabsPersonalAssistancePage,
       PaidPersonalAssistancePage
   ],
   providers: [

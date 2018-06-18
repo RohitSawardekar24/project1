@@ -21,7 +21,7 @@ export class PaidPersonalAssistancePage {
   http: any;
   items: any;
   list: any=[];
-
+  length: any;
   constructor(public navCtrl: NavController,
               public network: NetworkServiceProvider,
               public ga: GoogleAnalytics,
@@ -58,6 +58,7 @@ export class PaidPersonalAssistancePage {
                    this.list.push(response)                  
                   }
                 }
+                this.length = this.list.length;
               },error=>{
               });
             })

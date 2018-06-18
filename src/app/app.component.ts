@@ -35,7 +35,6 @@ import { AboutUsPage } from '../pages/about-us/about-us';
 import { NetworkServiceProvider } from '../providers/network-service/network-service';
 import { UpgradePackageProvider } from '../providers/upgrade-package/upgrade-package';
 import { HeaderColor } from '@ionic-native/header-color';
-import { TabsPersonalAssistancePage } from '../pages/tabs-personal-assistance/tabs-personal-assistance';
 import { PaidPersonalAssistancePage } from '../pages/paid-personal-assistance/paid-personal-assistance';
 
 @Component({
@@ -122,7 +121,7 @@ this.colors = ['#1396e2','#f2a900','#69a984','#073855','#00BCD4','#5c6bc0','#ff9
 this.icons = ['search','ios-contacts','md-calendar','md-open','ios-create','md-create','md-search','ios-create-outline','ios-eye','ios-document-outline','ios-basket-outline','ios-information-circle-outline'];
     this.pages = [
       { title: 'Search Employee', component: SelectDesignationPage, icon: this.icons[0], color: this.colors[0] },
-      { title: 'Personal Assistance', component: TabsPersonalAssistancePage, icon: this.icons[1], color: this.colors[1] },
+      { title: 'Personal Assistance', component: PersonalAssistancePage, icon: this.icons[1], color: this.colors[1] },
       { title: 'ShortList', component: ScheduleInterviewPage, icon: this.icons[2], color: this.colors[2] },
       { title: 'Update Profile', component: UpdateProfilePage, icon: this.icons[3], color: this.colors[3] },
       { title: 'Post Job', component: PostJobPage, icon: this.icons[4], color: this.colors[4] },
