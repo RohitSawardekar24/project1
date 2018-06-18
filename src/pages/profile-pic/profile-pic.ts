@@ -91,7 +91,10 @@ ionViewDidEnter(){
              let img = this.items[0].profile_pic.split("/")
              this.drive_name = this.items["0"].email.split('@');
             this.drive_name=this.drive_name["0"];
-             this.image='https://www.forehotels.com/public/hotel/avatar/'+this.items["0"].profile_pic;
+            if(this.items["0"].profile_pic=="")
+                this.image='https://www.forehotels.com/public/assets/img/download1.jpg';
+            else
+                 this.image='https://www.forehotels.com/public/hotel/avatar/'+this.items["0"].profile_pic;
              if(img.length > 1){
                this.social_pic = true;
 
