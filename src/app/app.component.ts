@@ -89,7 +89,7 @@ export class MyApp {
     this.events.subscribe('user:updatename',(data)=>{
       this.hotelname=data;
     });
-    this.events.subscribe('user:profilepic',(data)=>{
+    this.events.subscribe('user:profilepic1',(data)=>{
       this.storage.get("id").then((id) => {
         this.storage.get("Hash").then((value) => {
            this.platform.ready().then(() => {
