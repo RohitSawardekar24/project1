@@ -51,7 +51,7 @@ export class RegisterPage {
                 {title:'state Chain', icon:'state.png'},
                 {title:'national Chain', icon:'nat.png'},
                 {title:'international Chain', icon:'inter.png'},]
-                this.rows = Array.from(Array(Math.ceil(this.services.length/2)).keys());
+                this.rows = Array.from(Array(Math.ceil(this.services.length/4)).keys());
     }
 
     selectvalue(data){
