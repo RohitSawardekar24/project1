@@ -108,7 +108,10 @@ export class MyApp {
          this.http.get("http://www.forehotels.com:3000/api/package/"+id, options)
             .subscribe(data =>{
              this.items=JSON.parse(data._body).Jobs; //Bind data to items object
-              this.profilepic=this.items["0"].profile_pic;
+             if(this.items["0"].profile_pic=='')
+                 this.profilepic='https://www.forehotels.com/public/assets/img/download1.jpg';
+              else
+              this.profilepic='https://www.forehotels.com/public/hotel/avatar/'+this.items["0"].profile_pic;
             });
           });  
         });  
