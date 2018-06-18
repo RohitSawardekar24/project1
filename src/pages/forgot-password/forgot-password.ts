@@ -21,6 +21,7 @@ export class ForgotPasswordPage {
    checkusers:any;
    checkcontact:any;
    temppass:string;
+   contact:any;
   constructor(public loadingCtrl: LoadingController,
               public toast: Toast, 
               public storage: Storage,http: Http,
@@ -51,6 +52,7 @@ export class ForgotPasswordPage {
       if(this.network.noConnection()){
            this.network.showNetworkAlert()
         }else{  
+           var email_checker = false;
             this.storage.get("Hash").then((hash)=>{
             let loading = this.loadingCtrl.create({
               spinner: 'bubbles',
@@ -76,12 +78,14 @@ export class ForgotPasswordPage {
                   for(let item of this.checkusers ){
                       if(item.email == this.items.email){
                       checker = 1;
+                      this.contact=item.hr_number
                       }
                     }
                     if(checker == 1){
                     let email_body = JSON.stringify({
                     email: this.items.email,
-                    mail: 'forgot_password'
+                    mail: 'forgot_password',
+                    contact_no:this.contact
                   });
                   let headers1 = new Headers({
                   'Content-Type': "application/json",
@@ -89,11 +93,13 @@ export class ForgotPasswordPage {
                 });
                 let options1 = new RequestOptions({ headers: headers1 });
                     this.http
-                      .post('https://www.forehotels.com/alerts/send_email', email_body, options1)
+                      .post('http://forehotels.com:3000/api/send_email', email_body, options1)
                       .subscribe(
                           data => {
+                          this.navCtrl.push(LoginPage);
                         this.toast.show("A Mail has been sent to your Email ID", '7000', 'bottom').subscribe(
-                            toast => {
+                           
+                          toast => {
                               console.log(toast);
                             }
                           );
