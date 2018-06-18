@@ -20,10 +20,13 @@
 
     <div *ngIf="this.length == 0">
       <div style="margin: 0 auto;">
-        <h3>Please Pay for a Job posted by you to apply for Personal Assistance</h3>
-        <button ion-button color="black" outline (click)="goToPA()">
-          Go to Personal Asssistance Page&nbsp;&nbsp;
+       <h3 style="text-align: center">Please Pay for a Job posted by you to apply for Personal Assistance</h3>
+        
+       <div style="text-align:center">
+       <button ion-button color="black" outline (click)="goToPA()" align="center">
+          Go to Personal Asssistance Page
         </button>
+       </div>
       </div>
     </div>
   <ion-list>
