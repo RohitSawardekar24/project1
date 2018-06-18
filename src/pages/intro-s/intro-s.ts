@@ -19,7 +19,7 @@ export class IntroSPage {
     {
       title: "Personal Assistance",
       description: "With Personal Assistance you can hire your candidate on your finger tips.",
-      image: "assets/img/intro1.jpg",
+      image: "assets/img/slide5.jpg",
     },
     {
       title: "Schedule Interview",
