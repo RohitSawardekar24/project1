@@ -246,7 +246,7 @@ ionViewDidEnter(){
         // title:'Storage updated to'+this.c,
         // buttons:['OK']});
         // a.present();
-        this.events.publish('user:profilepic','doone');
+        this.events.publish('user:profilepic','done');
         this.navCtrl.push(ListPage);
       });
     });
