@@ -23,7 +23,9 @@ export class PersonalAssistancePage {
     value: number = 1;
     job_id: any;
     hotel_id = [];
+    heads = [];
     list:any =[];
+    temp:any;
   constructor(public alertCtrl:AlertController ,
               public navCtrl: NavController, 
               public navParams: NavParams,
@@ -75,7 +77,7 @@ export class PersonalAssistancePage {
               },error=>{
               });
             })
-        })
+        }) 
     }
 }
   deleteJob(hotel_id){
@@ -92,10 +94,15 @@ export class PersonalAssistancePage {
             'Authorization': hash
           });
           let options = new RequestOptions({ headers: headers });
+          this.http.get("http://www.forehotels.com:3000/api/personal_assistance/"+user_id, options)
+          .subscribe(data =>{
+            this.checkJobs=JSON.parse(data._body).Jobs;
+            this.temp = this.checkJobs["0"].no_of_heads;
+          });
             this.http.delete("http://www.forehotels.com:3000/api/personal_assistance/"+user_id+"/"+hotel_id, options)
                   .subscribe(data =>{
                     if(this.total > 0){             
-                    this.total = this.total - 4500
+                    this.total = this.total - 4500*this.temp;
                     this.value--
                   }
                   let alert = this.alertCtrl.create({
@@ -233,7 +240,8 @@ export class PersonalAssistancePage {
                    this.list.push(response)
                    if(response.cart == 1){
                         this.hotel_id.push(response.hj_id);
-                        this.total += 4500;
+                        this.heads.push(response.quantity);
+                        this.total += 4500*response.quantity;
                         this.value++
                        
                       }

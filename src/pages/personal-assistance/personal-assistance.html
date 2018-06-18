@@ -18,14 +18,42 @@
     height: 3em;  
 }
 </style>
-<ion-content>
+<ion-content class="card-background-page">
+
+
+  
+        
+        <ion-card>
+            <img src="assets/img/pa.png" height="150px"/>
+            <div>This package includes the following from Forehotels Team :-</div>
+            <ion-item>
+            <ion-icon name="return-right" item-left large></ion-icon>
+            <h2 style="white-space:pre-wrap">We Provide you a personal assistant who helps in getting you a job.</h2>
+            </ion-item>
+            <ion-item>
+                <ion-icon name="return-right" item-left large></ion-icon>
+                <h2 style="white-space:pre-wrap">Take Personal or Skype interview of the candidate</h2>
+            </ion-item>
+            <ion-item>
+                <ion-icon name="return-right" item-left large></ion-icon>
+                <h2 style="white-space:pre-wrap">Schedule interview with you</h2>
+            </ion-item>
+            <ion-item>
+                <ion-icon name="return-right" item-left large></ion-icon>
+                <h2 style="white-space:pre-wrap">We also find why candidate is not selected and send more options for the kind of candidate you Need</h2>
+            </ion-item>
+           <h1>₹ 4500/Per Job</h1>
+           
+        </ion-card>
+    
   <div *ngIf="this.length == 0"><h3>Please Post Job to apply for Personal Assistance</h3></div>
   <ion-list>
-  <ion-item *ngFor="let item of list">
+  <ion-item *ngFor="let item of list" style="padding-bottom:30px">
     <ion-avatar item-start>
       <img src="https://www.forehotels.com/public/assets/img/waiter.png">
     </ion-avatar>
     <h2>{{item.pname}}</h2>
+    <h4>Nmber of heads: {{item.quantity}}</h4>
     <button [disabled]="item.cart == '1'" ion-button color="black" outline (click)="addToCart(item.hj_id)">Add to Cart&nbsp;&nbsp;</button>
     <button [disabled]="item.cart != '1'" ion-button color="black" outline><ion-icon name="ios-trash-outline" (click)="deleteJob(item.hj_id)"></ion-icon></button>
     <h2 item-end>&#8377; 4500</h2>
@@ -37,3 +65,4 @@
     </div>
 </ion-list> 
 </ion-content>
+  

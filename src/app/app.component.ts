@@ -120,7 +120,7 @@ this.icons = ['search','ios-contacts','md-calendar','md-open','ios-create','md-c
     this.pages = [
       { title: 'Search Employee', component: SelectDesignationPage, icon: this.icons[0], color: this.colors[0] },
       { title: 'Personal Assistance', component: TabsPersonalAssistancePage, icon: this.icons[1], color: this.colors[1] },
-      { title: 'Schedule Interview', component: ScheduleInterviewPage, icon: this.icons[2], color: this.colors[2] },
+      { title: 'ShortList', component: ScheduleInterviewPage, icon: this.icons[2], color: this.colors[2] },
       { title: 'Update Profile', component: UpdateProfilePage, icon: this.icons[3], color: this.colors[3] },
       { title: 'Post Job', component: PostJobPage, icon: this.icons[4], color: this.colors[4] },
       { title: 'Post Catering Requirement', component: CateringRequirementPage, icon: this.icons[5], color: this.colors[5] },
