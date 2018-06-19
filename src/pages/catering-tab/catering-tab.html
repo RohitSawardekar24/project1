@@ -5,6 +5,7 @@
 </ion-header>
 <ion-content>
 <ion-list>
+  <h2 *ngIf="invalid">No employees available</h2>
   <ion-item *ngFor="let item of items">
 
     <ion-thumbnail item-left>

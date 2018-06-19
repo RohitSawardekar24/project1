@@ -129,9 +129,20 @@ menuToggle(){
     let status=this.getUserStatus();      
      switch(p.component)
      {
+       
+       case SearchSupplierPage: 
+       case SupplierRequirementPage: let a=this.alertCtrl.create(
+                                        {
+                                          title:'Work in progress',
+                                          subTitle:'We are currently developing this page',
+                                          buttons:['OK']
+                                        }
+                                      );
+                                      a.present();
+                                      break;
+
+
        case UpdateProfilePage:
-       case SearchSupplierPage:
-       case SupplierRequirementPage:
        case  ViewPostedJobPage:
        case  MyHistoryReportPage: this.navCtrl.push(p.component);
                                   break;

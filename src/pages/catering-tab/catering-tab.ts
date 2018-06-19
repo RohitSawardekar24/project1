@@ -16,6 +16,7 @@ http:any;
 hash:any;
 items:any;
 resitems:any;
+invalid:any;
   constructor(public storage: Storage,
               http: Http,
               public network: NetworkServiceProvider,
@@ -33,6 +34,7 @@ resitems:any;
                 this.ga.trackView("Catering Tab")
               });
           })
+          console.log(this.navParams.data);
               let loading = this.loadingCtrl.create({
               spinner: 'bubbles',
               content: 'Please Wait...'
@@ -46,10 +48,22 @@ resitems:any;
                 'Authorization': this.hash
               });
               let options = new RequestOptions({ headers: headers });
-              this.http.get("http:/www.forehotels.com:3000/api/catering_users_list", options)
-                    .subscribe(data =>{
+              let body=JSON.stringify({
+                pname: navParams.data.designation,
+                c_id: navParams.data.c_id 
+              });
+              this.http.post("http://www.forehotels.com:3000/api/catering_users_list", body,options)
+                    .subscribe((data) =>{
+                      console.log(data);
                       this.items= []
                       this.resitems = JSON.parse(data._body).Jobs;
+                      console.log('Catering jobs');
+                      console.log(this.resitems);
+                      if(this.resitems==[])
+                          this.invalid=true;
+                     
+                      else
+                      {
                       for(let i=0 ; i < this.resitems.length;  i++){                           
                         let img = this.resitems[i].profile_pic.split('/')
                         let imgpath;
@@ -60,10 +74,12 @@ resitems:any;
                         }
                         this.items.push({name:this.resitems[i].name,designation:this.resitems[i].designation,experience:this.resitems[i].experience,qualification:this.resitems[i].qualification,id:this.resitems[i].id,profile_pic:imgpath})                             
                       }
+                    }
                     loading.dismiss()
                     },error=>{
                         console.log(error);
                     } );
+                  
                 });    
   }
   employeedetail(emp){

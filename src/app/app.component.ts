@@ -136,18 +136,18 @@ this.icons = ['search','ios-contacts','md-calendar','md-open','ios-create','md-c
     this.no=0;
     this.storage.set("counter",this.no);
     this.storage.set("Hash",this.key);
-    // this.storage.get('loggedIn').then((id) => {
-    //    if(id == true){
-    //      this.rootPage = ListPage;
-    //      this.storage.get('id').then((id) => {
-    //       this.getDetails(id)
-    //       console.log(id)
-    //     }); 
-    //    }
-    //    else{
+    this.storage.get('loggedIn').then((id) => {
+       if(id == true){
+         this.rootPage = ListPage;
+         this.storage.get('id').then((id) => {
+          this.getDetails(id)
+          console.log(id)
+        }); 
+       }
+       else{
          this.rootPage = IntroSPage;
-    //    }
-    //  })
+       }
+     })
     this.platform.ready().then(() => {
       this.headerColor.tint('#f2a900');
       this.statusbar.backgroundColorByHexString('#1396e2');
