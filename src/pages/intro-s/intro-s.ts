@@ -19,17 +19,17 @@ export class IntroSPage {
     {
       title: "Personal Assistance",
       description: "With Personal Assistance you can hire your candidate on your finger tips.",
-      image: "assets/img/slide5.jpg",
+      image: "assets/img/pa.jpg",
     },
     {
       title: "Schedule Interview",
       description: "You can schedule an interview with candidates.",
-      image: "assets/img/intro2.png",
+      image: "assets/img/si.jpg",
     },
     {
       title: "Connect with Suppliers",
       description: "You can connect with professional Suppliers who supply goods for a Hotel.",
-      image: "assets/img/suppliers.jpg",
+      image: "assets/img/supplier.jpg",
     }
     ];
   }
