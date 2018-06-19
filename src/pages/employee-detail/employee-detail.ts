@@ -115,10 +115,10 @@ ionViewDidEnter() {
         'Authorization': value
       });
       let options = new RequestOptions({ headers: headers });
-      this.http.get('http://www.forehotels.com:3000/api/package/5925',options).subscribe(
+      this.http.get('http://www.forehotels.com:3000/api/package/'+id,options).subscribe(
         (data)=>{
           let items=JSON.parse(data._body).Jobs;
-          let name=items["0"].name;
+          let name=items["0"].user_id;
           this.http.get("http://www.forehotels.com:3000/api/employee/"+this.emp, options) .subscribe(
             (data) =>{
               let items=JSON.parse(data._body).Users;
@@ -126,7 +126,7 @@ ionViewDidEnter() {
               let post=items["0"].designation;
               let ans=JSON.stringify({
                 hotelier:name,
-                employee:empname,
+                employee:this.emp,
                 post:post
               });
               this.http.post('http://www.forehotels.com:3000/api/calllog',ans,options).subscribe(
