@@ -4,6 +4,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { NetworkServiceProvider } from '../../providers/network-service/network-service';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { PaidPersonalAssistancePage } from '../paid-personal-assistance/paid-personal-assistance';
 
 @Component({
   selector: 'page-my-history-report',
@@ -50,6 +51,13 @@ export class MyHistoryReportPage {
           let profileModal3 = this.modalCtrl.create(JobsAppliedPage);
           profileModal3.present();
         }
+    }
+    PaidPA(){
+      if(this.network.noConnection()){
+        this.network.showNetworkAlert()
+     }else{  
+       this.navCtrl.push(PaidPersonalAssistancePage)
+     }
     }
   }
                         /***** cv downloaded start***/

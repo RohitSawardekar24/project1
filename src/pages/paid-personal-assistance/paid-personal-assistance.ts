@@ -5,7 +5,7 @@ import { Storage } from '@ionic/storage';
 import { Toast } from '@ionic-native/toast';
 import { NetworkServiceProvider } from '../../providers/network-service/network-service';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
-
+import { PersonalAssistancePage } from '../personal-assistance/personal-assistance';
 /**
  * Generated class for the PaidPersonalAssistancePage page.
  *
@@ -21,7 +21,7 @@ export class PaidPersonalAssistancePage {
   http: any;
   items: any;
   list: any=[];
-
+  length: any;
   constructor(public navCtrl: NavController,
               public network: NetworkServiceProvider,
               public ga: GoogleAnalytics,
@@ -58,10 +58,18 @@ export class PaidPersonalAssistancePage {
                    this.list.push(response)                  
                   }
                 }
+                this.length = this.list.length;
               },error=>{
               });
             })
         })
     }
+  }
+  goToPA(){
+    if(this.network.noConnection()){
+      this.network.showNetworkAlert()
+     }else{ 
+        this.navCtrl.push(PersonalAssistancePage);
+     }
   }
 }

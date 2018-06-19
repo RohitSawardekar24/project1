@@ -35,7 +35,6 @@ import { AboutUsPage } from '../pages/about-us/about-us';
 import { NetworkServiceProvider } from '../providers/network-service/network-service';
 import { UpgradePackageProvider } from '../providers/upgrade-package/upgrade-package';
 import { HeaderColor } from '@ionic-native/header-color';
-import { TabsPersonalAssistancePage } from '../pages/tabs-personal-assistance/tabs-personal-assistance';
 import { PaidPersonalAssistancePage } from '../pages/paid-personal-assistance/paid-personal-assistance';
 
 @Component({
@@ -90,7 +89,7 @@ export class MyApp {
     this.events.subscribe('user:updatename',(data)=>{
       this.hotelname=data;
     });
-    this.events.subscribe('user:profilepic',(data)=>{
+    this.events.subscribe('user:profilepic1',(data)=>{
       this.storage.get("id").then((id) => {
         this.storage.get("Hash").then((value) => {
            this.platform.ready().then(() => {
@@ -122,7 +121,7 @@ this.colors = ['#1396e2','#f2a900','#69a984','#073855','#00BCD4','#5c6bc0','#ff9
 this.icons = ['search','ios-contacts','md-calendar','md-open','ios-create','md-create','md-search','ios-create-outline','ios-eye','ios-document-outline','ios-basket-outline','ios-information-circle-outline'];
     this.pages = [
       { title: 'Search Employee', component: SelectDesignationPage, icon: this.icons[0], color: this.colors[0] },
-      { title: 'Personal Assistance', component: TabsPersonalAssistancePage, icon: this.icons[1], color: this.colors[1] },
+      { title: 'Personal Assistance', component: PersonalAssistancePage, icon: this.icons[1], color: this.colors[1] },
       { title: 'ShortList', component: ScheduleInterviewPage, icon: this.icons[2], color: this.colors[2] },
       { title: 'Update Profile', component: UpdateProfilePage, icon: this.icons[3], color: this.colors[3] },
       { title: 'Post Job', component: PostJobPage, icon: this.icons[4], color: this.colors[4] },
@@ -228,11 +227,6 @@ this.icons = ['search','ios-contacts','md-calendar','md-open','ios-create','md-c
               let app_id = this.items["1"].app_id
               var latest_version = this.items["1"].android_latest_version
               latest_version = latest_version.split(".")
-              if(app_id == 2){
-                if((app_version[0] != latest_version[0]) || (app_version[1] != latest_version[1]) || (app_version[2] != latest_version[2])){
-                  this.updateApp();
-                }
-              }
              },
             error=>{
                 console.log(error);// Error getting the data
@@ -342,27 +336,5 @@ getDetails(id){
       this.rootPage = HomePage;
       this.menu.enable(false);
     });
-  }
-  updateApp(){
-    let alert = this.alertCtrl.create({
-       title: 'Update',
-       message: 'Please update your app to enjoy better features',
-       buttons: [
-         {
-           text: 'Cancel',
-           role: 'cancel',
-           handler: () => {
-           }
-         },
-         {
-           text: 'Update',
-           handler: () => {
-             let browser = this.iab.create('https://play.google.com/store/apps/details?id=com.fore.v100','_system')
-             browser.show();
-           }
-         }
-       ]
-     });
-     alert.present();
   }
 }

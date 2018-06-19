@@ -11,10 +11,24 @@
   </ion-navbar>
 
 </ion-header> -->
-
+<ion-header>
+    <ion-navbar>
+      <ion-title>Paid P.A</ion-title>
+    </ion-navbar>      
+</ion-header>
 <ion-content>
 
-   <div *ngIf="this.length == 0"><h3>Please Post Job to apply for Personal Assistance</h3></div>
+    <div *ngIf="this.length == 0">
+      <div style="margin: 0 auto;">
+       <h3 style="text-align: center">Please Pay for a Job posted by you to apply for Personal Assistance</h3>
+        
+       <div style="text-align:center">
+       <button ion-button color="black" outline (click)="goToPA()" align="center">
+          Go to Personal Asssistance Page
+        </button>
+       </div>
+      </div>
+    </div>
   <ion-list>
   <ion-item *ngFor="let item of list">
     <ion-avatar item-start>

@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { Toast } from '@ionic-native/toast';
 import { NetworkServiceProvider } from '../../providers/network-service/network-service';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { ListPage } from '../list/list';
 
 @Component({
   selector: 'page-personal-assistance',

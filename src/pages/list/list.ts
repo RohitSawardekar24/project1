@@ -20,7 +20,6 @@ import { Storage } from '@ionic/storage';
 import { NetworkServiceProvider } from '../../providers/network-service/network-service';
 import { UpgradePackageProvider } from '../../providers/upgrade-package/upgrade-package';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
-import { TabsPersonalAssistancePage } from '../tabs-personal-assistance/tabs-personal-assistance';
 
 @Component({  
   selector: 'page-list',
@@ -110,7 +109,7 @@ export class ListPage implements OnInit{
        });  
      });  
     this.pages = [
-      { title: 'Personal Assistance', img: this.images[0], component:TabsPersonalAssistancePage },
+      { title: 'Personal Assistance', img: this.images[0], component:PersonalAssistancePage },
       { title: 'ShortList', img: this.images[1], component: ScheduleInterviewPage },
       { title: 'Update Profile', img: this.images[2], component:UpdateProfilePage },
       { title: 'Post Job', img: this.images[3], component:PostJobPage },
@@ -136,7 +135,7 @@ menuToggle(){
        case  ViewPostedJobPage:
        case  MyHistoryReportPage: this.navCtrl.push(p.component);
                                   break;
-        case TabsPersonalAssistancePage:
+        case PersonalAssistancePage:
                                         //free user
                                         if(this.getUserStatus())
                                         {
