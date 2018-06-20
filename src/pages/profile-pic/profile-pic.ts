@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, AlertController, LoadingController, Platform, Events } from 'ionic-angular';
+import { NavController, NavParams, AlertController, LoadingController, Platform, Events, ToastController } from 'ionic-angular';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
@@ -9,6 +9,7 @@ import { Storage } from '@ionic/storage';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { NetworkServiceProvider } from '../../providers/network-service/network-service';
 import { ListPage } from '../list/list';
+import { Diagnostic } from '@ionic-native/diagnostic';
 @Component({
   selector: 'page-profile-pic',
   templateUrl: 'profile-pic.html'
@@ -48,7 +49,9 @@ ionViewDidEnter(){
               public navParams: NavParams, 
               private alertCtrl: AlertController, 
               private ga: GoogleAnalytics,
-              public events: Events
+              public events: Events,
+              public diagnostic: Diagnostic,
+              public toastCtrl:ToastController
               ) {           
             this.http = http;    
     }
@@ -105,6 +108,18 @@ ionViewDidEnter(){
             } );
    }
   findProfilePic(){
+    this.diagnostic.getExternalStorageAuthorizationStatus().then(
+      (status)=>{
+        let t=this.toastCtrl.create({
+          message: status,
+          duration:3000
+        });
+        // t.present();
+  
+      }
+    );
+   
+    this.diagnostic.requestExternalStorageAuthorization().then((status)=>{
     this.filechooser.open()
       .then(
         uri => {
@@ -134,6 +149,7 @@ ionViewDidEnter(){
             });
         }
       });
+    });
   }
   
   profilePicUpload(x){
@@ -220,11 +236,7 @@ ionViewDidEnter(){
              if(img.length > 1){
               this.image='https://www.forehotels.com/public/hotel/avatar/'+this.items["0"].profile_pic
                this.social_pic = true;
-               let alert=this.alertCtrl.create({
-                title:'Profile pic uploaded',
-                buttons:['OK']
-              })
-              alert.present();
+               
              }
              loader.dismiss();
             },error=>{
@@ -246,6 +258,11 @@ ionViewDidEnter(){
         // title:'Storage updated to'+this.c,
         // buttons:['OK']});
         // a.present();
+        let alert=this.alertCtrl.create({
+          title:'Profile pic uploaded',
+          buttons:['OK']
+        })
+        alert.present();
         this.events.publish('user:profilepic1','done');
         this.events.publish('user:profilepic','done');
         this.navCtrl.push(ListPage);
