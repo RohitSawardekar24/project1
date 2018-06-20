@@ -33,6 +33,8 @@ export class EmployeeTabPage {
   fb:any
   designation:any
   mera_picture:any
+  index:number=0;
+    length1: number=0;
   constructor(public upgrade:UpgradePackageProvider,
               public events: Events, 
               public alertCtrl: AlertController,
@@ -101,12 +103,19 @@ export class EmployeeTabPage {
                           }
                           this.items.push({name:this.resitems[i].name,designation:this.resitems[i].designation,experience:this.resitems[i].experience,qualification:this.resitems[i].qualification,id:this.resitems[i].id,profile_pic:imgpath})            
                       }
-                    }   
+                    }  
+                    this.length1 = this.items.length; 
                   loading.dismiss()
                   });          
           })
       }
     }
+    increment(){
+      this.index += 10;
+  }
+  decrement(){
+      this.index -= 10;
+  }
   doInfinite(infiniteScroll) {
     if(this.network.noConnection()){
            this.network.showNetworkAlert()

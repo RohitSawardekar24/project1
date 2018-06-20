@@ -6,7 +6,7 @@
 <ion-content>
  <div *ngIf="emp_count == 0"><h2 style="text-align:center">No Matching Candidates Found</h2></div>
 <ion-list>
-  <ion-item *ngFor="let item of items">
+  <ion-item *ngFor="let item of items|slice:index:index+10;let i=index">
 
     <ion-thumbnail item-left>
       <img src="{{item.profile_pic}}" onError="this.src='https://www.forehotels.com/public/assets/img/male.png';" style="border-radius:6px"><br />
@@ -17,6 +17,9 @@
     <p><ion-icon name="ios-school"></ion-icon>  {{item.qualification}}<p>
     <button ion-button full style="border-radius:50px"  (click)="employeedetail(item.id)">Read More</button>
   </ion-item>
+  <br />
+        <button [disabled]="index == 0" ion-button style="color: #295786" (click)="decrement()">Previous</button>
+        <button [disabled]="index == length1" ion-button style="color: #295786" (click)="increment()">Next</button>
 </ion-list>
 
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

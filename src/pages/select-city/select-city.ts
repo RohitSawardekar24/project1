@@ -17,6 +17,8 @@ export class SelectCityPage {
     searching: any = false;
     designation:any
     loader:any
+    index:number=0;
+    length: number=0;
     constructor(public network: NetworkServiceProvider,public navCtrl: NavController, public navParams: NavParams, public dataService: City) {
       this.designation = navParams.get('designation')
       this.loader = navParams.get('loader')
@@ -54,5 +56,11 @@ export class SelectCityPage {
     setFilteredItems() {
         this.items = this.dataService.filterItems(this.searchTerm);
         this.loader.dismiss()
+    }
+    increment(){
+      this.index += 10;
+    }
+    decrement(){
+      this.index -= 10;
     }
 }

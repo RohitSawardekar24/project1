@@ -16,6 +16,8 @@ items:any;
 http:any;
 hash:any
 resitems:any
+index:number=0;
+    length: number=0;
   constructor(public loadingCtrl: LoadingController,
               public storage: Storage,http: Http,
               public upgrade: UpgradePackageProvider,
@@ -62,6 +64,7 @@ resitems:any
                               }
                               this.items.push({name:this.resitems[i].name,designation:this.resitems[i].designation,experience:this.resitems[i].experience,qualification:this.resitems[i].qualification,id:this.resitems[i].id,profile_pic:imgpath})                             
                             }
+                            this.length = this.items.length;
                           loading.dismiss()  
                         },error=>{
                               console.log(error);// Error getting the data
@@ -82,4 +85,10 @@ resitems:any
       }
     }
   }
+  increment(){
+    this.index += 10;
+}
+decrement(){
+    this.index -= 10;
+}
 }

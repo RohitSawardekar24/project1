@@ -16,6 +16,8 @@ http:any;
 hash:any;
 items:any;
 resitems:any;
+index:number=0;
+    length: number=0;
   constructor(public storage: Storage,
               http: Http,
               public network: NetworkServiceProvider,
@@ -60,6 +62,7 @@ resitems:any;
                         }
                         this.items.push({name:this.resitems[i].name,designation:this.resitems[i].designation,experience:this.resitems[i].experience,qualification:this.resitems[i].qualification,id:this.resitems[i].id,profile_pic:imgpath})                             
                       }
+                      this.length = this.items.length;
                     loading.dismiss()
                     },error=>{
                         console.log(error);
@@ -79,4 +82,10 @@ resitems:any;
         }
       }
     }
+    increment(){
+      this.index += 10;
+  }
+  decrement(){
+      this.index -= 10;
+  }
   }
