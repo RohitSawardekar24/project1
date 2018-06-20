@@ -323,7 +323,19 @@ getDetails(id){
                 }else{
                   this.upgrade.sucalert()
                 }
-          }else{
+          }
+          else if(p===SearchSupplierPage||p===SupplierRequirementPage)
+          {
+            let a=this.alertCtrl.create(
+              {
+                title:'Work in progress',
+                subTitle:'We are currently developing this page',
+                buttons:['OK']
+              }
+            );
+            a.present();
+          }
+          else{
             this.nav.push(p);
           }          
         }

@@ -543,20 +543,23 @@ export class ModalHotelCategoryPage {
   mnumber: any;
   city: any;
   state: any;
-
+http:any
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               public from: FormBuilder, 
               public network: NetworkServiceProvider,
-              public alertCtrl:AlertController) {
+              public alertCtrl:AlertController,
+            http:Http) {
 
               this.hotelType = navParams.get('hotelType')
               this.hotelCatid = navParams.get('hotelCatid');
               this.pata = navParams.get('pata');
               this.outletname = navParams.get('outletname');
               this.mnumber = navParams.get('mnumber');
-              console.log(this.mnumber)
+              console.log(this.mnumber);
+              this.http=http;
               this.otp = navParams.get('otp')
+
               console.log(this.otp)
               this.city = navParams.get('city')
               this.state = navParams.get('state')
@@ -594,11 +597,37 @@ export class ModalHotelCategoryPage {
                         console.log('Cancel clicked');         
                         }
                     },{
-                            text: 'Go To Login',
-                            handler: () => {
-                            this.navCtrl.push(LoginPage,{           
-                            },{animate:true,animation:'transition',duration:500,direction:'forward'})
-                            }}]
+                        text: 'Resend',
+                        role: 'cancel',
+                        handler: () => {
+                          console.log('Cancel clicked');
+                          let val=Math.floor(100000 + Math.random() * 900000);
+                          let body = JSON.stringify({
+                            number: this.mnumber,
+                            text: "Welcome , Your OTP is "+val+ ". Please Verify to register on ForeHotels"
+                            })
+                
+                            let headers = new Headers({
+                              'Content-Type': 'application/json',
+                              'Authorization': "e36051cb8ca82ee0Lolzippu123456*="
+                            });
+                            let options = new RequestOptions({ headers: headers });
+                            this.http.post("http://forehotels.com:3000/api/send_sms", body, options)
+                                  .subscribe(data =>{
+                                    console.log('otp');
+                          });
+                          this.navCtrl.push(OtpPage,{
+                            hotelType: this.hotelType,
+                            hotelCatid: this.hotelCatid,        
+                            pata: this.pata,           
+                             outletname: this.outletname,
+                            mnumber: this.mnumber,
+                         otp: val, 
+                         state: this.state,
+                         city: this.city,
+                          },{animate:true,animation:'transition',duration:500,direction:'forward'});
+                        }
+                        }],
                     });
                 alert.present();
             }

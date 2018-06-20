@@ -247,6 +247,14 @@ export class PersonalAssistancePage {
                        
                       }
                   }
+                }
+                if(this.list.length==0)
+                {
+                  let l=this.alertCtrl.create({
+                      title:'Post Job First',
+                      buttons:['OK'] 
+                  });
+                  l.present();
                 }         
               },error=>{
               });

@@ -41,6 +41,10 @@
     padding-left: 16px;
     padding-top: 12px;
   }
+.color
+{
+  color: red;
+}
   </style>
 <ion-content>
 <ion-list style="background-color:#1396e2;position: relative;top: -9px;">
@@ -67,7 +71,9 @@
                         [showCancelButton]="shouldShowCancel"
                         (ionInput)="onInput($event)"
                         (ionCancel)="onCancel($event)"
-                        (click)="SearchEmployee()">
+                        (click)="SearchEmployee()"
+                        class="color"
+                   >
                       </ion-searchbar>
                       </div>
                     </div>
