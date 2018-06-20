@@ -15,9 +15,8 @@ export class InternTabPage {
 items:any;
 http:any;
 hash:any
-resitems:any
-index:number=0;
-    length: number=0;
+resitems:any;
+invalid:any;
   constructor(public loadingCtrl: LoadingController,
               public storage: Storage,http: Http,
               public upgrade: UpgradePackageProvider,
@@ -50,21 +49,31 @@ index:number=0;
                       'Authorization': this.hash
                     });
                     let options = new RequestOptions({ headers: headers });
-                    this.http.get("http://www.forehotels.com:3000/api/intern_users_list", options)
+                    let body=JSON.stringify({
+                      pname: navParams.data.designation,
+                      c_id: navParams.data.c_id 
+                    });
+                    this.http.post("http://www.forehotels.com:3000/api/intern_users_list",body,options)
                           .subscribe(data =>{
                             this.items= []
                             this.resitems = JSON.parse(data._body).Jobs;
-                            for(let i=0 ; i < this.resitems.length;  i++){                           
-                              let img = this.resitems[i].profile_pic.split('/')
-                              let imgpath;
-                              if(img[0] == 'https:'){
-                                imgpath = this.resitems[i].profile_pic;
-                              }else{
-                                imgpath = 'https://www.forehotels.com/public/emp/avatar/'+this.resitems[i].profile_pic;
-                              }
-                              this.items.push({name:this.resitems[i].name,designation:this.resitems[i].designation,experience:this.resitems[i].experience,qualification:this.resitems[i].qualification,id:this.resitems[i].id,profile_pic:imgpath})                             
-                            }
-                            this.length = this.items.length;
+                            console.log('interns');
+                            console.log(this.resitems);
+                            if(this.resitems==[])
+                                  this.invalid=true;
+                            else
+                            {
+                                for(let i=0 ; i < this.resitems.length;  i++){                           
+                                  let img = this.resitems[i].profile_pic.split('/')
+                                  let imgpath;
+                                  if(img[0] == 'https:'){
+                                    imgpath = this.resitems[i].profile_pic;
+                                  }else{
+                                    imgpath = 'https://www.forehotels.com/public/emp/avatar/'+this.resitems[i].profile_pic;
+                                  }
+                                  this.items.push({name:this.resitems[i].name,designation:this.resitems[i].designation,experience:this.resitems[i].experience,qualification:this.resitems[i].qualification,id:this.resitems[i].id,profile_pic:imgpath})                             
+                                }
+                          }
                           loading.dismiss()  
                         },error=>{
                               console.log(error);// Error getting the data

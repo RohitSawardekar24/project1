@@ -44,23 +44,29 @@ intern_length:any
                 'Authorization': hash
               });
               let options = new RequestOptions({ headers: headers });
-            let body={
+            let body=JSON.stringify({
               pname: this.designation.designation,
               c_id: this.designation.c_id 
-            }
+            });
             this.http = http
             this.events.subscribe('emp_length', (user) => {
               this.emp_length = user
             });
-            this.http.get("http://www.forehotels.com:3000/api/catering_users_list", options)
+            this.http.post("http://www.forehotels.com:3000/api/catering_users_list", body,options)
                     .subscribe(data =>{
                     this.c_items=JSON.parse(data._body).Jobs; 
-                    this.catering_length = this.c_items.length
+                    if(this.c_items==[])
+                        this.catering_length=0;
+                    else
+                        this.catering_length = this.c_items.length
                 });   
-              this.http.get("http://www.forehotels.com:3000/api/intern_users_list", options)
+              this.http.post("http://www.forehotels.com:3000/api/intern_users_list", body,options)
                     .subscribe(data =>{
                     this.i_items=JSON.parse(data._body).Jobs; //Bind data to items object
-                    this.intern_length = this.i_items.length        
+                    if(this.i_items==[])
+                          this.intern_length=0;
+                     else
+                          this.intern_length = this.i_items.length;      
               });           
                   })  
                       

@@ -16,8 +16,7 @@ http:any;
 hash:any;
 items:any;
 resitems:any;
-index:number=0;
-    length: number=0;
+invalid:any;
   constructor(public storage: Storage,
               http: Http,
               public network: NetworkServiceProvider,
@@ -35,6 +34,7 @@ index:number=0;
                 this.ga.trackView("Catering Tab")
               });
           })
+          console.log(this.navParams.data);
               let loading = this.loadingCtrl.create({
               spinner: 'bubbles',
               content: 'Please Wait...'
@@ -48,10 +48,22 @@ index:number=0;
                 'Authorization': this.hash
               });
               let options = new RequestOptions({ headers: headers });
-              this.http.get("http:/www.forehotels.com:3000/api/catering_users_list", options)
-                    .subscribe(data =>{
+              let body=JSON.stringify({
+                pname: navParams.data.designation,
+                c_id: navParams.data.c_id 
+              });
+              this.http.post("http://www.forehotels.com:3000/api/catering_users_list", body,options)
+                    .subscribe((data) =>{
+                      console.log(data);
                       this.items= []
                       this.resitems = JSON.parse(data._body).Jobs;
+                      console.log('Catering jobs');
+                      console.log(this.resitems);
+                      if(this.resitems==[])
+                          this.invalid=true;
+                     
+                      else
+                      {
                       for(let i=0 ; i < this.resitems.length;  i++){                           
                         let img = this.resitems[i].profile_pic.split('/')
                         let imgpath;
@@ -62,11 +74,12 @@ index:number=0;
                         }
                         this.items.push({name:this.resitems[i].name,designation:this.resitems[i].designation,experience:this.resitems[i].experience,qualification:this.resitems[i].qualification,id:this.resitems[i].id,profile_pic:imgpath})                             
                       }
-                      this.length = this.items.length;
+                    }
                     loading.dismiss()
                     },error=>{
                         console.log(error);
                     } );
+                  
                 });    
   }
   employeedetail(emp){
@@ -82,10 +95,5 @@ index:number=0;
         }
       }
     }
-    increment(){
-      this.index += 10;
-  }
-  decrement(){
-      this.index -= 10;
   }
   }

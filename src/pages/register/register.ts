@@ -8,6 +8,7 @@ import { Storage } from '@ionic/storage';
 import { NetworkServiceProvider } from '../../providers/network-service/network-service';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { debounce } from 'rxjs/operators';
+import { TermsConditionsPage } from '../terms-conditions/terms-conditions';
 declare var google :any
 var self = this;
 let loader;
@@ -674,6 +675,10 @@ export class ModalHotelCategoryPage {
             <ion-label color="primary" stacked>Reference(optional)</ion-label>
             <ion-input type="text" formControlName="reference" placeholder="Mr. XYZ"></ion-input>
         </ion-item>
+        <ion-item>
+                <input type="checkbox"  formControlName="ckbox">
+                <label>I agree to the<label (click)="tnc()" style="color:blue ; text-decoration:underline"> Terms&Conditions </label></label>
+        </ion-item>
       </ion-list>
       <br>
           <ion-list style="text-align: center;">
@@ -732,8 +737,9 @@ export class ModalHotelCategoryPage {
                 "hr_number":[this.mnumber, Validators.compose([Validators.maxLength(10),Validators.minLength(10),Validators.required])],
                 "user_name":["",Validators],
                 "reference":["",Validators],                
-                "password":["",Validators.compose([Validators.maxLength(10),Validators.minLength(4),Validators.required])]      
-              }) 
+                "password":["",Validators.compose([Validators.maxLength(10),Validators.minLength(4),Validators.required])] ,     
+                "ckbox":["",Validators.required]
+            }) 
               this.validation_messages = [
                 { type: 'required', message: 'Username is required.' },
                 { type: 'minlength', message: 'Username must be at least 5 characters long.' },
@@ -755,7 +761,10 @@ export class ModalHotelCategoryPage {
                 { type: 'maxlength', message: 'Password cannot be more than 10 Characters long.' },
                 { type: 'pattern', message: '' }]          
   }
-
+  tnc()
+  {
+      this.navCtrl.push(TermsConditionsPage);
+  }
   checkEmail(emailid)
   {
       console.log(emailid);
