@@ -522,39 +522,40 @@ export class PopoverPageSalary {
 
 	  <ion-item>
 		<ion-label>Below 10th</ion-label>
-		<ion-radio (click)="selectvalue('Below 10th')"></ion-radio>
+		<ion-checkbox (ionChange)="updateCheckedOptions($event,'Below 10th')" [checked]="cbChecked.indexOf('Below 10th') >= 0"></ion-checkbox>
 	  </ion-item>
 
 	  <ion-item>
 		<ion-label>10th</ion-label>
-		<ion-radio (click)="selectvalue('10th')"></ion-radio>
+    <ion-checkbox (ionChange)="updateCheckedOptions($event,'10th')" [checked]="cbChecked.indexOf('10th') >= 0"></ion-checkbox>
 	  </ion-item>
 
 	  <ion-item>
 		<ion-label>12th</ion-label>
-		<ion-radio (click)="selectvalue('12th')"></ion-radio>
+    <ion-checkbox (ionChange)="updateCheckedOptions($event,'12th')" [checked]="cbChecked.indexOf('12th') >= 0"></ion-checkbox>
 	  </ion-item>
 
 	  <ion-item>
 		<ion-label>Below 12th</ion-label>
-		<ion-radio (click)="selectvalue('Below 12th')"></ion-radio>
+    <ion-checkbox (ionChange)="updateCheckedOptions($event,'Below 12th')" [checked]="cbChecked.indexOf('Below 12th') >= 0"></ion-checkbox>
 	  </ion-item>
 
 	  <ion-item>
 		<ion-label>Degree in Hotel Management</ion-label>
-		<ion-radio (click)="selectvalue('Degree in Hotel Management')"></ion-radio>
+    <ion-checkbox (ionChange)="updateCheckedOptions($event,'Degree in Hotel Management')" [checked]="cbChecked.indexOf('Degree in Hotel Management') >= 0"></ion-checkbox>
 	  </ion-item>
 
 	  <ion-item>
 		<ion-label>BSc. in Hotel Management</ion-label>
-		<ion-radio (click)="selectvalue('BSc. in Hotel Management')"></ion-radio>
+		<ion-checkbox (ionChange)="updateCheckedOptions($event,'BSc. in Hotel Management')" [checked]="cbChecked.indexOf('BSc. in Hotel Management') >= 0"></ion-checkbox>
 	  </ion-item>
 	  
 	  <ion-item>
 		<ion-label>Other</ion-label>
-		<ion-radio (click)="selectvalue('Other')"></ion-radio>
+		<ion-checkbox (ionChange)="updateCheckedOptions($event,'Other')" [checked]="cbChecked.indexOf('Other') >= 0"></ion-checkbox>
 	  </ion-item>
-	</ion-list>
+  </ion-list>
+  <button ion-button large (click)="selectvalue()">Next</button>
 	</ion-content>`
 	})
 	export class EducationAndRolePage{
@@ -566,7 +567,8 @@ export class PopoverPageSalary {
 	  designation: any;
 	  parent_id: any;
 	  job_city: any;	  
-	  salary: any;
+    salary: any;
+    cbChecked: string[];
 		 constructor(public network:NetworkServiceProvider,public navParams: NavParams, public navCtrl: NavController, public platform:Platform,public app:App, public viewCtrl: ViewController) {  
 		   
 		  this.salary_range = navParams.get('salary_range')
@@ -575,15 +577,28 @@ export class PopoverPageSalary {
 		  this.no_of_heads = navParams.get('no_of_heads')        
 		  this.designation = navParams.get('designation')
 		  this.parent_id = navParams.get('parent_id')
-		  this.job_city = navParams.get('job_city')  
+      this.job_city = navParams.get('job_city') 
+      this.cbChecked=[]; 
 	 }
 
-		selectvalue(item){
+   updateCheckedOptions(e: any,data) {
+    var list = this.cbChecked.indexOf(e)
+    if(e.checked){
+      this.cbChecked.push(data)
+    }else{
+     var ind = this.cbChecked.indexOf(data)
+        this.cbChecked.splice(ind, 1);
+      }
+    }
+
+		selectvalue(){
       if(this.network.noConnection()){
          this.network.showNetworkAlert()
         }else{ 
+          console.log(this.cbChecked);
+          var edu = this.cbChecked.toString();
             this.navCtrl.push(RolePage,{
-                education: item,
+                education: edu,
                 salary_range: this.salary_range,      
                 min: this.min,
                 max: this.max,

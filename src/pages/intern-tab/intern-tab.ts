@@ -94,10 +94,4 @@ invalid:any;
       }
     }
   }
-  increment(){
-    this.index += 10;
-}
-decrement(){
-    this.index -= 10;
-}
 }

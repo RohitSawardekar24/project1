@@ -20,12 +20,14 @@ export class PersonalAssistancePage {
     checkJobs:any
     length:any
     view:boolean = false
+    added:boolean=false
     total: number = 0;
     value: number = 1;
     job_id: any;
     hotel_id = [];
     heads = [];
     list:any =[];
+    num: number;
     temp:any;
   constructor(public alertCtrl:AlertController ,
               public navCtrl: NavController, 
@@ -45,7 +47,6 @@ export class PersonalAssistancePage {
     if(this.network.noConnection()){
        this.network.showNetworkAlert()
       }else{ 
-        
         this.total = 0
         this.list = [];
           this.storage.get("id").then((id)=>{
@@ -113,6 +114,7 @@ export class PersonalAssistancePage {
                       });
                       alert.present();
                       // this.loadData()
+                      this.navCtrl.pop();
                       this.navCtrl.push(PersonalAssistancePage);
                   });
                   err=>{
@@ -177,6 +179,7 @@ export class PersonalAssistancePage {
                     });
                     
                     alert.present();
+                    this.navCtrl.pop();
                     this.navCtrl.push(PersonalAssistancePage);
                   });
                 }
@@ -213,7 +216,6 @@ export class PersonalAssistancePage {
     if(this.network.noConnection()){
        this.network.showNetworkAlert()
       }else{ 
-        
         this.total = 0
         this.list = [];
           this.storage.get("id").then((id)=>{
