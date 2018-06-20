@@ -7,7 +7,8 @@ import { ProfilePicPage } from '../profile-pic/profile-pic';
 import { ModalAutocompleteItems } from '../modal-autocomplete-items/modal-autocomplete-items';
 import { NetworkServiceProvider } from '../../providers/network-service/network-service';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
-declare var google:any;
+import { ModalRegisterMapPage } from "../modal-register-map/modal-register-map";
+declare var google: any;
 var self = this;
 let loader
 
@@ -176,7 +177,7 @@ placedetails: any;
     if(this.network.noConnection()){
        this.network.showNetworkAlert()
       }else{
-        let modal = this.modalCtrl.create(ModalAutocompleteItems);      
+        let modal = this.modalCtrl.create(ModalRegisterMapPage);      
         modal.onDidDismiss(data => {
         loader = this.loadingCtrl.create({
               spinner: 'bubbles',
