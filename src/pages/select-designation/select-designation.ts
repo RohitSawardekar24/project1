@@ -16,8 +16,6 @@ searchTerm: string = '';
     items: any;
     searching: any = false;
     designation:any;
-    index:number=0;
-    length: number=0;
     constructor(public navCtrl: NavController,
                 public network: NetworkServiceProvider,
                 public dataService: Designation,
@@ -60,12 +58,5 @@ searchTerm: string = '';
     } 
     setFilteredItems() { 
         this.items = this.dataService.filterItems(this.searchTerm);
-        this.length = this.items.length; 
-    }
-    increment(){
-        this.index += 10;
-    }
-    decrement(){
-        this.index -= 10;
     }
 }

@@ -10,9 +10,6 @@
         <ion-item *ngFor="let item of items|slice:index:index+10;let i=index" (click)="onClick(item.c_id)">
             {{item.city_name}}
         </ion-item>
-        <br />
-        <button [disabled]="index == 0" ion-button style="color: #295786" (click)="decrement()">Previous</button>
-        <button [disabled]="index == length" ion-button style="color: #295786" (click)="increment()">Next</button>
     </ion-list>
  
 </ion-content>
