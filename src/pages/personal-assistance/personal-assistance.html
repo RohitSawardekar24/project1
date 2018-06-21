@@ -1,5 +1,4 @@
-
-  <style>
+<style>
     #footer {   
         position: fixed;
         bottom: 0;
@@ -19,6 +18,11 @@
         height: 3em;  
     }
     </style>
+    <ion-header>
+        <ion-navbar>
+          <ion-title>Personal Assitance</ion-title>
+        </ion-navbar>      
+    </ion-header>
     <ion-content class="card-background-page">
     
     
@@ -43,7 +47,7 @@
                     <ion-icon name="return-right" item-left large></ion-icon>
                     <h2 style="white-space:pre-wrap">We also find why candidate is not selected and send more options for the kind of candidate you Need</h2>
                 </ion-item>
-               <h1>₹ 4500/Per Job</h1>
+               <h1>₹ 4500/Per Job/Per Head</h1>
                
             </ion-card>
         
@@ -54,8 +58,8 @@
           <img src="https://www.forehotels.com/public/assets/img/waiter.png">
         </ion-avatar>
         <h2>{{item.pname}}</h2>
-        <button [disabled]="item.cart == '1'" ion-button color="black" outline (click)="addToCart(item.hj_id)">Add to Cart&nbsp;&nbsp;</button>
-        <button [disabled]="item.cart != '1'" ion-button color="black" outline><ion-icon name="ios-trash-outline" (click)="deleteJob(item.hj_id)"></ion-icon></button>
+        <button [disabled]="item.cart == '1'" ion-button color="black" outline (click)="addToCart(item.hj_id)" style="color:green;border-color: green;">Add to Cart&nbsp;&nbsp;</button>
+        <button [disabled]="item.cart != '1'" ion-button color="black" outline (click)="deleteJob(item.hj_id)" style="color:red;border-color: red;">Delete&nbsp;&nbsp;</button>
         <h2 item-end>&#8377; 4500</h2>
       </ion-item>
         <div id="footer">
