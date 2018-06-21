@@ -6,7 +6,6 @@ import { Storage } from '@ionic/storage';
 import { Toast } from '@ionic-native/toast';
 import { NetworkServiceProvider } from '../../providers/network-service/network-service';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
-import { ListPage } from '../list/list';
 
 @Component({
   selector: 'page-personal-assistance',
@@ -20,15 +19,12 @@ export class PersonalAssistancePage {
     checkJobs:any
     length:any
     view:boolean = false
-    added:boolean=false
     total: number = 0;
     value: number = 1;
     job_id: any;
     hotel_id = [];
-    newHeads=[];
     heads = [];
     list:any =[];
-    num: number;
     temp:any;
   constructor(public alertCtrl:AlertController ,
               public navCtrl: NavController, 
@@ -48,6 +44,7 @@ export class PersonalAssistancePage {
     if(this.network.noConnection()){
        this.network.showNetworkAlert()
       }else{ 
+        
         this.total = 0
         this.list = [];
           this.storage.get("id").then((id)=>{
@@ -115,7 +112,6 @@ export class PersonalAssistancePage {
                       });
                       alert.present();
                       // this.loadData()
-                      this.navCtrl.pop();
                       this.navCtrl.push(PersonalAssistancePage);
                   });
                   err=>{
@@ -130,16 +126,11 @@ export class PersonalAssistancePage {
         });
     }
 }
-   addToCart(F,id){
+   addToCart(id){
     if(this.network.noConnection()){
         this.network.showNetworkAlert()
     }else{
-        console.log(F);
-        console.log('formVALue');
           this.hotel_id.push(id);
-          this.newHeads.push(F.value.heads);
-          let heads = F.value.heads;
-          console.log(heads);
           console.log('a');
           this.storage.get("id").then((user_id)=>{
           this.storage.get("Hash").then((hash)=>{
@@ -148,8 +139,7 @@ export class PersonalAssistancePage {
           let body = JSON.stringify({
             usr_id: user_id,
             hotel_id: id,
-            qty:1,
-            quantity:heads
+            qty:'1'
             });
             let headers = new Headers({
             'Content-Type': 'application/json',
@@ -178,14 +168,14 @@ export class PersonalAssistancePage {
                   .map(res => res.json())
                   .subscribe(
                   detail => {             
-                    console.log('d');
+                    console.log('d'); 
                     let alert = this.alertCtrl.create({
                       title: 'Success!',
                       subTitle: 'Job added to cart.',
                       buttons: ['OK']
                     });
+                    
                     alert.present();
-                    this.navCtrl.pop();
                     this.navCtrl.push(PersonalAssistancePage);
                   });
                 }
@@ -222,7 +212,8 @@ export class PersonalAssistancePage {
     if(this.network.noConnection()){
        this.network.showNetworkAlert()
       }else{ 
-        this.total=0;
+        
+        this.total = 0
         this.list = [];
           this.storage.get("id").then((id)=>{
           this.storage.get("Hash").then((value)=>{
@@ -248,7 +239,6 @@ export class PersonalAssistancePage {
                   if(response.paid != 1){                   
                    this.list.push(response)
                    if(response.cart == 1){
-                        console.log("RESPONSE:"+response.quantity);
                         this.hotel_id.push(response.hj_id);
                         this.heads.push(response.quantity);
                         this.total += 4500*response.quantity;
@@ -256,14 +246,6 @@ export class PersonalAssistancePage {
                        
                       }
                   }
-                }
-                if(this.list.length==0)
-                {
-                  let l=this.alertCtrl.create({
-                      title:'Post Job First',
-                      buttons:['OK'] 
-                  });
-                  l.present();
                 }         
               },error=>{
               });
