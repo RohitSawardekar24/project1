@@ -94,10 +94,32 @@ export class PostJobPage {
       if(this.network.noConnection()){
          this.network.showNetworkAlert()
         }else{ 
-          this.navCtrl.push(ModalPage,{
-            designation: data.designation,
-            parent_id: data.parent_id,
-          },{animate:true,animation:'transition',duration:500,direction:'forward'})
+          let alert=this.alertCtrl.create(
+            {
+              title:'Designation Selected',
+              subTitle:'You have chosen '+data.designation,
+              buttons: [
+                {
+                  text: 'OK',
+                  handler: () => {
+                    console.log('Buy clicked');
+                    this.navCtrl.push(ModalPage,{
+                      designation: data.designation,
+                      parent_id: data.parent_id,
+                    },{animate:true,animation:'transition',duration:500,direction:'forward'})
+                  }
+                },
+                {
+                  text: 'Cancel',
+                  role: 'cancel',
+                  handler: () => {
+                    console.log('Cancel clicked');
+                  }
+                }
+              ]
+            }
+          );
+          alert.present();      
        }
     }  
 }

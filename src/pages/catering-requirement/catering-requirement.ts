@@ -33,7 +33,8 @@ export class CateringRequirementPage {
              public platform: Platform,
              public ga: GoogleAnalytics,
              public network: NetworkServiceProvider,
-             public loadingCtrl: LoadingController) {
+             public loadingCtrl: LoadingController,
+             private alertCtrl:AlertController) {
              this.http = http;              
         if(this.network.noConnection()){
            this.network.showNetworkAlert()
@@ -91,11 +92,33 @@ export class CateringRequirementPage {
 selectvalue(data){
       if(this.network.noConnection()){
            this.network.showNetworkAlert()
-       }else{      
-        this.navCtrl.push(CityPage,{
-        designation: data.designation,
-        parent_id: data.parent_id,
-      },{animate:true,animation:'transition',duration:500,direction:'forward'})
+       }else{
+        let alert=this.alertCtrl.create(
+          {
+            title:'Designation Selected',
+            subTitle:'You have chosen '+data.designation,
+            buttons: [
+              {
+                text: 'OK',
+                handler: () => {
+                  console.log('Buy clicked');
+                  this.navCtrl.push(CityPage,{
+                    designation: data.designation,
+                    parent_id: data.parent_id,
+                  },{animate:true,animation:'transition',duration:500,direction:'forward'})
+                }
+              },
+              {
+                text: 'Cancel',
+                role: 'cancel',
+                handler: () => {
+                  console.log('Cancel clicked');
+                }
+              }
+            ]
+          }
+        );
+        alert.present();      
     }
   }  
 }
