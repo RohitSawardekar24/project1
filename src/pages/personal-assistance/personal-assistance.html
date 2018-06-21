@@ -58,7 +58,13 @@
       <img src="https://www.forehotels.com/public/assets/img/waiter.png">
     </ion-avatar>
     <h2>{{item.pname}}</h2>
-    <button [disabled]="item.cart == '1'" ion-button color="black" outline (click)="addToCart(item.hj_id)" style="color:green;border-color: green;">Add to Cart&nbsp;&nbsp;</button>
+    <form #F="ngForm" (ngSubmit)="addToCart(F,item.hj_id)">
+    <label for="heads">Number of heads</label>
+    <br />
+    <input style="border:1px solid blue" id="heads" name="heads" required type="number" min="0" (ngModel)="0">
+    <br />
+    <button [disabled]="item.cart == '1'" ion-button color="black" outline style="color:green;border-color: green;">Add to Cart&nbsp;&nbsp;</button>
+    </form>
     <button [disabled]="item.cart != '1'" ion-button color="black" outline (click)="deleteJob(item.hj_id)" style="color:red;border-color: red;">Delete&nbsp;&nbsp;</button>
     <h2 item-end>&#8377; 4500</h2>
   </ion-item>
