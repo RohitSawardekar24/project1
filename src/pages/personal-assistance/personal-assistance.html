@@ -1,78 +1,71 @@
 <style>
-#footer {   
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: transparent;
-    box-shadow: none;
-}
-#footerbtn {
-    background: #0070FF;
-    text-align: center;    
-    z-index:1000;
-    font-size: 18px;
-    font-family: sans-serif;
-    font-weight: bold;
-    width: 100%;
-    margin: 0;
-    height: 3em;  
-}
-</style>
-<ion-header>
-    <ion-navbar>
-      <ion-title>Personal Assitance</ion-title>
-    </ion-navbar>      
-</ion-header>
-<ion-content class="card-background-page">
-
-
-  
-        
-        <ion-card>
-            <img src="assets/img/pa.png" height="150px"/>
-            <div>This package includes the following from Forehotels Team :-</div>
-            <ion-item>
-            <ion-icon name="return-right" item-left large></ion-icon>
-            <h2 style="white-space:pre-wrap">We Provide you a personal assistant who helps in getting you a job.</h2>
-            </ion-item>
-            <ion-item>
-                <ion-icon name="return-right" item-left large></ion-icon>
-                <h2 style="white-space:pre-wrap">Take Personal or Skype interview of the candidate</h2>
-            </ion-item>
-            <ion-item>
-                <ion-icon name="return-right" item-left large></ion-icon>
-                <h2 style="white-space:pre-wrap">Schedule interview with you</h2>
-            </ion-item>
-            <ion-item>
-                <ion-icon name="return-right" item-left large></ion-icon>
-                <h2 style="white-space:pre-wrap">We also find why candidate is not selected and send more options for the kind of candidate you Need</h2>
-            </ion-item>
-           <h1>₹ 4500/Per Job/Per Head</h1>
-           
-        </ion-card>
+    #footer {   
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: transparent;
+        box-shadow: none;
+    }
+    #footerbtn {
+        background: #0070FF;
+        text-align: center;    
+        z-index:1000;
+        font-size: 18px;
+        font-family: sans-serif;
+        font-weight: bold;
+        width: 100%;
+        margin: 0;
+        height: 3em;  
+    }
+    </style>
+    <ion-header>
+        <ion-navbar>
+          <ion-title>Personal Assitance</ion-title>
+        </ion-navbar>      
+    </ion-header>
+    <ion-content class="card-background-page">
     
-  <div *ngIf="this.length == 0"><h3>Please Post Job to apply for Personal Assistance</h3></div>
-  <ion-list>
-  <ion-item *ngFor="let item of list" style="padding-bottom:30px">
-    <ion-avatar item-start>
-      <img src="https://www.forehotels.com/public/assets/img/waiter.png">
-    </ion-avatar>
-    <h2>{{item.pname}}</h2>
-    <form #F="ngForm" (ngSubmit)="addToCart(F,item.hj_id)">
-    <label for="heads">Number of heads</label>
-    <br />
-    <input style="border:1px solid blue" id="heads" name="heads" required type="number" min="0" (ngModel)="0">
-    <br />
-    <button [disabled]="item.cart == '1'" ion-button color="black" outline style="color:green;border-color: green;">Add to Cart&nbsp;&nbsp;</button>
-    </form>
-    <button [disabled]="item.cart != '1'" ion-button color="black" outline (click)="deleteJob(item.hj_id)" style="color:red;border-color: red;">Delete&nbsp;&nbsp;</button>
-    <h2 item-end>&#8377; 4500</h2>
-  </ion-item>
-    <div id="footer">
-      <button ion-button id="footerbtn" (click)="personalAssistance()">Total - Rs. {{this.total}}&nbsp;&nbsp;&nbsp;&nbsp;
-        <ion-icon name="md-arrow-round-forward"></ion-icon>
-      </button>
-    </div>
-</ion-list> 
-</ion-content>
-  
+    
+      
+            
+            <ion-card>
+                <img src="assets/img/pa.png" height="150px"/>
+                <div>This package includes the following from Forehotels Team :-</div>
+                <ion-item>
+                <ion-icon name="return-right" item-left large></ion-icon>
+                <h2 style="white-space:pre-wrap">We Provide you a personal assistant who helps in getting you a job.</h2>
+                </ion-item>
+                <ion-item>
+                    <ion-icon name="return-right" item-left large></ion-icon>
+                    <h2 style="white-space:pre-wrap">Take Personal or Skype interview of the candidate</h2>
+                </ion-item>
+                <ion-item>
+                    <ion-icon name="return-right" item-left large></ion-icon>
+                    <h2 style="white-space:pre-wrap">Schedule interview with you</h2>
+                </ion-item>
+                <ion-item>
+                    <ion-icon name="return-right" item-left large></ion-icon>
+                    <h2 style="white-space:pre-wrap">We also find why candidate is not selected and send more options for the kind of candidate you Need</h2>
+                </ion-item>
+               <h1>₹ 4500/Per Job/Per Head</h1>
+               
+            </ion-card>
+        
+      <div *ngIf="this.length == 0"><h3>Please Post Job to apply for Personal Assistance</h3></div>
+      <ion-list>
+      <ion-item *ngFor="let item of list" style="padding-bottom:30px">
+        <ion-avatar item-start>
+          <img src="https://www.forehotels.com/public/assets/img/waiter.png">
+        </ion-avatar>
+        <h2>{{item.pname}}</h2>
+        <button [disabled]="item.cart == '1'" ion-button color="black" outline (click)="addToCart(item.hj_id)" style="color:green;border-color: green;">Add to Cart&nbsp;&nbsp;</button>
+        <button [disabled]="item.cart != '1'" ion-button color="black" outline (click)="deleteJob(item.hj_id)" style="color:red;border-color: red;">Delete&nbsp;&nbsp;</button>
+        <h2 item-end>&#8377; 4500</h2>
+      </ion-item>
+        <div id="footer">
+          <button ion-button id="footerbtn" (click)="personalAssistance()">Total - Rs. {{this.total}}&nbsp;&nbsp;&nbsp;&nbsp;
+            <ion-icon name="md-arrow-round-forward"></ion-icon>
+          </button>
+        </div>
+    </ion-list> 
+    </ion-content>
