@@ -45,6 +45,7 @@ export class ListPage implements OnInit{
   {
     // this.menuToggle();
     this.storage.get("id").then((id) => {
+      console.log(id);
       this.storage.get("Hash").then((value) => {
          this.platform.ready().then(() => {
            this.ga.trackEvent("Dashboard", "Opened", "New Session Started", id, true)
@@ -61,6 +62,7 @@ export class ListPage implements OnInit{
        this.http.get("http://www.forehotels.com:3000/api/package/"+id, options)
           .subscribe(data =>{
            this.items=JSON.parse(data._body).Jobs; //Bind data to items object
+           console.log(this.items);
            let alert=this.alertCtrl.create({
              title:this.items["0"].profile_pic+'  is the profile pic retrived in list page' ,
              buttons:['OK']
@@ -148,14 +150,14 @@ menuToggle(){
                                   break;
         case PersonalAssistancePage:
                                         //free user
-                                        if(this.getUserStatus())
+                                        if(this.items["0"].status=='free')
                                         {
                                             this.upgrade.upgradepackage();
                                         }
                                         else
                                             this.navCtrl.push(p.component);
                                         break;
-        case ScheduleInterviewPage: if(this.getUserStatus())
+        case ScheduleInterviewPage: if(this.items["0"].status=='free')
                                         this.upgrade.upgradepackage();
                                     else if(this.upgrade.interviewAlert())
                                           this.upgrade.s_alert();
@@ -187,8 +189,10 @@ menuToggle(){
             .subscribe(
               (data) =>{
               this.items=JSON.parse(data._body).Jobs; //Bind data to items object
+               console.log('called from get user status');
                console.log(this.items);
-               if(this.items.status=='free')
+               console.log('my status'+this.items["0"].status);
+               if(this.items["0"].status=='free')
                   return true;
                 else
                   return false;

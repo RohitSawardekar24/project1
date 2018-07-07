@@ -526,6 +526,7 @@ export class ModalHotelCategoryPage {
          Proceed             
         </button> 
   </form>
+  <button ion-button full round type="submit"   color="secondary"(click)="resendOtp()">Resend otp</button>
   <ion-card>
   <ion-item>
   <p>*Note</p>
@@ -574,6 +575,39 @@ http:any
               })
   }
 
+resendOtp()
+{
+          let val=Math.floor(100000 + Math.random() * 900000);
+          this.otp=val;
+          let body = JSON.stringify({
+            number: this.mnumber,
+            text: "Welcome , Your OTP is "+val+ ". Please Verify to register on ForeHotels"
+            })
+
+            let headers = new Headers({
+              'Content-Type': 'application/json',
+              'Authorization': "e36051cb8ca82ee0Lolzippu123456*="
+            });
+            let options = new RequestOptions({ headers: headers });
+            this.http.post("http://forehotels.com:3000/api/send_sms", body, options)
+                  .subscribe(data =>{
+                    console.log('otp'+val);
+                    let alert = this.alertCtrl.create({
+                        title: 'OTP resent',
+                        subTitle:'New Otp has been successfully send to your no',
+                        buttons: ['Dismiss']
+                        // buttons: [{
+                        //         text: 'Retry',
+                        //         role: 'cancel',
+                        //         handler: () => {
+                        //         console.log('Cancel clicked');         
+                        //         }
+                        //     }],
+                            });
+                        alert.present();
+          });
+
+}
   success(){
       if(this.network.noConnection()){
            this.network.showNetworkAlert()
@@ -602,38 +636,7 @@ http:any
                         handler: () => {
                         console.log('Cancel clicked');         
                         }
-                    },{
-                        text: 'Resend',
-                        role: 'cancel',
-                        handler: () => {
-                          console.log('Cancel clicked');
-                          let val=Math.floor(100000 + Math.random() * 900000);
-                          let body = JSON.stringify({
-                            number: this.mnumber,
-                            text: "Welcome , Your OTP is "+val+ ". Please Verify to register on ForeHotels"
-                            })
-                
-                            let headers = new Headers({
-                              'Content-Type': 'application/json',
-                              'Authorization': "e36051cb8ca82ee0Lolzippu123456*="
-                            });
-                            let options = new RequestOptions({ headers: headers });
-                            this.http.post("http://forehotels.com:3000/api/send_sms", body, options)
-                                  .subscribe(data =>{
-                                    console.log('otp');
-                          });
-                          this.navCtrl.push(OtpPage,{
-                            hotelType: this.hotelType,
-                            hotelCatid: this.hotelCatid,        
-                            pata: this.pata,           
-                             outletname: this.outletname,
-                            mnumber: this.mnumber,
-                         otp: val, 
-                         state: this.state,
-                         city: this.city,
-                          },{animate:true,animation:'transition',duration:500,direction:'forward'});
-                        }
-                        }],
+                    }],
                     });
                 alert.present();
             }
@@ -711,13 +714,13 @@ http:any
             <ion-input type="text" formControlName="reference" placeholder="Mr. XYZ"></ion-input>
         </ion-item>
         <ion-item>
-                <input type="checkbox"  formControlName="ckbox">
+                <input type="checkbox"  formControlName="ckbox" >
                 <label>I agree to the<label (click)="tnc()" style="color:blue ; text-decoration:underline"> Terms&Conditions </label></label>
         </ion-item>
       </ion-list>
       <br>
           <ion-list style="text-align: center;">
-          <button ion-button large type="submit" [disabled]="!registrationForm.valid||invalid">Register</button>
+          <button ion-button large type="submit" [disabled]="!registrationForm.valid||!registrationForm.value.ckbox">Register</button>
       </ion-list>
   </form>
 </ion-content>
@@ -798,6 +801,7 @@ http:any
   }
   tnc()
   {
+      console.log(this.registrationForm);
       this.navCtrl.push(TermsConditionsPage);
   }
   checkEmail(emailid)
