@@ -200,63 +200,63 @@ this.icons = ['search','ios-contacts','md-calendar','md-open','ios-create','md-c
           }        
       });
         
-            let contact: Contact = this.contacts.create();
-          contact.name = new ContactName(null, '- Employee Search', 'Forehotels');
-          contact.phoneNumbers = [new ContactField('mobile', '1234567890')];
-          contact.save().then(
-            () => console.log('Contact saved!', contact),
-            (error: any) => console.error('Error saving contact.', error)
-          );
-          this.statusbar.backgroundColorByHexString('#1396e2');
-          this.splashscreen.hide();
-          let self = this;
-          this.appVersion.getVersionNumber().then(
-          data => {
-            let app_version = data.split(".")
-            console.log(app_version)
-            this.storage.get("Hash").then((hash)=>{
-            let headers = new Headers({
-            'Content-Type': 'application/json',
-            'Authorization': hash
-          });
-          let options = new RequestOptions({ headers: headers });
-          this.http
-            .get("http://forehotels.com:3000/api/app_versions", options)
-            .subscribe(data =>{
-              this.items=JSON.parse(data._body).Apps;
-              let app_id = this.items["1"].app_id
-              var latest_version = this.items["1"].android_latest_version
-              latest_version = latest_version.split(".")
-             },
-            error=>{
-                console.log(error);// Error getting the data
-              });
-            });
-          });  
-          this.oneSignal.startInit(this.app_Id, '278620255983');
-          this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
-          this.oneSignal.setSubscription(true);
-          this.oneSignal.handleNotificationReceived().subscribe(() => {
-          // do something when notification is received
-          });
+          //   let contact: Contact = this.contacts.create();
+          // contact.name = new ContactName(null, '- Employee Search', 'Forehotels');
+          // contact.phoneNumbers = [new ContactField('mobile', '1234567890')];
+          // contact.save().then(
+          //   () => console.log('Contact saved!', contact),
+          //   (error: any) => console.error('Error saving contact.', error)
+          // );
+          // this.statusbar.backgroundColorByHexString('#1396e2');
+          // this.splashscreen.hide();
+          // let self = this;
+          // this.appVersion.getVersionNumber().then(
+          // data => {
+          //   let app_version = data.split(".")
+          //   console.log(app_version)
+          //   this.storage.get("Hash").then((hash)=>{
+          //   let headers = new Headers({
+          //   'Content-Type': 'application/json',
+          //   'Authorization': hash
+          // });
+          // let options = new RequestOptions({ headers: headers });
+          // this.http
+          //   .get("http://forehotels.com:3000/api/app_versions", options)
+          //   .subscribe(data =>{
+          //     this.items=JSON.parse(data._body).Apps;
+          //     let app_id = this.items["1"].app_id
+          //     var latest_version = this.items["1"].android_latest_version
+          //     latest_version = latest_version.split(".")
+          //    },
+          //   error=>{
+          //       console.log(error);// Error getting the data
+          //     });
+          //   });
+          // });  
+          // this.oneSignal.startInit(this.app_Id, '278620255983');
+          // this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
+          // this.oneSignal.setSubscription(true);
+          // this.oneSignal.handleNotificationReceived().subscribe(() => {
+          // // do something when notification is received
+          // });
 
-          this.oneSignal.handleNotificationOpened().subscribe(() => {
-            this.storage.get('loggedIn').then((result)=>{
-                if(result){
-                  self.nav.push(ListPage);                
-                }else{
-                  self.nav.push(HomePage);
-                }
-            })
-          });
-          this.oneSignal.endInit();
+          // this.oneSignal.handleNotificationOpened().subscribe(() => {
+            // this.storage.get('loggedIn').then((result)=>{
+            //     if(result){
+            //       self.nav.push(ListPage);                
+            //     }else{
+            //       self.nav.push(HomePage);
+            //     }
+            // })
+          // });
+          // this.oneSignal.endInit();
 
-          this.ga.debugMode()
-          this.ga.startTrackerWithId('UA-74078016-8')
-          this.ga.enableUncaughtExceptionReporting(true)
-          let current_time = new Date().getTime();
-          let total_time = (current_time - this.start_time);
-          this.ga.trackTiming("Android", total_time, "App Opening Time", "app_open")          
+          // this.ga.debugMode()
+          // this.ga.startTrackerWithId('UA-74078016-8')
+          // this.ga.enableUncaughtExceptionReporting(true)
+          // let current_time = new Date().getTime();
+          // let total_time = (current_time - this.start_time);
+          // this.ga.trackTiming("Android", total_time, "App Opening Time", "app_open")          
       
     });
     
