@@ -367,6 +367,7 @@ data: Array<{title:any,img : any, img1: any,img2:any,icon:string,text1:any,text2
                                   buttons: ['Retry']
                                   });
                                   alert.present();
+                                  this.navCtrl.setRoot(ListPage)
                                 }
                                 else{
                                   let alert = this.alertCtrl.create({

@@ -83,7 +83,7 @@ export class PackagePage {
            
   		this.paid = false      
         this.data.push({
-         title:"Quarterly package Rs. "+this.amount,
+         title:"Quarterly package Rs. 4500",
          icon1: 'md-arrow-dropright',
          icon2:'md-checkmark',
          icon3:"As Per Post",
@@ -98,7 +98,7 @@ export class PackagePage {
          textamt2:this.interview,
          textamt3:"As per Post",
          textamt4:this.days+" Days",
-         amt:this.amount
+         amt:4500
         });
      
         this.data.push({
