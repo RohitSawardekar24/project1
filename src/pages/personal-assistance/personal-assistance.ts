@@ -29,6 +29,7 @@ export class PersonalAssistancePage {
     list:any =[];
     num: number;
     temp:any;
+    hotelstatus:any;
   constructor(public alertCtrl:AlertController ,
               public navCtrl: NavController, 
               public navParams: NavParams,
@@ -165,6 +166,7 @@ export class PersonalAssistancePage {
                         applied = true;
                       }
                     }
+
                 if(applied==false){
                   this.http
                   .post('http://www.forehotels.com:3000/api/pa', body, options)
